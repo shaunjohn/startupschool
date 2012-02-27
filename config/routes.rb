@@ -1,4 +1,8 @@
 Startupschool::Application.routes.draw do
+  get "pages/landing"
+
+  get "pages/application"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
