@@ -1,4 +1,4 @@
 # If you get a bundler error related to open ssl, you must:
 # rvm pkg install openssl
-# rvm reinstall ruby-1.9.3 --with-openssl-dir$rvm_path/usr
+# rvm reinstall ruby-1.9.3 --with-openssl-dir$=rvm_path/usr
 rvm use 1.9.3@startupschool --create
