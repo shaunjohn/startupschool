@@ -4130,3 +4130,42 @@ a.thumbnail:hover {
 .invisible {
   visibility: hidden;
 }
+.testing {
+  position: relative;
+  width: 500px;
+  height: 500px;
+  margin: 50px auto;
+  background: #999999;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+  -webkit-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+  background-color: #a1271e;
+  background-image: -moz-linear-gradient(top, #b32b21, #872119);
+  background-image: -ms-linear-gradient(top, #b32b21, #872119);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#b32b21), to(#872119));
+  background-image: -webkit-linear-gradient(top, #b32b21, #872119);
+  background-image: -o-linear-gradient(top, #b32b21, #872119);
+  background-image: linear-gradient(top, #b32b21, #872119);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#b32b21', endColorstr='#872119', GradientType=0);
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+}
+.testing:hover {
+  cursor: pointer;
+  -webkit-box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.5);
+  box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.5);
+  opacity: 1;
+  filter: alpha(opacity=100);
+}
+.testing:active {
+  top: 3px;
+  left: 3px;
+  -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
