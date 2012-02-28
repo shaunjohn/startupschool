@@ -25,3 +25,70 @@
   }
 }
 
+#svg_logo {
+  position:absolute;
+  bottom:40px;
+  left:40px;
+}
+
+#arrow {
+  position:absolute;
+  bottom:60px;
+  left:100px;
+  display:none;
+  .arrow_head {
+    width:0px;
+    height:0px;
+    border-top:0;
+    border-right:80px solid transparent;
+    border-left:80px solid transparent;
+    border-bottom:80px solid @primary;
+  }
+  .arrow_body {
+    height:100px;
+    width:80px;
+    margin-left:40px;
+    background:@primary;
+  }
+  .arrow_tail {
+    margin-left:40px;
+    width:0px;
+    height:0px;
+    border-top:40px solid @primary;
+    border-right:40px solid @primary;
+    border-left:40px solid @primary;
+    border-bottom:40px solid transparent;
+  }
+}
+
+#call_to_action {
+  display:table;
+  position:fixed;
+  top:50%;
+  right:5%;
+
+  padding:.7em .3em;
+  width:20%;
+
+  color:@white;
+  font-size:42px;
+  text-transform:uppercase;
+
+  background:@primary;
+
+  .border-radius(4px);
+
+  &:hover {
+    cursor:pointer;
+    background:@tertiary;
+  }
+  &:active {
+    background:@secondary;
+  }
+
+  #call_text {
+    text-align:center;
+    vertical-align:middle;
+    display:table-cell;
+  }
+}

@@ -19,6 +19,7 @@ end
 group :development, :test do
   gem 'heroku'
   gem 'rspec-rails'
+  gem 'watchr'
 end
 
 gem 'jquery-rails'
