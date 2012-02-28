@@ -16,15 +16,36 @@ adjustLogo = ->
     height: logo_h
   $logo.hide()
   $logo.show()
+
+  $("#page").css
+    "padding-bottom": logo_h + LOGO_MARGIN
+
   adjustArrow(logo_w, logo_h)
+
+arrowHeight = ->
+  wh = $(window).height()
+  dh = $(document).height()
+  view_visible = wh/dh
+
+  # When scrolled to the bottom, this is the relative percentage from the WINDOW top we want the arrow to start at.
+  from_top = -0.666 * view_visible + 0.666
+
+  # The percent down the page the user has scrolled
+  scroll_percent = $(window).scrollTop() / (dh - wh)
+
+  # The absolute position of where the arrowhead should end up. Affected by both window height and scroll position.
+  doc_top = $(window).scrollTop() + scroll_percent * from_top * wh
+
+  # Set the arrow height to a positive number
+  arrow_height = Math.max($("#arrow_tail").offset().top - doc_top, 128)
+  $("#arrow_body").height(arrow_height)
 
 adjustArrow = (logo_w, logo_h) ->
   $arrow = $("#arrow")
-  $head = $("#arrow > .arrow_head")
-  $body = $("#arrow > .arrow_body")
-  $tail = $("#arrow > .arrow_tail")
+  $head = $("#arrow_head")
+  $body = $("#arrow_body")
+  $tail = $("#arrow_tail")
 
-  arrow_height = $(window).height() * .5
 
   arrow_w = logo_w * A_WIDTH
   arrow_l = LOGO_MARGIN + logo_w * A_LEFT - arrow_w / 2
@@ -42,16 +63,22 @@ adjustArrow = (logo_w, logo_h) ->
     "margin-left":"#{arrow_w/2}px"
   $body.css
     "width":"#{arrow_w}px"
-    "height":"#{arrow_height}px"
     "margin-left":"#{arrow_w/2}px"
 
   $arrow.css "left", arrow_l
   $arrow.css "bottom", arrow_b
+
+  arrowHeight()
+
   $arrow.show()
 
-adjustCTA = ->
-  $cta = $("#call_to_action")
+  page_w = $body.offset().left + arrow_w + 30
+  $("#page").width page_w
 
 jQuery ->
   $(window).resize adjustLogo
+  $(window).scroll arrowHeight
   adjustLogo()
+  arrowHeight()
+
+  $(window).scrollTop($(window).height())

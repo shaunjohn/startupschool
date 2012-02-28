@@ -1,5 +1,5 @@
 (function() {
-  var A_BOTTOM, A_LEFT, A_WIDTH, LOGO_FACTOR, LOGO_MARGIN, PAGE_FACTOR, adjustArrow, adjustCTA, adjustLogo;
+  var A_BOTTOM, A_LEFT, A_WIDTH, LOGO_FACTOR, LOGO_MARGIN, PAGE_FACTOR, adjustArrow, adjustLogo, arrowHeight;
 
   LOGO_FACTOR = 270 / 91;
 
@@ -25,16 +25,30 @@
     });
     $logo.hide();
     $logo.show();
+    $("#page").css({
+      "padding-bottom": logo_h + LOGO_MARGIN
+    });
     return adjustArrow(logo_w, logo_h);
   };
 
+  arrowHeight = function() {
+    var arrow_height, dh, doc_top, from_top, scroll_percent, view_visible, wh;
+    wh = $(window).height();
+    dh = $(document).height();
+    view_visible = wh / dh;
+    from_top = -0.666 * view_visible + 0.666;
+    scroll_percent = $(window).scrollTop() / (dh - wh);
+    doc_top = $(window).scrollTop() + scroll_percent * from_top * wh;
+    arrow_height = Math.max($("#arrow_tail").offset().top - doc_top, 128);
+    return $("#arrow_body").height(arrow_height);
+  };
+
   adjustArrow = function(logo_w, logo_h) {
-    var $arrow, $body, $head, $tail, arrow_b, arrow_height, arrow_l, arrow_w;
+    var $arrow, $body, $head, $tail, arrow_b, arrow_l, arrow_w, page_w;
     $arrow = $("#arrow");
-    $head = $("#arrow > .arrow_head");
-    $body = $("#arrow > .arrow_body");
-    $tail = $("#arrow > .arrow_tail");
-    arrow_height = $(window).height() * .5;
+    $head = $("#arrow_head");
+    $body = $("#arrow_body");
+    $tail = $("#arrow_tail");
     arrow_w = logo_w * A_WIDTH;
     arrow_l = LOGO_MARGIN + logo_w * A_LEFT - arrow_w / 2;
     arrow_b = LOGO_MARGIN + logo_h * A_BOTTOM;
@@ -52,22 +66,22 @@
     });
     $body.css({
       "width": "" + arrow_w + "px",
-      "height": "" + arrow_height + "px",
       "margin-left": "" + (arrow_w / 2) + "px"
     });
     $arrow.css("left", arrow_l);
     $arrow.css("bottom", arrow_b);
-    return $arrow.show();
-  };
-
-  adjustCTA = function() {
-    var $cta;
-    return $cta = $("#call_to_action");
+    arrowHeight();
+    $arrow.show();
+    page_w = $body.offset().left + arrow_w + 30;
+    return $("#page").width(page_w);
   };
 
   jQuery(function() {
     $(window).resize(adjustLogo);
-    return adjustLogo();
+    $(window).scroll(arrowHeight);
+    adjustLogo();
+    arrowHeight();
+    return $(window).scrollTop($(window).height());
   });
 
 }).call(this);
