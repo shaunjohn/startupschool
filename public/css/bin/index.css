@@ -557,7 +557,7 @@ html {
 body {
   margin: 0;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 13px;
+  font-size: 18px;
   line-height: 1.4;
   color: #58585a;
   background: #eeeeee url(../../img/bg.jpg) repeat;
@@ -745,11 +745,11 @@ a:hover {
 p {
   margin: 0 0 0.7;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 13px;
+  font-size: 18px;
   line-height: 1.4;
 }
 p small {
-  font-size: 11px;
+  font-size: 16px;
   color: #818285;
 }
 .lead {
@@ -937,7 +937,7 @@ code,
 pre {
   padding: 0 3px 2px;
   font-family: Menlo, Monaco, "Courier New", monospace;
-  font-size: 12px;
+  font-size: 17px;
   color: #58585a;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
@@ -992,7 +992,7 @@ legend {
   width: 100%;
   padding: 0;
   margin-bottom: 2.0999999999999996;
-  font-size: 19.5px;
+  font-size: 27px;
   line-height: 2.8;
   color: #58585a;
   border: 0;
@@ -1007,7 +1007,7 @@ input,
 button,
 select,
 textarea {
-  font-size: 13px;
+  font-size: 18px;
   font-weight: normal;
   line-height: 1.4;
 }
@@ -1031,7 +1031,7 @@ select,
   height: 1.4;
   padding: 4px;
   margin-bottom: 9px;
-  font-size: 13px;
+  font-size: 18px;
   line-height: 1.4;
   color: #555555;
   border: 1px solid #ccc;
@@ -2268,7 +2268,7 @@ table .span12 {
   display: inline-block;
   padding: 4px 10px 4px;
   margin-bottom: 0;
-  font-size: 13px;
+  font-size: 18px;
   line-height: 1.4;
   color: #58585a;
   text-align: center;
@@ -2351,7 +2351,7 @@ table .span12 {
 }
 .btn-large {
   padding: 9px 14px;
-  font-size: 15px;
+  font-size: 20px;
   line-height: normal;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
@@ -2362,7 +2362,7 @@ table .span12 {
 }
 .btn-small {
   padding: 5px 9px;
-  font-size: 11px;
+  font-size: 16px;
   line-height: -0.6000000000000001px;
 }
 .btn-small [class^="icon-"] {
@@ -2370,7 +2370,7 @@ table .span12 {
 }
 .btn-mini {
   padding: 2px 6px;
-  font-size: 11px;
+  font-size: 16px;
   line-height: -2.6px;
 }
 .btn-primary,
@@ -3797,7 +3797,7 @@ a.thumbnail:hover {
 }
 .label {
   padding: 2px 4px 3px;
-  font-size: 11.049999999999999px;
+  font-size: 15.299999999999999px;
   font-weight: bold;
   color: #ffffff;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
@@ -4136,14 +4136,82 @@ a.thumbnail:hover {
   visibility: hidden;
 }
 section {
+  margin-top: 30px;
   position: relative;
   z-index: 2;
-  height: 500px;
+}
+.curriculum_section {
+  margin: 40px 0;
+  padding-left: 40px;
+  *zoom: 1;
+  *zoom: 1;
+}
+.curriculum_section:before,
+.curriculum_section:after {
+  display: table;
+  content: "";
+}
+.curriculum_section:after {
+  clear: both;
+}
+.curriculum_section .icon {
+  float: left;
+  width: 128px;
+  height: 128px;
+}
+.curriculum_section .bar_cover {
+  margin: 43px 0 0 -10px;
+  float: left;
+  overflow: hidden;
+  width: 100px;
+}
+.curriculum_section .bar {
+  padding: 4px 0 0 15px;
+  height: 41px;
+  font-size: 25px;
+  color: #ffffff;
+  background: #3ba4db;
+  width: 692px;
+}
+.curriculum_section .subtext {
+  opacity: 0.6;
+  filter: alpha(opacity=60);
+}
+.curriculum_section #dev_icon {
+  background: url(../../img/dev.png) no-repeat;
+}
+.curriculum_section #marketing_icon {
+  background: url(../../img/marketing.png) no-repeat;
+}
+.curriculum_section #design_icon {
+  background: url(../../img/design.png) no-repeat;
+}
+.curriculum_section #sales_icon {
+  background: url(../../img/sales.png) no-repeat;
+}
+.curric_content {
+  margin: 40px 90px 0 168px;
+}
+#hero {
+  height: auto;
+  font-size: 40px;
+  margin-bottom: 80px;
+}
+#hero .hero_content {
+  padding: 10px 90px 10px 40px;
+}
+#hero .trust {
+  font-size: 16px;
+  color: #818285;
+}
+#hero #ts_logo {
+  height: 40px;
 }
 #page {
   position: relative;
   width: 63%;
   padding-bottom: 390px;
+  visibility: hidden;
 }
 #page h1 {
   position: relative;
@@ -4173,7 +4241,14 @@ section {
   height: 0;
 }
 .content {
-  padding: 10px 90px 0 40px;
+  padding: 10px 40px 10px 168px;
+  margin-right: 75px;
+  /*background:@tertiary;*/
+
+  /*color:white;*/
+
+  /*border-bottom:1px solid @secondary;*/
+
 }
 #svg_logo {
   position: absolute;

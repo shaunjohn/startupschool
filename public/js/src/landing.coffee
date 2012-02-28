@@ -6,6 +6,21 @@ A_LEFT = 0.785
 A_BOTTOM = 0.870252
 A_WIDTH = 0.045475
 
+fixCurriculum = ->
+  X_START = 40 + 128 - 10
+  X_END = $("#page").width() - 30
+
+  # How many pixels of scroll does it take to fully expand the bar
+  EXP_LEN = 200
+
+  bar_w = X_END - X_START - 15
+  $(".bar").width(bar_w)
+
+  scroll_top = $(window).scrollTop()
+  for el in $(".bar_cover")
+    factor = Math.min(Math.max(($(el).offset().top - scroll_top) / EXP_LEN, 0), 1)
+    $(el).width(factor * bar_w)
+
 adjustLogo = ->
   $logo = $("#svg_logo")
   w = $(window).width()
@@ -20,25 +35,13 @@ adjustLogo = ->
   $("#page").css
     "padding-bottom": logo_h + LOGO_MARGIN
 
+  stack = logo_h + LOGO_MARGIN + $("#hero").outerHeight(true)
+  m = $(window).height() - stack + LOGO_MARGIN
+  # m = $(window).height() - ($(document).height() - $("#hero").offset().top)
+  $("#hero").css
+    "margin-top":"#{m}px"
+
   adjustArrow(logo_w, logo_h)
-
-arrowHeight = ->
-  wh = $(window).height()
-  dh = $(document).height()
-  view_visible = wh/dh
-
-  # When scrolled to the bottom, this is the relative percentage from the WINDOW top we want the arrow to start at.
-  from_top = -0.666 * view_visible + 0.666
-
-  # The percent down the page the user has scrolled
-  scroll_percent = $(window).scrollTop() / (dh - wh)
-
-  # The absolute position of where the arrowhead should end up. Affected by both window height and scroll position.
-  doc_top = $(window).scrollTop() + scroll_percent * from_top * wh
-
-  # Set the arrow height to a positive number
-  arrow_height = Math.max($("#arrow_tail").offset().top - doc_top, 128)
-  $("#arrow_body").height(arrow_height)
 
 adjustArrow = (logo_w, logo_h) ->
   $arrow = $("#arrow")
@@ -75,10 +78,37 @@ adjustArrow = (logo_w, logo_h) ->
   page_w = $body.offset().left + arrow_w + 30
   $("#page").width page_w
 
+arrowHeight = ->
+  wh = $(window).height()
+  dh = $(document).height()
+  view_visible = wh/dh
+
+  # When scrolled to the bottom, this is the relative percentage from the WINDOW top we want the arrow to start at.
+  from_top = -0.666 * view_visible + 0.666
+
+  # The percent down the page the user has scrolled
+  scroll_percent = $(window).scrollTop() / (dh - wh)
+
+  # The absolute position of where the arrowhead should end up. Affected by both window height and scroll position.
+  doc_top = $(window).scrollTop() + scroll_percent * from_top * wh
+
+  # Set the arrow height to a positive number
+  arrow_height = Math.max($("#arrow_tail").offset().top - doc_top, 128)
+  $("#arrow_body").height(arrow_height)
+
+  fixCurriculum()
+
 jQuery ->
-  $(window).resize adjustLogo
-  $(window).scroll arrowHeight
+
+  console.log $(document).height()
   adjustLogo()
   arrowHeight()
+  $(window).resize adjustLogo
+  $(window).scroll arrowHeight
 
-  $(window).scrollTop($(window).height())
+  $(window).scrollTop($(document).height())
+  $("#page").css
+    visibility:"visible"
+
+  $("#svg_logo").load ->
+    console.log "SVG Loaded"
