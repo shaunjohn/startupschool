@@ -2274,9 +2274,9 @@ table .span12 {
   text-align: center;
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
   vertical-align: middle;
-  background: #818285;
-  border: 1px solid #747578;
-  border-bottom-color: #68696b;
+  background: #f89406;
+  border: 1px solid #df8505;
+  border-bottom-color: #c67605;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   border-radius: 4px;
@@ -2291,9 +2291,9 @@ table .span12 {
   *margin-left: 0;
 }
 .btn:hover {
-  color: #58585a;
+  color: #ffffff;
   text-decoration: none;
-  background-color: #e6e6e6;
+  background-color: #c67605;
   background-position: 0 -15px;
   -webkit-transition: background-position 0.1s linear;
   -moz-transition: background-position 0.1s linear;
@@ -2312,8 +2312,8 @@ table .span12 {
   -webkit-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
   -moz-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
-  background-color: #e6e6e6;
-  background-color: #d9d9d9 \9;
+  background-color: #c67605;
+  background-color: #ad6704 \9;
   outline: 0;
 }
 .btn.disabled,
@@ -4119,6 +4119,33 @@ section {
   position: relative;
   z-index: 2;
 }
+#scroll_up {
+  position: fixed;
+  top: 20px;
+  right: 40px;
+  text-align: center;
+  opacity: 0.2;
+  filter: alpha(opacity=20);
+}
+#scroll_up .scroll_arrow {
+  margin: 20px auto 0 auto;
+  width: 80px;
+}
+#scroll_up .scroll_arrow .scroll_arrow_head {
+  width: 0px;
+  height: 0px;
+  border-top: 0;
+  border-right: 40px solid transparent;
+  border-left: 40px solid transparent;
+  border-bottom: 40px solid #818285;
+}
+#scroll_up .scroll_arrow .scroll_arrow_body {
+  position: relative;
+  height: 100px;
+  width: 40px;
+  margin-left: 20px;
+  background: #818285;
+}
 #curriculum {
   padding: 20px 0 60px 0;
 }
@@ -4182,6 +4209,9 @@ section {
 }
 #application {
   padding: 20px 90px 20px 40px;
+}
+#application .control-group {
+  max-width: 640px;
 }
 #application input[type=text],
 #application textarea {
@@ -4257,6 +4287,9 @@ h1.section_header:after {
   width: 0;
   height: 0;
 }
+h1.apply_header {
+  color: #3ba4db;
+}
 #page {
   position: relative;
   padding-top: 50px;
@@ -4312,13 +4345,13 @@ h1.section_header:after {
 }
 #call_to_action {
   display: table;
-  position: relative;
-  top: 0px;
-  left: 209%;
-  padding: .7em .3em;
-  width: 1020%;
+  position: fixed;
+  bottom: 37%;
+  right: 3%;
+  padding: .3em .2em .3em .3em;
+  width: 20%;
   color: #ffffff;
-  font-size: 42px;
+  font-size: 30px;
   text-transform: uppercase;
   background: #3ba4db;
   -webkit-border-radius: 4px;

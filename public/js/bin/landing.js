@@ -1,17 +1,17 @@
 (function() {
-  var A_BOTTOM, A_LEFT, A_WIDTH, LOGO_FACTOR, LOGO_MARGIN, PAGE_FACTOR, adjustArrow, adjustLogo, arrowHeight, fixCurriculum, formSubmission, headers, limitChar, limitWord, onResize, onScroll, validateForm;
+  var A_BOTTOM, A_LEFT, A_WIDTH, LOGO_FACTOR, LOGO_MARGIN, PAGE_FACTOR, adjustArrow, adjustLogo, arrowHeight, fixCurriculum, formSubmission, headers, limitChar, limitWord, onResize, onScroll, show_scroll, validateForm;
 
   LOGO_FACTOR = 270 / 91;
 
   LOGO_MARGIN = 40;
 
-  PAGE_FACTOR = .7;
+  PAGE_FACTOR = .8;
 
-  A_LEFT = 0.785;
+  A_LEFT = 0.7820;
 
-  A_BOTTOM = 0.870252;
+  A_BOTTOM = 0.65;
 
-  A_WIDTH = 0.045475;
+  A_WIDTH = 0.048;
 
   adjustLogo = function() {
     var $logo, logo_h, logo_w, m, stack, w;
@@ -37,11 +37,10 @@
   };
 
   adjustArrow = function(logo_w, logo_h) {
-    var $arrow, $body, $head, $tail, arrow_b, arrow_l, arrow_w, page_w;
+    var $arrow, $body, $head, arrow_b, arrow_l, arrow_w, page_w;
     $arrow = $("#arrow");
     $head = $("#arrow_head");
     $body = $("#arrow_body");
-    $tail = $("#arrow_tail");
     arrow_w = logo_w * A_WIDTH;
     arrow_l = LOGO_MARGIN + logo_w * A_LEFT - arrow_w / 2;
     arrow_b = LOGO_MARGIN + logo_h * A_BOTTOM;
@@ -49,13 +48,6 @@
       "border-right": "" + arrow_w + "px solid transparent",
       "border-left": "" + arrow_w + "px solid transparent",
       "border-bottom": "" + arrow_w + "px solid #3ba4db"
-    });
-    $tail.css({
-      "border-top": "" + (arrow_w / 2) + "px solid #3ba4db",
-      "border-right": "" + (arrow_w / 2) + "px solid #3ba4db",
-      "border-left": "" + (arrow_w / 2) + "px solid #3ba4db",
-      "border-bottom": "" + (arrow_w / 2) + "px solid transparent",
-      "margin-left": "" + (arrow_w / 2) + "px"
     });
     $body.css({
       "width": "" + arrow_w + "px",
@@ -75,10 +67,14 @@
     return headers('fix_width');
   };
 
+  show_scroll = 0;
+
   onScroll = function() {
+    if (show_scroll === 10) $("#scroll_up").fadeOut('slow');
     arrowHeight();
     fixCurriculum();
-    return headers();
+    headers();
+    return show_scroll += 1;
   };
 
   headers = function(fix_width) {
@@ -120,18 +116,19 @@
   };
 
   arrowHeight = function() {
-    var arrow_height, dh, doc_top, from_top, scroll_percent, view_visible, wh;
+    var $arrow_body, arrow_height, dh, doc_top, from_top, scroll_percent, view_visible, wh;
     wh = $(window).height();
     dh = $(document).height();
     view_visible = wh / dh;
     from_top = -0.666 * view_visible + 0.666;
     scroll_percent = $(window).scrollTop() / (dh - wh);
     doc_top = $(window).scrollTop() + scroll_percent * from_top * wh;
-    arrow_height = Math.max($("#arrow_tail").offset().top - doc_top, 128);
-    $("#arrow_body").stop(true);
-    return $("#arrow_body").animate({
+    $arrow_body = $("#arrow_body");
+    arrow_height = Math.max($arrow_body.offset().top + $arrow_body.height() - doc_top, 10);
+    $arrow_body.stop(true);
+    return $arrow_body.animate({
       height: "" + arrow_height + "px"
-    }, 60);
+    }, 70);
   };
 
   fixCurriculum = function() {
@@ -160,7 +157,7 @@
       data = $(this).serializeObject();
       console.log(data);
       $.post("pages/wufoo", data, function(r) {
-        var error, id, _i, _len, _ref, _results;
+        var error, id, _i, _len, _ref;
         console.log(r);
         if (r.Success === 1) {
           $(window).scrollTop(0);
@@ -169,17 +166,18 @@
         } else {
           if (r.FieldErrors != null) {
             _ref = r.FieldErrors;
-            _results = [];
             for (_i = 0, _len = _ref.length; _i < _len; _i++) {
               error = _ref[_i];
               id = $("input[name='app[" + error.ID + "]'],textarea[name='app[" + error.ID + "]']").attr('id');
               console.log("" + id + "_error");
-              _results.push($("#" + id + "_error").html(error.ErrorText));
+              $("#" + id + "_error").html(error.ErrorText);
             }
-            return _results;
+            return onScroll();
           }
         }
       });
+    } else {
+      onScroll();
     }
     return false;
   };

@@ -1,13 +1,14 @@
 LOGO_FACTOR = 270 / 91 # Ratio of width to height
 LOGO_MARGIN = 40 # Static pixel margins around the logo
-PAGE_FACTOR = .7 # How much of the page the logo takes up
+PAGE_FACTOR = .8 # How much of the page the logo takes up
 
 # Relative position of the left side of the arrow relative to the logo's left.
-A_LEFT = 0.785 
+A_LEFT = 0.7820
 # Relative position of the bottom of the arrow relative to the logo's bottom.
-A_BOTTOM = 0.870252
+# A_BOTTOM = 0.870252
+A_BOTTOM = 0.65
 # Relative width of the arrow relative to the logo's width
-A_WIDTH = 0.045475
+A_WIDTH = 0.048
 
 # Adjusts the Cirriculum bars. Fired on scroll
 
@@ -43,7 +44,7 @@ adjustArrow = (logo_w, logo_h) ->
   $arrow = $("#arrow")
   $head = $("#arrow_head")
   $body = $("#arrow_body")
-  $tail = $("#arrow_tail")
+  # $tail = $("#arrow_tail")
 
 
   arrow_w = logo_w * A_WIDTH
@@ -54,12 +55,12 @@ adjustArrow = (logo_w, logo_h) ->
     "border-right":"#{arrow_w}px solid transparent"
     "border-left":"#{arrow_w}px solid transparent"
     "border-bottom":"#{arrow_w}px solid #3ba4db"
-  $tail.css
-    "border-top":"#{arrow_w/2}px solid #3ba4db"
-    "border-right":"#{arrow_w/2}px solid #3ba4db"
-    "border-left":"#{arrow_w/2}px solid #3ba4db"
-    "border-bottom":"#{arrow_w/2}px solid transparent"
-    "margin-left":"#{arrow_w/2}px"
+  # $tail.css
+  #   "border-top":"#{arrow_w/2}px solid #3ba4db"
+  #   "border-right":"#{arrow_w/2}px solid #3ba4db"
+  #   "border-left":"#{arrow_w/2}px solid #3ba4db"
+  #   "border-bottom":"#{arrow_w/2}px solid transparent"
+  #   "margin-left":"#{arrow_w/2}px"
   $body.css
     "width":"#{arrow_w}px"
     "margin-left":"#{arrow_w/2}px"
@@ -79,10 +80,17 @@ onResize = ->
   fixCurriculum()
   headers('fix_width')
 
+show_scroll = 0
 onScroll = ->
+
+  if show_scroll == 10
+    $("#scroll_up").fadeOut('slow')
+
   arrowHeight()
   fixCurriculum()
   headers()
+
+  show_scroll += 1
 
 headers = (fix_width=false)->
   section_headers = $("h1.section_header")
@@ -129,12 +137,13 @@ arrowHeight = ->
   # The absolute position of where the arrowhead should end up. Affected by both window height and scroll position.
   doc_top = $(window).scrollTop() + scroll_percent * from_top * wh
 
+  $arrow_body = $("#arrow_body")
   # Set the arrow height to a positive number
-  arrow_height = Math.max($("#arrow_tail").offset().top - doc_top, 128)
-  $("#arrow_body").stop(true)
-  $("#arrow_body").animate
+  arrow_height = Math.max($arrow_body.offset().top + $arrow_body.height() - doc_top, 10)
+  $arrow_body.stop(true)
+  $arrow_body.animate
     height:"#{arrow_height}px"
-  ,60
+  ,70
 
 fixCurriculum = ->
   # Position of the start of the sliding bar
@@ -172,6 +181,9 @@ formSubmission = (e) ->
             id = $("input[name='app[#{error.ID}]'],textarea[name='app[#{error.ID}]']").attr('id')
             console.log "#{id}_error"
             $("##{id}_error").html error.ErrorText
+          onScroll()
+  else
+    onScroll()
   return false
 
 # Custom front-end form validators

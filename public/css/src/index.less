@@ -7,6 +7,35 @@ section {
   z-index:2;
 }
 
+#scroll_up {
+  position:fixed;
+  top:20px;
+  right:40px;
+  text-align:center;
+
+  .opacity(20);
+
+  .scroll_arrow {
+    margin:20px auto 0 auto;
+    width:80px;
+    .scroll_arrow_head {
+      width:0px;
+      height:0px;
+      border-top:0;
+      border-right:40px solid transparent;
+      border-left:40px solid transparent;
+      border-bottom:40px solid @tertiary;
+    }
+    .scroll_arrow_body {
+      position:relative;
+      height:100px;
+      width:40px;
+      margin-left:20px;
+      background:@tertiary;
+    }
+  }
+}
+
 #curriculum {
   padding:20px 0 60px 0;
   .curriculum_section {
@@ -59,6 +88,10 @@ section {
 }
 #application {
   padding:20px 90px 20px 40px;
+
+  .control-group {
+    max-width:640px;
+  }
 
   input[type=text],textarea {
     width:95%;
@@ -144,6 +177,9 @@ h1.section_header {
     height:0;
   }
 }
+h1.apply_header {
+  color:@primary;
+}
 
 #page {
   position:relative;
@@ -202,15 +238,15 @@ h1.section_header {
 
 #call_to_action {
   display:table;
-  position:relative;
-  top:0px;
-  left:209%;
+  position:fixed;
+  bottom:37%;
+  right:3%;
 
-  padding:.7em .3em;
-  width:1020%;
+  padding:.3em .2em .3em .3em;
+  width:20%;
 
   color:@white;
-  font-size:42px;
+  font-size:30px;
   text-transform:uppercase;
 
   background:@primary;
