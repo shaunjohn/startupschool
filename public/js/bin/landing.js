@@ -78,7 +78,7 @@
   };
 
   headers = function(fix_width) {
-    var $header, $section, h, header, nav_h, scroll_top, section_headers, _i, _j, _len, _len2, _results;
+    var $header, $section, h, header, nav_bot_h, nav_h, scroll_top, section_headers, section_top, win_h, _i, _j, _len, _len2, _results;
     if (fix_width == null) fix_width = false;
     section_headers = $("h1.section_header");
     scroll_top = $(window).scrollTop();
@@ -87,28 +87,55 @@
       section_headers.width($("#page").width() - 100);
     }
     nav_h = 0;
+    nav_bot_h = 0;
     for (_i = 0, _len = section_headers.length; _i < _len; _i++) {
       header = section_headers[_i];
-      if ($(header).css('position') === "fixed") nav_h += h;
+      if ($(header).hasClass('fixed_top')) {
+        nav_h += h;
+      } else if ($(header).hasClass('fixed_bot')) {
+        nav_bot_h += h;
+      }
     }
+    win_h = $(window).height();
     _results = [];
     for (_j = 0, _len2 = section_headers.length; _j < _len2; _j++) {
       header = section_headers[_j];
       $section = $("#" + ($(header).data("section")));
+      section_top = $section.offset().top;
       $header = $(header);
-      if ($header.css('position') === "fixed") {
-        if (scroll_top + nav_h > $section.offset().top) {
+      if ($header.hasClass('fixed_top')) {
+        if (scroll_top + nav_h > section_top) {
           _results.push(null);
         } else {
           $header.css('position', 'absolute');
-          _results.push($header.css('top', $section.offset().top - h));
+          $header.removeClass('fixed_bot');
+          $header.removeClass('fixed_top');
+          _results.push($header.css('top', section_top - h));
+        }
+      } else if ($header.hasClass('fixed_bot')) {
+        if (scroll_top + win_h - nav_bot_h + h < section_top) {
+          _results.push(null);
+        } else {
+          $header.css('position', 'absolute');
+          $header.removeClass('fixed_bot');
+          $header.removeClass('fixed_top');
+          _results.push($header.css('top', section_top - h));
         }
       } else {
-        if (scroll_top + nav_h > $section.offset().top - h) {
+        if (scroll_top + nav_h > section_top - h) {
           $header.css('position', 'fixed');
-          _results.push($header.css('top', h * $(header).data("order")));
+          $header.css('bottom', 'auto');
+          $header.css('top', h * $(header).data("order"));
+          $header.removeClass('fixed_bot');
+          _results.push($header.addClass('fixed_top'));
+        } else if ($header.offset().top + h + nav_bot_h > scroll_top + win_h) {
+          $header.css('position', 'fixed');
+          $header.css('top', 'auto');
+          $header.css('bottom', h * (3 - $(header).data("order")));
+          $header.addClass('fixed_bot');
+          _results.push($header.removeClass('fixed_top'));
         } else {
-          _results.push($header.css('top', $section.offset().top - h));
+          _results.push($header.css('top', section_top - h));
         }
       }
     }
@@ -319,7 +346,7 @@
     $("h1.section_header").click(function() {
       var $section, correction;
       $section = $("#" + ($(this).data("section")));
-      correction = $(this).offset().top - $(window).scrollTop() + $(this).height();
+      correction = $(this).data("order") * $(this).height() + $(this).height();
       return $("body,html").animate({
         scrollTop: $section.offset().top - correction
       });
@@ -330,7 +357,7 @@
       correction = $(this).offset().top - $(window).scrollTop() + $(this).height();
       return $("body,html").animate({
         scrollTop: $section.offset().top - correction
-      });
+      }, 'slow');
     });
   });
 

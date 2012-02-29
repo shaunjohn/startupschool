@@ -102,25 +102,49 @@ headers = (fix_width=false)->
 
   # Determine which are currently fixed and how high the stack is.
   nav_h = 0
+  nav_bot_h = 0
   for header in section_headers
-    if $(header).css('position') is "fixed" then nav_h += h
+    if $(header).hasClass('fixed_top') then nav_h += h
+    else if $(header).hasClass('fixed_bot') then nav_bot_h += h
 
+  win_h = $(window).height()
   for header in section_headers
     $section = $("##{$(header).data("section")}")
+    section_top = $section.offset().top
     $header = $(header)
 
-    if $header.css('position') is "fixed"
-      if scroll_top + nav_h > $section.offset().top
+    if $header.hasClass('fixed_top')
+      if scroll_top + nav_h > section_top
         null
       else
         $header.css 'position', 'absolute'
-        $header.css('top', $section.offset().top - h)
-    else
-      if scroll_top + nav_h > $section.offset().top - h
-        $header.css 'position', 'fixed'
-        $header.css('top', h * $(header).data("order"))
+        $header.removeClass 'fixed_bot'
+        $header.removeClass 'fixed_top'
+        $header.css('top', section_top - h)
+    else if $header.hasClass('fixed_bot')
+      if scroll_top + win_h - nav_bot_h + h < section_top
+        null
       else
-        $header.css('top', $section.offset().top - h)
+        $header.css 'position', 'absolute'
+        $header.removeClass 'fixed_bot'
+        $header.removeClass 'fixed_top'
+        $header.css('top', section_top - h)
+    else
+      # The header is positioned absolutely, determine which fixed mode it should be in given the position on the page
+      if scroll_top + nav_h > section_top - h
+        $header.css 'position', 'fixed'
+        $header.css('bottom', 'auto')
+        $header.css('top', h * $(header).data("order"))
+        $header.removeClass 'fixed_bot'
+        $header.addClass 'fixed_top'
+      else if $header.offset().top + h + nav_bot_h > scroll_top + win_h
+        $header.css 'position', 'fixed'
+        $header.css('top', 'auto')
+        $header.css('bottom', h * (3 - $(header).data("order")))
+        $header.addClass 'fixed_bot'
+        $header.removeClass 'fixed_top'
+      else
+        $header.css('top', section_top - h)
 
 # Adjusts the height of the arrow on page resize or scroll
 arrowHeight = ->
@@ -318,7 +342,9 @@ jQuery ->
 
   $("h1.section_header").click ->
     $section = $("##{$(@).data("section")}")
-    correction = $(@).offset().top - $(window).scrollTop() + $(@).height()
+    correction = $(@).data("order") * $(@).height() + $(@).height()
+    # correction = $(@).offset().top - $(window).scrollTop() + $(@).height()
+    # correction = ($(".fixed_top").length + additional) * $(@).height() * $(@).height()
     $("body,html").animate
       scrollTop: $section.offset().top - correction
 
@@ -327,3 +353,4 @@ jQuery ->
     correction = $(@).offset().top - $(window).scrollTop() + $(@).height()
     $("body,html").animate
       scrollTop: $section.offset().top - correction
+    ,'slow'
