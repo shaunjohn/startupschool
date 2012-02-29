@@ -124,6 +124,7 @@ headers = (fix_width=false)->
 
 # Adjusts the height of the arrow on page resize or scroll
 arrowHeight = ->
+  if show_scroll < 10 then return
   wh = $(window).height()
   dh = $(document).height()
   view_visible = wh/dh
@@ -317,6 +318,12 @@ jQuery ->
 
   $("h1.section_header").click ->
     $section = $("##{$(@).data("section")}")
+    correction = $(@).offset().top - $(window).scrollTop() + $(@).height()
+    $("body,html").animate
+      scrollTop: $section.offset().top - correction
+
+  $("#call_to_action").click ->
+    $section = $("#apply")
     correction = $(@).offset().top - $(window).scrollTop() + $(@).height()
     $("body,html").animate
       scrollTop: $section.offset().top - correction

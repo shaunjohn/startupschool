@@ -117,6 +117,7 @@
 
   arrowHeight = function() {
     var $arrow_body, arrow_height, dh, doc_top, from_top, scroll_percent, view_visible, wh;
+    if (show_scroll < 10) return;
     wh = $(window).height();
     dh = $(document).height();
     view_visible = wh / dh;
@@ -315,9 +316,17 @@
     $("#other").keyup(function(e) {
       return limitWord.call(this, 250);
     });
-    return $("h1.section_header").click(function() {
+    $("h1.section_header").click(function() {
       var $section, correction;
       $section = $("#" + ($(this).data("section")));
+      correction = $(this).offset().top - $(window).scrollTop() + $(this).height();
+      return $("body,html").animate({
+        scrollTop: $section.offset().top - correction
+      });
+    });
+    return $("#call_to_action").click(function() {
+      var $section, correction;
+      $section = $("#apply");
       correction = $(this).offset().top - $(window).scrollTop() + $(this).height();
       return $("body,html").animate({
         scrollTop: $section.offset().top - correction
