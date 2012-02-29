@@ -314,8 +314,16 @@
     $("#good_hire").keyup(function(e) {
       return limitChar.call(this, 250);
     });
-    return $("#other").keyup(function(e) {
+    $("#other").keyup(function(e) {
       return limitWord.call(this, 250);
+    });
+    return $("h1.section_header").click(function() {
+      var $section, correction;
+      $section = $("#" + ($(this).data("section")));
+      correction = $(this).offset().top - $(window).scrollTop() + $(this).height();
+      return $("body,html").animate({
+        scrollTop: $section.offset().top - correction
+      });
     });
   });
 

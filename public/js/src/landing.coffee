@@ -302,3 +302,9 @@ jQuery ->
 
   $("#other").keyup (e) ->
     limitWord.call(@, 250)
+
+  $("h1.section_header").click ->
+    $section = $("##{$(@).data("section")}")
+    correction = $(@).offset().top - $(window).scrollTop() + $(@).height()
+    $("body,html").animate
+      scrollTop: $section.offset().top - correction
