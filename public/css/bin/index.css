@@ -2270,24 +2270,13 @@ table .span12 {
   margin-bottom: 0;
   font-size: 18px;
   line-height: 1.4;
-  color: #58585a;
+  color: #ffffff;
   text-align: center;
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
   vertical-align: middle;
-  background-color: #f5f5f5;
-  background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6);
-  background-image: -ms-linear-gradient(top, #ffffff, #e6e6e6);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6));
-  background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6);
-  background-image: -o-linear-gradient(top, #ffffff, #e6e6e6);
-  background-image: linear-gradient(top, #ffffff, #e6e6e6);
-  background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#e6e6e6', GradientType=0);
-  border-color: #e6e6e6 #e6e6e6 #bfbfbf;
-  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
-  border: 1px solid #ccc;
-  border-bottom-color: #bbb;
+  background: #818285;
+  border: 1px solid #747578;
+  border-bottom-color: #68696b;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   border-radius: 4px;
@@ -2297,17 +2286,6 @@ table .span12 {
   cursor: pointer;
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
   *margin-left: .3em;
-}
-.btn:hover,
-.btn:active,
-.btn.active,
-.btn.disabled,
-.btn[disabled] {
-  background-color: #e6e6e6;
-}
-.btn:active,
-.btn.active {
-  background-color: #cccccc \9;
 }
 .btn:first-child {
   *margin-left: 0;
@@ -4136,36 +4114,40 @@ a.thumbnail:hover {
   visibility: hidden;
 }
 section {
-  margin-top: 30px;
+  margin-top: 50px;
+  margin-bottom: 30px;
   position: relative;
   z-index: 2;
 }
-.curriculum_section {
+#curriculum {
+  padding: 20px 0 60px 0;
+}
+#curriculum .curriculum_section {
   margin: 40px 0;
   padding-left: 40px;
   *zoom: 1;
   *zoom: 1;
 }
-.curriculum_section:before,
-.curriculum_section:after {
+#curriculum .curriculum_section:before,
+#curriculum .curriculum_section:after {
   display: table;
   content: "";
 }
-.curriculum_section:after {
+#curriculum .curriculum_section:after {
   clear: both;
 }
-.curriculum_section .icon {
+#curriculum .curriculum_section .icon {
   float: left;
   width: 128px;
   height: 128px;
 }
-.curriculum_section .bar_cover {
+#curriculum .curriculum_section .bar_cover {
   margin: 43px 0 0 -10px;
   float: left;
   overflow: hidden;
   width: 100px;
 }
-.curriculum_section .bar {
+#curriculum .curriculum_section .bar {
   padding: 4px 0 0 15px;
   height: 41px;
   font-size: 25px;
@@ -4173,24 +4155,59 @@ section {
   background: #3ba4db;
   width: 692px;
 }
-.curriculum_section .subtext {
+#curriculum .curriculum_section .subtext {
   opacity: 0.6;
   filter: alpha(opacity=60);
 }
-.curriculum_section #dev_icon {
+#curriculum .curriculum_section #dev_icon {
   background: url(../../img/dev.png) no-repeat;
 }
-.curriculum_section #marketing_icon {
+#curriculum .curriculum_section #marketing_icon {
   background: url(../../img/marketing.png) no-repeat;
 }
-.curriculum_section #design_icon {
+#curriculum .curriculum_section #design_icon {
   background: url(../../img/design.png) no-repeat;
 }
-.curriculum_section #sales_icon {
+#curriculum .curriculum_section #sales_icon {
   background: url(../../img/sales.png) no-repeat;
 }
-.curric_content {
-  margin: 40px 90px 0 168px;
+#curriculum .curric_content {
+  margin: 20px 90px 0 168px;
+}
+#success {
+  display: none;
+  padding: 20px 90px 20px 40px;
+  font-size: 24px;
+  color: #3ba4db;
+}
+#application {
+  padding: 20px 90px 20px 40px;
+}
+#application input[type=text],
+#application textarea {
+  width: 95%;
+  min-width: 250px;
+  max-width: 640px;
+}
+#application textarea {
+  height: 6em;
+}
+#application label {
+  font-weight: bold;
+  width: 95%;
+  min-width: 250px;
+  max-width: 640px;
+}
+#application .help-inline {
+  color: #9d261d;
+  font-size: 15px;
+}
+#application .control-group {
+  margin-top: 20px;
+}
+#application .counter {
+  font-size: 13px;
+  color: #818285;
 }
 #hero {
   height: auto;
@@ -4207,18 +4224,14 @@ section {
 #hero #ts_logo {
   height: 40px;
 }
-#page {
-  position: relative;
-  width: 63%;
-  padding-bottom: 390px;
-  visibility: hidden;
-}
-#page h1 {
-  position: relative;
+h1.section_header {
+  display: none;
+  position: absolute;
+  z-index: 15;
   text-align: right;
-  padding-right: 10%;
+  padding-right: 100px;
   width: 90%;
-  height: 1.5em;
+  height: 50px;
   color: #ffffff;
   line-height: 1.5em;
   background: #58585a;
@@ -4226,19 +4239,30 @@ section {
   -moz-box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3);
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3);
   border-top: 1px solid #818285;
-  border-bottom: 1px solid #818285;
+  border-bottom: 1px solid #4b4b4d;
 }
-#page h1:after {
+h1.section_header:hover {
+  cursor: pointer;
+  background: #818285;
+}
+h1.section_header:after {
   content: "";
   position: absolute;
   right: 0px;
-  bottom: -30px;
+  bottom: -31px;
   border-top: 15px solid #818285;
   border-right: 15px solid transparent;
   border-bottom: 15px solid transparent;
   border-left: 15px solid #818285;
   width: 0;
   height: 0;
+}
+#page {
+  position: relative;
+  padding-top: 50px;
+  padding-bottom: 390px;
+  width: 63%;
+  visibility: hidden;
 }
 .content {
   padding: 10px 40px 10px 168px;

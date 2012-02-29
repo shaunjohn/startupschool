@@ -48,6 +48,9 @@ GEM
       rubyzip
       term-ansicolor (~> 1.0.5)
     hike (1.2.1)
+    httparty (0.8.1)
+      multi_json
+      multi_xml
     i18n (0.6.0)
     journey (1.0.3)
     jquery-rails (2.0.0)
@@ -62,6 +65,8 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.17.2)
     multi_json (1.1.0)
+    multi_xml (0.4.1)
+    multipart-post (1.1.5)
     pg (0.13.2)
     polyglot (0.3.3)
     rack (1.4.1)
@@ -126,6 +131,10 @@ GEM
       execjs (>= 0.3.0)
       multi_json (>= 1.0.2)
     watchr (0.7)
+    wuparty (1.0.2)
+      httparty (>= 0.6.1)
+      mime-types (>= 1.16)
+      multipart-post (>= 1.0.1)
 
 PLATFORMS
   ruby
@@ -141,3 +150,4 @@ DEPENDENCIES
   sqlite3
   uglifier (>= 1.0.3)
   watchr
+  wuparty

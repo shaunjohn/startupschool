@@ -1,18 +1,105 @@
+<h1 class="section_header" data-section="apply" data-order="0">Apply Now</h1>
+<h1 class="section_header" data-section="curriculum" data-order="1">Curriculum</h1>
+<h1 class="section_header" data-section="why" data-order="2">Why attend?</h1>
+<h1 class="section_header" data-section="about" data-order="3">What's this about?</h1>
 <div id="page">
-  <section>
-    <h1>Apply Now</h1>
+  <section id="apply" style="margin-top:0">
+    <div id='success'>Success! Your application has been received.</div>
+    <form id="application">
+
+      <div class="control-group">
+        <label for="app[Field7]">Full name</label>
+        <input type="text" name="app[Field7]" id="name" />
+        <span class="help-inline" id="name_error"></span>
+      </div>
+
+      <div class="control-group">
+        <label for="app[Field3]">Email</label>
+        <input type="text" name="app[Field3]" id="email" />
+        <span class="help-inline" id="email_error"></span>
+      </div>
+
+      <div class="control-group">
+        <label for="app[Field10]">What college/university do you attend, what is your major, and what is your year?</label>
+        <input type="text" name="app[Field10]" id="college"/>
+        <span class="help-inline" id="college_error"></span>
+      </div>
+
+      <div class="control-group">
+        <label for="app[Field11]">What track are you applying to?</label>
+        <label class="radio">
+          <input type="radio" name="app[Field11]" class="track" value="Track A - Product & Design" /> Track A - Product &amp; Design
+        </label>
+        <label class="radio">
+          <input type="radio" name="app[Field11]" class="track" value="Track B - Business Development & Sales" /> Track B - Business Development &amp; Sales
+        </label>
+        <label class="radio">
+          <input type="radio" name="app[Field11]" class="track" value="Track C - Marketing" /> Track C - Marketing
+        </label>
+        <label class="radio">
+          <input type="radio" name="app[Field11]" class="track" value="Track D - Software Development" /> Track D - Software Development
+        </label>
+        <span class="help-inline" id="track_error"></span>
+      </div>
+
+      <div class="control-group">
+        <label for="app[Field12]">In 140 characters or less, who are you?</label>
+        <textarea name="app[Field12]" id="whoami"></textarea>
+        <span class="help-inline" id="whoami_error"></span>
+        <label for="app[Field12]" class="counter whoami_count">0/140 characters</label>
+      </div>
+
+      <div class="control-group">
+        <label for="app[Field13]">Provide up to 5 links to sites where we can find your social footprint.</label>
+        <textarea name="app[Field13]" id="social" placeholder="For example, LinkedIn, Tumblr, Github, etc"></textarea>
+        <span class="help-inline" id="social_error"></span>
+      </div>
+
+      <div class="control-group">
+        <label for="app[Field14]">In a short video (60 seconds or less), tell us: (1) Why you want to enroll in Boston Startup School and (2) what makes you a strong candidate for admission.</label>
+        <input type="text" name="app[Field14]" id="the_why" placeholder="Add a link to your video" data-required="true"/>
+        <span class="help-inline" id="the_why_error"></span>
+      </div>
+
+      <div class="control-group">
+        <label for="app[Field9]">In a second short video (60 seconds or less), tell us about something you created or accomplished that you are most proud of and why it wouldn't have happened without you.</label>
+        <input type="text" name="app[Field9]" id="accomplished" placeholder="Add a link to your video" data-required="true"/>
+        <span class="help-inline" id="accomplished_error"></span>
+      </div>
+
+      <div class="control-group">
+        <label for="app[Field15]">Why do you think you will be an awesome hire upon completion of this program? (250 character limit)</label>
+        <textarea name="app[Field15]" id="good_hire"></textarea>
+        <span class="help-inline" id="good_hire_error"></span>
+        <label for="app[Field12]" class="counter good_hire_count">0/250 characters</label>
+      </div>
+
+      <div class="control-group">
+        <label for="app[Field5]">Is there anything else we should know about you? (250 word limit)</label>
+        <textarea name="app[Field5]" id="other"></textarea>
+        <span class="help-inline" id="other_error"></span>
+        <label for="app[Field12]" class="counter other_count">0/250 words</label>
+      </div>
+
+      <br/>
+      <button type="submit" class="btn">Submit Application</button>
+
+    </form>
   </section>
 
-  <section>
-    <h1>Curriculum</h1>
+  <section id="curriculum">
     <p class="curric_content">
       Select from one of four curriculum tracks, each of which are highly coveted in today's competitive job market.
+    </p>
+
+    <p class="curric_content">
+      We also provide an underlying curriculum that's akin to the onboarding process you'd experience once joining a team, de-risking the opportunity for companies to hire you after our program.
     </p>
 
     <div class="curriculum_section" id="dev" style="margin-top:0">
       <div class="icon" id="dev_icon"></div>
       <div class="bar_cover">
-        <div class="bar">Software Development <span class="subtext">- Mobile, Front End, Back End</span></div>
+        <div class="bar">Software Development</div>
       </div>
     </div>
     <div class="curriculum_section" id="marketing">
@@ -34,22 +121,16 @@
       </div>
     </div>
 
-    <p class="curric_content" style="margin-top:0">
-      We also provide an underlying curriculum that's akin to the on boarding process you'd experience once joining a team, de-risking the opportunity for companies to hire you after our program.
-    </p>
-
   </section>
 
-  <section>
-    <h1>Why attend?</h1>
+  <section id="why">
     <div class="content">
       <p>It's an experience you can't obtain elsewhere. You learn from key leaders in the community who deliver lectures, workshops and team-based projects.</p>
       <p>You'll be sought-after by Boston area startups looking to build their team immediately.</p>
     </div>
   </section>
 
-  <section>
-    <h1>What's this about?</h1>
+  <section id="about">
     <div class="content">
       <p>Boston Startup School helps graduating college seniors learn what it takes to become more hirable and participate as a key team member of a Boston area startup company.</p>
       <p>Our program is a six week immersive curriculum that teaches you a series of highly demanded skill sets.</p>

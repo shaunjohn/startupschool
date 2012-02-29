@@ -3,6 +3,8 @@ Startupschool::Application.routes.draw do
 
   get "pages/application"
 
+  post "pages/wufoo"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
