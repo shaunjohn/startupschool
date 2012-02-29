@@ -7,6 +7,13 @@ section {
   z-index:2;
 }
 
+ol {
+  margin-left:1.5em;
+}
+ol ol {
+  list-style:lower-alpha;
+}
+
 #scroll_up {
   position:fixed;
   top:20px;
@@ -36,7 +43,7 @@ section {
   }
 }
 
-#curriculum {
+#about {
   padding:20px 0 60px 0;
   .curriculum_section {
     margin:40px 0;
@@ -75,11 +82,73 @@ section {
     #sales_icon {background: url(../../img/sales.png) no-repeat}
 
   }
-  .curric_content {
-    margin:20px 90px 0 168px;
-  }
 }
 
+#why {
+  padding:20px 0 60px 0;
+}
+
+#instructions_container {
+  position:absolute;
+  margin:0 12% 0 4%;
+  width:84%;
+  height:100%;
+  overflow:hidden;
+}
+#instructions {
+  position:relative;
+  top:0;
+  color:@white;
+
+  background:rgba(100,100,100,.9);
+  border:1px solid @tertiary;
+  .box-shadow(0 0 15px rgba(0,0,0,0.5));
+  .border-radius(4px);
+
+  #instruction_content {
+    position:relative;
+    padding:10px 35px 15px 35px;
+    border-bottom:1px solid @secondary;
+  }
+
+  .instruction_header {
+    border-top:1px solid @tertiary;
+    padding:4px 0 6px 0;
+    font-size:20px;
+    text-align:center;
+    background:rgba(0,0,0,0.1);
+    &:hover {
+      cursor:pointer;
+      background:rgba(255,255,255,0.2);
+      #toggle_instructions {
+        color:@grayLighter;
+      }
+    }
+  }
+
+  .x_close {
+    position:absolute;
+    top:2%;
+    right:3%;
+    color:@grayLighter;
+    .opacity(50);
+
+    &:hover {
+      cursor:pointer;
+      .opacity(100);
+    }
+  }
+
+  #toggle_instructions {
+    color:@grayLight;
+    font-size:14px;
+    &:hover {
+      text-decoration:none;
+      color:@grayLighter;
+      cursor:pointer;
+    }
+  }
+}
 #success {
   display:none;
   padding:20px 90px 20px 40px;
@@ -87,7 +156,7 @@ section {
   color:@primary;
 }
 #application {
-  padding:20px 90px 20px 40px;
+  padding:40px 90px 20px 40px;
 
   .control-group {
     max-width:640px;
@@ -141,7 +210,7 @@ section {
   }
 }
 
-h1.section_header {
+.section_header {
   display:none;
   position:absolute;
   z-index:15;
@@ -177,7 +246,7 @@ h1.section_header {
     height:0;
   }
 }
-h1.apply_header {
+.apply_header {
   color:@primary;
 }
 
@@ -191,8 +260,10 @@ h1.apply_header {
 }
 
 .content {
-  padding:10px 40px 10px 168px;
-  margin-right:75px;
+  margin:20px 0 20px 40px;
+  width:80%;
+  min-width:250px;
+  max-width:640px;
   /*background:@tertiary;*/
   /*color:white;*/
   /*border-bottom:1px solid @secondary;*/

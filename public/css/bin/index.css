@@ -4119,6 +4119,12 @@ section {
   position: relative;
   z-index: 2;
 }
+ol {
+  margin-left: 1.5em;
+}
+ol ol {
+  list-style: lower-alpha;
+}
 #scroll_up {
   position: fixed;
   top: 20px;
@@ -4146,35 +4152,35 @@ section {
   margin-left: 20px;
   background: #818285;
 }
-#curriculum {
+#about {
   padding: 20px 0 60px 0;
 }
-#curriculum .curriculum_section {
+#about .curriculum_section {
   margin: 40px 0;
   padding-left: 40px;
   *zoom: 1;
   *zoom: 1;
 }
-#curriculum .curriculum_section:before,
-#curriculum .curriculum_section:after {
+#about .curriculum_section:before,
+#about .curriculum_section:after {
   display: table;
   content: "";
 }
-#curriculum .curriculum_section:after {
+#about .curriculum_section:after {
   clear: both;
 }
-#curriculum .curriculum_section .icon {
+#about .curriculum_section .icon {
   float: left;
   width: 128px;
   height: 128px;
 }
-#curriculum .curriculum_section .bar_cover {
+#about .curriculum_section .bar_cover {
   margin: 43px 0 0 -10px;
   float: left;
   overflow: hidden;
   width: 100px;
 }
-#curriculum .curriculum_section .bar {
+#about .curriculum_section .bar {
   padding: 4px 0 0 15px;
   height: 41px;
   font-size: 25px;
@@ -4182,24 +4188,85 @@ section {
   background: #3ba4db;
   width: 692px;
 }
-#curriculum .curriculum_section .subtext {
+#about .curriculum_section .subtext {
   opacity: 0.6;
   filter: alpha(opacity=60);
 }
-#curriculum .curriculum_section #dev_icon {
+#about .curriculum_section #dev_icon {
   background: url(../../img/dev.png) no-repeat;
 }
-#curriculum .curriculum_section #marketing_icon {
+#about .curriculum_section #marketing_icon {
   background: url(../../img/marketing.png) no-repeat;
 }
-#curriculum .curriculum_section #design_icon {
+#about .curriculum_section #design_icon {
   background: url(../../img/design.png) no-repeat;
 }
-#curriculum .curriculum_section #sales_icon {
+#about .curriculum_section #sales_icon {
   background: url(../../img/sales.png) no-repeat;
 }
-#curriculum .curric_content {
-  margin: 20px 90px 0 168px;
+#why {
+  padding: 20px 0 60px 0;
+}
+#instructions_container {
+  position: absolute;
+  margin: 0 12% 0 4%;
+  width: 84%;
+  height: 100%;
+  overflow: hidden;
+}
+#instructions {
+  position: relative;
+  top: 0;
+  color: #ffffff;
+  background: rgba(100, 100, 100, 0.9);
+  border: 1px solid #818285;
+  -webkit-box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}
+#instructions #instruction_content {
+  position: relative;
+  padding: 10px 35px 15px 35px;
+  border-bottom: 1px solid #58585a;
+}
+#instructions .instruction_header {
+  border-top: 1px solid #818285;
+  padding: 4px 0 6px 0;
+  font-size: 20px;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.1);
+}
+#instructions .instruction_header:hover {
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.2);
+}
+#instructions .instruction_header:hover #toggle_instructions {
+  color: #eeeeee;
+}
+#instructions .x_close {
+  position: absolute;
+  top: 2%;
+  right: 3%;
+  color: #eeeeee;
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+}
+#instructions .x_close:hover {
+  cursor: pointer;
+  opacity: 1;
+  filter: alpha(opacity=100);
+}
+#instructions #toggle_instructions {
+  color: #818285;
+  font-size: 14px;
+}
+#instructions #toggle_instructions:hover {
+  text-decoration: none;
+  color: #eeeeee;
+  cursor: pointer;
 }
 #success {
   display: none;
@@ -4208,7 +4275,7 @@ section {
   color: #3ba4db;
 }
 #application {
-  padding: 20px 90px 20px 40px;
+  padding: 40px 90px 20px 40px;
 }
 #application .control-group {
   max-width: 640px;
@@ -4254,7 +4321,7 @@ section {
 #hero #ts_logo {
   height: 40px;
 }
-h1.section_header {
+.section_header {
   display: none;
   position: absolute;
   z-index: 15;
@@ -4271,11 +4338,11 @@ h1.section_header {
   border-top: 1px solid #818285;
   border-bottom: 1px solid #4b4b4d;
 }
-h1.section_header:hover {
+.section_header:hover {
   cursor: pointer;
   background: #818285;
 }
-h1.section_header:after {
+.section_header:after {
   content: "";
   position: absolute;
   right: 0px;
@@ -4287,7 +4354,7 @@ h1.section_header:after {
   width: 0;
   height: 0;
 }
-h1.apply_header {
+.apply_header {
   color: #3ba4db;
 }
 #page {
@@ -4298,8 +4365,10 @@ h1.apply_header {
   visibility: hidden;
 }
 .content {
-  padding: 10px 40px 10px 168px;
-  margin-right: 75px;
+  margin: 20px 0 20px 40px;
+  width: 80%;
+  min-width: 250px;
+  max-width: 640px;
   /*background:@tertiary;*/
 
   /*color:white;*/

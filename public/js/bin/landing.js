@@ -78,9 +78,9 @@
   };
 
   headers = function(fix_width) {
-    var $header, $section, d_apply, h, header, nav_bot_h, nav_h, opacity, scroll_top, section_headers, section_top, win_h, _i, _j, _len, _len2, _results;
+    var $header, $section, d_apply, h, header, nav_bot_h, nav_h, num_sections, opacity, scroll_top, section_headers, section_top, win_h, _i, _j, _len, _len2, _results;
     if (fix_width == null) fix_width = false;
-    section_headers = $("h1.section_header");
+    section_headers = $(".section_header");
     scroll_top = $(window).scrollTop();
     h = section_headers.outerHeight();
     d_apply = Math.min(Math.abs(scroll_top - $("#apply").offset().top), 1500);
@@ -108,6 +108,7 @@
       $section = $("#" + ($(header).data("section")));
       section_top = $section.offset().top;
       $header = $(header);
+      num_sections = $(".section_header").length - 1;
       if ($header.hasClass('fixed_top')) {
         if (scroll_top + nav_h > section_top) {
           _results.push(null);
@@ -136,7 +137,7 @@
         } else if ($header.offset().top + h + nav_bot_h > scroll_top + win_h) {
           $header.css('position', 'fixed');
           $header.css('top', 'auto');
-          $header.css('bottom', h * (3 - $(header).data("order")));
+          $header.css('bottom', h * (num_sections - $(header).data("order")));
           $header.addClass('fixed_bot');
           _results.push($header.removeClass('fixed_top'));
         } else {
@@ -168,7 +169,7 @@
     var EXP_LEN, X_END, X_START, bar_w, el, factor, scroll_top, _i, _len, _ref, _results;
     X_START = 40 + 128 - 10;
     X_END = $("#page").width() - 30;
-    EXP_LEN = 200;
+    EXP_LEN = 400;
     bar_w = X_END - X_START - 15;
     $(".bar").width(bar_w);
     scroll_top = $(window).scrollTop();
@@ -330,8 +331,9 @@
   };
 
   jQuery(function() {
+    var h;
     onResize();
-    $("h1.section_header").show();
+    $(".section_header").show();
     $(window).resize(onResize);
     $(window).scroll(onScroll);
     $(window).scrollTop($(document).height());
@@ -348,7 +350,7 @@
     $("#other").keyup(function(e) {
       return limitWord.call(this, 250);
     });
-    $("h1.section_header").click(function() {
+    $(".section_header").click(function() {
       var $section, correction;
       $section = $("#" + ($(this).data("section")));
       correction = $(this).data("order") * $(this).height() + $(this).height();
@@ -356,13 +358,40 @@
         scrollTop: $section.offset().top - correction
       });
     });
-    return $("#call_to_action").click(function() {
+    $("#call_to_action").click(function() {
       var $section, correction;
       $section = $("#apply");
       correction = $(this).offset().top - $(window).scrollTop() + $(this).height();
       return $("body,html").animate({
         scrollTop: $section.offset().top - correction
       }, 'slow');
+    });
+    $("#instructions").css({
+      top: "-" + ($("#instruction_content").outerHeight()) + "px"
+    });
+    h = $(".instruction_header").outerHeight() + 10;
+    $("#instructions_container").height(h);
+    return $(".instruction_toggle").click(function() {
+      var $container, $instructions;
+      $instructions = $("#instructions");
+      $container = $("#instructions_container");
+      if ($instructions.hasClass("opened")) {
+        $instructions.animate({
+          top: "-" + ($('#instruction_content').outerHeight()) + "px"
+        }, function() {
+          return $container.height($(".instruction_header").outerHeight() + 10);
+        });
+        $instructions.toggleClass("opened");
+        return $("#toggle_instructions").html("open");
+      } else {
+        h = $(".instruction_header").outerHeight() + $("#instruction_content").outerHeight() + 20;
+        $container.height(h);
+        $instructions.animate({
+          top: "0px"
+        });
+        $instructions.toggleClass("opened");
+        return $("#toggle_instructions").html("close");
+      }
     });
   });
 
