@@ -78,11 +78,16 @@
   };
 
   headers = function(fix_width) {
-    var $header, $section, h, header, nav_bot_h, nav_h, scroll_top, section_headers, section_top, win_h, _i, _j, _len, _len2, _results;
+    var $header, $section, d_apply, h, header, nav_bot_h, nav_h, opacity, scroll_top, section_headers, section_top, win_h, _i, _j, _len, _len2, _results;
     if (fix_width == null) fix_width = false;
     section_headers = $("h1.section_header");
     scroll_top = $(window).scrollTop();
     h = section_headers.outerHeight();
+    d_apply = Math.min(Math.abs(scroll_top - $("#apply").offset().top), 1500);
+    opacity = Math.max(1 / 750 * d_apply - 1, 0);
+    $("#call_to_action").css({
+      opacity: opacity
+    });
     if (fix_width === true || fix_width === 'fix_width') {
       section_headers.width($("#page").width() - 100);
     }

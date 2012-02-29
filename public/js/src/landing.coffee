@@ -97,6 +97,12 @@ headers = (fix_width=false)->
   scroll_top = $(window).scrollTop()
   h = section_headers.outerHeight()
 
+  # Fade out the 'Apply now' button if we're close to the apply section
+  d_apply = Math.min(Math.abs(scroll_top - $("#apply").offset().top), 1500)
+  opacity = Math.max(1/750 * d_apply - 1, 0)
+  $("#call_to_action").css
+    opacity:opacity
+
   if fix_width is true or fix_width is 'fix_width'
     section_headers.width $("#page").width() - 100
 
