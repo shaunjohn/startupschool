@@ -114,9 +114,11 @@ onResize = ->
   fixCurriculum()
   headers('fix_width')
   setupElements()
+  adjustLogo() # Re-setup now that elements have been setup
 
 show_scroll = 0
 instructions_shown = false
+instruction_show_time = null
 onScroll = ->
 
   if show_scroll == 10
@@ -124,6 +126,7 @@ onScroll = ->
 
   if not instructions_shown
     if $(window).scrollTop() < $("#instruction_header").offset().top + 5
+      instruction_show_time = new Date().getTime()
       $("#instruction_header").trigger("click")
       instructions_shown = true
 
@@ -261,6 +264,9 @@ formSubmission = (e) ->
     data = $(@).serializeObject()
     $.post "pages/wufoo", data, (r) ->
       if r.Success is 1
+        submit_delta = Math.round((new Date().getTime() - instruction_show_time) / 1000)
+        mpq.track("Submit Application Success", {"time_to_submit":submit_delta, "mp_note":"A user successfully submitted an application. They took #{submit_delta} seconds to fill it out."})
+
         $(window).scrollTop(0)
         $("#application").fadeOut()
         $("#success").fadeIn()
@@ -271,6 +277,8 @@ formSubmission = (e) ->
             $("##{id}_error").html error.ErrorText
           onScroll()
   else
+    submit_delta = Math.round((new Date().getTime() - instruction_show_time) / 1000)
+    mpq.track("Submit Application Error", {"time_to_submit":submit_delta, "mp_note":"A user tried to submit an application but had errors. They took #{submit_delta} seconds to fill it out."})
     onScroll()
   return false
 
@@ -399,6 +407,9 @@ setupElements = ->
 
   $(window).scrollTop($(document).height())
 
+  if $(window).width() < SIZE_CUTOFF
+    $("#scroll_up").hide()
+
 retrieveForm = ->
   if window.localStorage?
     for el in $("input[type=text], textarea")
@@ -442,6 +453,8 @@ events = ->
       scrollTop: $section.offset().top - correction
 
   $("#call_to_action").click ->
+    scroll_pos = $(window).scrollTop() / ($(document).height() - $(window).height()) * 100
+    mpq.track("Apply Now", {"scroll_pos":scroll_pos, "mp_note":"Sidebar Apply Now call to action clicked at #{scroll_pos}% on the page"})
     $section = $("#apply")
     correction = $(@).offset().top - $(window).scrollTop() + $(@).height()
     $("body,html").animate

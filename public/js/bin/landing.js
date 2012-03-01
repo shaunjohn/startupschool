@@ -1,5 +1,5 @@
 (function() {
-  var A_BOTTOM, A_LEFT, A_WIDTH, LOGO_FACTOR, LOGO_MARGIN, PAGE_FACTOR, SIZE_CUTOFF, adjustArrow, arrowHeight, events, fixCurriculum, formSubmission, headers, instructions_shown, limitChar, limitWord, onResize, onScroll, retrieveForm, saveForm, setupElements, show_scroll, validateForm;
+  var A_BOTTOM, A_LEFT, A_WIDTH, LOGO_FACTOR, LOGO_MARGIN, PAGE_FACTOR, SIZE_CUTOFF, adjustArrow, arrowHeight, events, fixCurriculum, formSubmission, headers, instruction_show_time, instructions_shown, limitChar, limitWord, onResize, onScroll, retrieveForm, saveForm, setupElements, show_scroll, validateForm;
 
   LOGO_FACTOR = 1484 / 500;
 
@@ -82,17 +82,21 @@
     adjustLogo();
     fixCurriculum();
     headers('fix_width');
-    return setupElements();
+    setupElements();
+    return adjustLogo();
   };
 
   show_scroll = 0;
 
   instructions_shown = false;
 
+  instruction_show_time = null;
+
   onScroll = function() {
     if (show_scroll === 10) $("#scroll_up").fadeOut('slow');
     if (!instructions_shown) {
       if ($(window).scrollTop() < $("#instruction_header").offset().top + 5) {
+        instruction_show_time = new Date().getTime();
         $("#instruction_header").trigger("click");
         instructions_shown = true;
       }
@@ -228,14 +232,19 @@
   };
 
   formSubmission = function(e) {
-    var data;
+    var data, submit_delta;
     e.preventDefault();
     $(".help-inline").html("");
     if (validateForm()) {
       data = $(this).serializeObject();
       $.post("pages/wufoo", data, function(r) {
-        var error, id, _i, _len, _ref;
+        var error, id, submit_delta, _i, _len, _ref;
         if (r.Success === 1) {
+          submit_delta = Math.round((new Date().getTime() - instruction_show_time) / 1000);
+          mpq.track("Submit Application Success", {
+            "time_to_submit": submit_delta,
+            "mp_note": "A user successfully submitted an application. They took " + submit_delta + " seconds to fill it out."
+          });
           $(window).scrollTop(0);
           $("#application").fadeOut();
           return $("#success").fadeIn();
@@ -252,6 +261,11 @@
         }
       });
     } else {
+      submit_delta = Math.round((new Date().getTime() - instruction_show_time) / 1000);
+      mpq.track("Submit Application Error", {
+        "time_to_submit": submit_delta,
+        "mp_note": "A user tried to submit an application but had errors. They took " + submit_delta + " seconds to fill it out."
+      });
       onScroll();
     }
     return false;
@@ -386,7 +400,8 @@
     $("#page, #scroll_up, #call_to_action").css({
       visibility: "visible"
     });
-    return $(window).scrollTop($(document).height());
+    $(window).scrollTop($(document).height());
+    if ($(window).width() < SIZE_CUTOFF) return $("#scroll_up").hide();
   };
 
   retrieveForm = function() {
@@ -447,7 +462,12 @@
       });
     });
     $("#call_to_action").click(function() {
-      var $section, correction;
+      var $section, correction, scroll_pos;
+      scroll_pos = $(window).scrollTop() / ($(document).height() - $(window).height()) * 100;
+      mpq.track("Apply Now", {
+        "scroll_pos": scroll_pos,
+        "mp_note": "Sidebar Apply Now call to action clicked at " + scroll_pos + "% on the page"
+      });
       $section = $("#apply");
       correction = $(this).offset().top - $(window).scrollTop() + $(this).height();
       return $("body,html").animate({
