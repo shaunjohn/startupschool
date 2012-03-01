@@ -1,55 +1,55 @@
-LOGO_FACTOR = 270 / 91 # Ratio of width to height
+LOGO_FACTOR = 1484 / 500 # Ratio of width to height
 LOGO_MARGIN = 40 # Static pixel margins around the logo
 PAGE_FACTOR = .8 # How much of the page the logo takes up
 
 # Relative position of the left side of the arrow relative to the logo's left.
+# A_LEFT = 0.7820
 A_LEFT = 0.7820
 # Relative position of the bottom of the arrow relative to the logo's bottom.
 # A_BOTTOM = 0.870252
+# A_BOTTOM = 0.65
 A_BOTTOM = 0.65
 # Relative width of the arrow relative to the logo's width
+# A_WIDTH = 0.048
 A_WIDTH = 0.048
 
 # Adjusts the Cirriculum bars. Fired on scroll
 
 # Sets the logo size and position and blank padding space above the logo
 window.adjustLogo = ->
-  console.log "ADJUSTING LOGO"
   $logo = $("#svg_logo")
   w = $(window).width()
   logo_w = w * PAGE_FACTOR
   logo_h = w * PAGE_FACTOR / LOGO_FACTOR
 
-  $logo.hide()
-  $logo.show()
-
+  # Needed important flags for svg resizing
   $logo.css
     width: "#{logo_w}px !important"
     height: "#{logo_h}px !important"
   $logo.attr 'width', "#{logo_w}px !important"
   $logo.attr 'height', "#{logo_h}px !important"
 
-  console.log $logo
-  $logo_svg = $($logo[0].contentDocument).find("svg")
-  if $logo_svg.length
-    console.log "Fixing SVG dom element", $logo_svg
-    $logo_svg.attr "width", "#{logo_w}px"
-    $logo_svg.attr "height", "#{logo_h}px"
-    $logo_svg.attr "viewBox", "0 0 #{logo_w} #{logo_h}"
-    $logo_svg.attr "enable-background", "new 0 0 #{logo_w} #{logo_h}"
-    $logo_svg.css
-      width: "#{logo_w}px !important"
-      height: "#{logo_h}px !important"
+  # $logo_svg = $($logo[0].contentDocument).find("svg")
+  # if $logo_svg.length
+  #   $logo_svg.attr "width", "#{logo_w}px"
+  #   $logo_svg.attr "height", "#{logo_h}px"
+  #   $logo_svg.attr "viewBox", "0 0 #{logo_w} #{logo_h}"
+  #   $logo_svg.attr "enable-background", "new 0 0 #{logo_w} #{logo_h}"
+  #   $logo_svg.css
+  #     width: "#{logo_w}px !important"
+  #     height: "#{logo_h}px !important"
 
   # Setting padding so no content accidentally flows over the logo.
   $("#page").css
     "padding-bottom": logo_h + LOGO_MARGIN
 
+  # $logo.hide()
+  # $logo.show()
+
   # Calculate how much empty space we should generate above the logo to ensure
   # a clean landing page.
-  stack = logo_h + LOGO_MARGIN + $("#hero").outerHeight(true)
+  stack = logo_h + LOGO_MARGIN + $("#hero").outerHeight()
   m = $(window).height() - stack + LOGO_MARGIN
-  # m = $(window).height() - ($(document).height() - $("#hero").offset().top)
   $("#hero").css
     "margin-top":"#{m}px"
 
@@ -180,23 +180,30 @@ headers = (fix_width=false)->
 # Adjusts the height of the arrow on page resize or scroll
 arrowHeight = ->
   if show_scroll < 10 then return
+
   wh = $(window).height()
   dh = $(document).height()
-  view_visible = wh/dh
-
-  # When scrolled to the bottom, this is the relative percentage from the WINDOW top we want the arrow to start at.
-  from_top = -0.666 * view_visible + 0.666
-
-  # The percent down the page the user has scrolled
-  scroll_percent = $(window).scrollTop() / (dh - wh)
-
-  # The absolute position of where the arrowhead should end up. Affected by both window height and scroll position.
-  doc_top = $(window).scrollTop() + scroll_percent * from_top * wh
-
   $arrow_body = $("#arrow_body")
-  # Set the arrow height to a positive number
-  arrow_height = Math.max($arrow_body.offset().top + $arrow_body.height() - doc_top, 10)
-  $arrow_body.stop(true)
+
+  # We're scrolled near the bottom
+  if $(window).scrollTop() + wh + 40 > dh
+    arrow_height = 2
+  else
+    view_visible = wh/dh
+
+    # When scrolled to the bottom, this is the relative percentage from the WINDOW top we want the arrow to start at.
+    from_top = -0.666 * view_visible + 0.666
+
+    # The percent down the page the user has scrolled
+    scroll_percent = $(window).scrollTop() / (dh - wh)
+
+    # The absolute position of where the arrowhead should end up. Affected by both window height and scroll position.
+    doc_top = $(window).scrollTop() + scroll_percent * from_top * wh
+
+    # Set the arrow height to a positive number
+    arrow_height = Math.max($arrow_body.offset().top + $arrow_body.height() - doc_top, 10)
+    $arrow_body.stop(true)
+
   $arrow_body.animate
     height:"#{arrow_height}px"
   ,70
@@ -224,9 +231,7 @@ formSubmission = (e) ->
   $(".help-inline").html ""
   if validateForm()
     data = $(@).serializeObject()
-    console.log data
     $.post "pages/wufoo", data, (r) ->
-      console.log r
       if r.Success is 1
         $(window).scrollTop(0)
         $("#application").fadeOut()
@@ -235,7 +240,6 @@ formSubmission = (e) ->
         if r.FieldErrors?
           for error in r.FieldErrors
             id = $("input[name='app[#{error.ID}]'],textarea[name='app[#{error.ID}]']").attr('id')
-            console.log "#{id}_error"
             $("##{id}_error").html error.ErrorText
           onScroll()
   else
@@ -347,9 +351,8 @@ jQuery.fn.serializeObject = ->
   return objectData
 
 setupElements = ->
-  window.addEventListener 'SVGLoad', (e) ->
-    console.log "SVG LOADED", e
-    adjustLogo()
+  # window.addEventListener 'SVGLoad', (e) ->
+  #   adjustLogo()
 
   $(".section_header").show()
 
@@ -417,6 +420,7 @@ events = ->
       $("#toggle_instructions").html "close"
 
 jQuery ->
+
   # Setup the logo and arrow height for the first time
   events()
   onResize()

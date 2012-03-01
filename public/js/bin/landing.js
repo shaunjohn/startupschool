@@ -1,7 +1,7 @@
 (function() {
   var A_BOTTOM, A_LEFT, A_WIDTH, LOGO_FACTOR, LOGO_MARGIN, PAGE_FACTOR, adjustArrow, arrowHeight, events, fixCurriculum, formSubmission, headers, instructions_shown, limitChar, limitWord, onResize, onScroll, setupElements, show_scroll, validateForm;
 
-  LOGO_FACTOR = 270 / 91;
+  LOGO_FACTOR = 1484 / 500;
 
   LOGO_MARGIN = 40;
 
@@ -14,37 +14,21 @@
   A_WIDTH = 0.048;
 
   window.adjustLogo = function() {
-    var $logo, $logo_svg, logo_h, logo_w, m, stack, w;
-    console.log("ADJUSTING LOGO");
+    var $logo, logo_h, logo_w, m, stack, w;
     $logo = $("#svg_logo");
     w = $(window).width();
     logo_w = w * PAGE_FACTOR;
     logo_h = w * PAGE_FACTOR / LOGO_FACTOR;
-    $logo.hide();
-    $logo.show();
     $logo.css({
       width: "" + logo_w + "px !important",
       height: "" + logo_h + "px !important"
     });
     $logo.attr('width', "" + logo_w + "px !important");
     $logo.attr('height', "" + logo_h + "px !important");
-    console.log($logo);
-    $logo_svg = $($logo[0].contentDocument).find("svg");
-    if ($logo_svg.length) {
-      console.log("Fixing SVG dom element", $logo_svg);
-      $logo_svg.attr("width", "" + logo_w + "px");
-      $logo_svg.attr("height", "" + logo_h + "px");
-      $logo_svg.attr("viewBox", "0 0 " + logo_w + " " + logo_h);
-      $logo_svg.attr("enable-background", "new 0 0 " + logo_w + " " + logo_h);
-      $logo_svg.css({
-        width: "" + logo_w + "px !important",
-        height: "" + logo_h + "px !important"
-      });
-    }
     $("#page").css({
       "padding-bottom": logo_h + LOGO_MARGIN
     });
-    stack = logo_h + LOGO_MARGIN + $("#hero").outerHeight(true);
+    stack = logo_h + LOGO_MARGIN + $("#hero").outerHeight();
     m = $(window).height() - stack + LOGO_MARGIN;
     $("#hero").css({
       "margin-top": "" + m + "px"
@@ -178,13 +162,17 @@
     if (show_scroll < 10) return;
     wh = $(window).height();
     dh = $(document).height();
-    view_visible = wh / dh;
-    from_top = -0.666 * view_visible + 0.666;
-    scroll_percent = $(window).scrollTop() / (dh - wh);
-    doc_top = $(window).scrollTop() + scroll_percent * from_top * wh;
     $arrow_body = $("#arrow_body");
-    arrow_height = Math.max($arrow_body.offset().top + $arrow_body.height() - doc_top, 10);
-    $arrow_body.stop(true);
+    if ($(window).scrollTop() + wh + 40 > dh) {
+      arrow_height = 2;
+    } else {
+      view_visible = wh / dh;
+      from_top = -0.666 * view_visible + 0.666;
+      scroll_percent = $(window).scrollTop() / (dh - wh);
+      doc_top = $(window).scrollTop() + scroll_percent * from_top * wh;
+      arrow_height = Math.max($arrow_body.offset().top + $arrow_body.height() - doc_top, 10);
+      $arrow_body.stop(true);
+    }
     return $arrow_body.animate({
       height: "" + arrow_height + "px"
     }, 70);
@@ -214,10 +202,8 @@
     $(".help-inline").html("");
     if (validateForm()) {
       data = $(this).serializeObject();
-      console.log(data);
       $.post("pages/wufoo", data, function(r) {
         var error, id, _i, _len, _ref;
-        console.log(r);
         if (r.Success === 1) {
           $(window).scrollTop(0);
           $("#application").fadeOut();
@@ -228,7 +214,6 @@
             for (_i = 0, _len = _ref.length; _i < _len; _i++) {
               error = _ref[_i];
               id = $("input[name='app[" + error.ID + "]'],textarea[name='app[" + error.ID + "]']").attr('id');
-              console.log("" + id + "_error");
               $("#" + id + "_error").html(error.ErrorText);
             }
             return onScroll();
@@ -357,10 +342,6 @@
 
   setupElements = function() {
     var cta_t, h;
-    window.addEventListener('SVGLoad', function(e) {
-      console.log("SVG LOADED", e);
-      return adjustLogo();
-    });
     $(".section_header").show();
     $("#instructions").css({
       top: "-" + ($("#instruction_content").outerHeight()) + "px"
