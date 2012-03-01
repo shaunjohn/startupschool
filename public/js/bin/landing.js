@@ -1,5 +1,5 @@
 (function() {
-  var A_BOTTOM, A_LEFT, A_WIDTH, LOGO_FACTOR, LOGO_MARGIN, PAGE_FACTOR, SIZE_CUTOFF, adjustArrow, arrowHeight, events, fixCurriculum, formSubmission, headers, instructions_shown, limitChar, limitWord, onResize, onScroll, setupElements, show_scroll, validateForm;
+  var A_BOTTOM, A_LEFT, A_WIDTH, LOGO_FACTOR, LOGO_MARGIN, PAGE_FACTOR, SIZE_CUTOFF, adjustArrow, arrowHeight, events, fixCurriculum, formSubmission, headers, instructions_shown, limitChar, limitWord, onResize, onScroll, retrieveForm, saveForm, setupElements, show_scroll, validateForm;
 
   LOGO_FACTOR = 1484 / 500;
 
@@ -212,15 +212,19 @@
     EXP_LEN = 400;
     bar_w = X_END - X_START - 15;
     $(".bar").width(bar_w);
-    scroll_top = $(window).scrollTop();
-    _ref = $(".bar_cover");
-    _results = [];
-    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-      el = _ref[_i];
-      factor = Math.min(Math.max(($(el).offset().top - scroll_top) / EXP_LEN, 0), 1);
-      _results.push($(el).width(factor * bar_w));
+    if ($(window).width() >= SIZE_CUTOFF) {
+      scroll_top = $(window).scrollTop();
+      _ref = $(".bar_cover");
+      _results = [];
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        el = _ref[_i];
+        factor = Math.min(Math.max(($(el).offset().top - scroll_top) / EXP_LEN, 0), 1);
+        _results.push($(el).width(factor * bar_w));
+      }
+      return _results;
+    } else {
+      return $(".bar_cover").width(bar_w);
     }
-    return _results;
   };
 
   formSubmission = function(e) {
@@ -385,9 +389,45 @@
     return $(window).scrollTop($(document).height());
   };
 
+  retrieveForm = function() {
+    var el, key, val, _i, _len, _ref, _results;
+    if (window.localStorage != null) {
+      _ref = $("input[type=text], textarea");
+      _results = [];
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        el = _ref[_i];
+        key = $(el).attr('name');
+        val = localStorage.getItem(key);
+        _results.push($(el).val(val));
+      }
+      return _results;
+    } else {
+      $(".no_save").show();
+      return false;
+    }
+  };
+
+  saveForm = function() {
+    var el, key, val, _i, _len, _ref, _results;
+    if (window.localStorage != null) {
+      _ref = $("input[type=text], textarea");
+      _results = [];
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        el = _ref[_i];
+        key = $(el).attr('name');
+        val = $(el).val();
+        _results.push(localStorage.setItem(key, val));
+      }
+      return _results;
+    } else {
+      return false;
+    }
+  };
+
   events = function() {
     $(window).resize(onResize);
     $(window).scroll(onScroll);
+    $("input, textarea").blur(saveForm);
     $("#application").submit(formSubmission);
     $("#whoami").keyup(function(e) {
       return limitChar.call(this, 140);
@@ -441,6 +481,7 @@
   jQuery(function() {
     events();
     onResize();
+    retrieveForm();
     return $(window).scrollTop($(document).height());
   });
 

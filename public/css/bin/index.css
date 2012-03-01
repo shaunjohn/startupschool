@@ -559,6 +559,7 @@ body {
   font-family: "Flama-Book", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 18px;
   line-height: 1.4;
+  text-shadow: -1px -1px rgba(0, 0, 0, 0.1);
   color: #58585a;
   background: #eeeeee url(../../img/bg.jpg) repeat;
 }
@@ -4255,6 +4256,9 @@ ol ol {
   float: left;
   overflow: hidden;
   width: 100px;
+  -webkit-border-radius: 0 20px 20px 0;
+  -moz-border-radius: 0 20px 20px 0;
+  border-radius: 0 20px 20px 0;
 }
 #about .curriculum_section .bar {
   padding: 4px 0 0 15px;
@@ -4269,16 +4273,16 @@ ol ol {
   filter: alpha(opacity=60);
 }
 #about .curriculum_section #dev_icon {
-  background: url(../../img/dev.png) no-repeat;
+  background: url(../../img/icon_dev.png) no-repeat;
 }
 #about .curriculum_section #marketing_icon {
-  background: url(../../img/marketing.png) no-repeat;
+  background: url(../../img/icon_marketing.png) no-repeat;
 }
 #about .curriculum_section #design_icon {
-  background: url(../../img/design.png) no-repeat;
+  background: url(../../img/icon_design.png) no-repeat;
 }
 #about .curriculum_section #sales_icon {
-  background: url(../../img/sales.png) no-repeat;
+  background: url(../../img/icon_sales.png) no-repeat;
 }
 #instructions_container {
   position: absolute;
@@ -4408,9 +4412,19 @@ ol ol {
   letter-spacing: 1px;
   text-align: right;
   line-height: 1.5em;
+  text-shadow: -2px -2px 1px rgba(0, 0, 0, 0.2);
   font-size: 24px;
   color: #ffffff;
   background: #58585a;
+  background-color: #5d5d5f;
+  background-image: -moz-linear-gradient(top, #606062, #58585a);
+  background-image: -ms-linear-gradient(top, #606062, #58585a);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#606062), to(#58585a));
+  background-image: -webkit-linear-gradient(top, #606062, #58585a);
+  background-image: -o-linear-gradient(top, #606062, #58585a);
+  background-image: linear-gradient(top, #606062, #58585a);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#606062', endColorstr='#58585a', GradientType=0);
   -webkit-box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3);
   -moz-box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3);
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3);

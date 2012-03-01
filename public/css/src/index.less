@@ -112,6 +112,7 @@ ol ol {
       float:left;
       overflow:hidden;
       width:100px;
+      .border-radius(0 20px 20px 0);
     }
     .bar {
 
@@ -128,10 +129,10 @@ ol ol {
       .opacity(60);
     }
 
-    #dev_icon {background: url(../../img/dev.png) no-repeat}
-    #marketing_icon {background: url(../../img/marketing.png) no-repeat}
-    #design_icon {background: url(../../img/design.png) no-repeat}
-    #sales_icon {background: url(../../img/sales.png) no-repeat}
+    #dev_icon {background: url(../../img/icon_dev.png) no-repeat}
+    #marketing_icon {background: url(../../img/icon_marketing.png) no-repeat}
+    #design_icon {background: url(../../img/icon_design.png) no-repeat}
+    #sales_icon {background: url(../../img/icon_sales.png) no-repeat}
 
   }
 }
@@ -275,10 +276,12 @@ ol ol {
   letter-spacing:1px;
   text-align:right;
   line-height:1.5em;
+  text-shadow: -2px -2px 1px rgba(0,0,0,0.2);
   font-size:24px;
   color:@white;
 
   background:@secondary;
+  #gradient > .vertical(lighten(@secondary, 3%), @secondary);
   .box-shadow(0px 3px 6px rgba(0,0,0,0.3));
   border-top:1px solid @tertiary;
   border-bottom:1px solid darken(@secondary,5%);

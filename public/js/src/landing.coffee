@@ -245,10 +245,13 @@ fixCurriculum = ->
   bar_w = X_END - X_START - 15
   $(".bar").width(bar_w)
 
-  scroll_top = $(window).scrollTop()
-  for el in $(".bar_cover")
-    factor = Math.min(Math.max(($(el).offset().top - scroll_top) / EXP_LEN, 0), 1)
-    $(el).width(factor * bar_w)
+  if $(window).width() >= SIZE_CUTOFF
+    scroll_top = $(window).scrollTop()
+    for el in $(".bar_cover")
+      factor = Math.min(Math.max(($(el).offset().top - scroll_top) / EXP_LEN, 0), 1)
+      $(el).width(factor * bar_w)
+  else
+    $(".bar_cover").width bar_w
 
 # Catch submission, validate, send it to wufoo backend and display results.
 formSubmission = (e) ->
@@ -396,11 +399,30 @@ setupElements = ->
 
   $(window).scrollTop($(document).height())
 
+retrieveForm = ->
+  if window.localStorage?
+    for el in $("input[type=text], textarea")
+      key = $(el).attr('name')
+      val = localStorage.getItem key
+      $(el).val(val)
+  else 
+    $(".no_save").show()
+    return false
+
+saveForm = ->
+  if window.localStorage?
+    for el in $("input[type=text], textarea")
+      key = $(el).attr('name')
+      val = $(el).val()
+      localStorage.setItem key, val
+  else return false
 
 events = ->
   # Bind resizing and scrolling
   $(window).resize onResize
   $(window).scroll onScroll
+
+  $("input, textarea").blur saveForm
 
   $("#application").submit formSubmission
 
@@ -449,5 +471,7 @@ jQuery ->
   # Setup the logo and arrow height for the first time
   events()
   onResize()
+
+  retrieveForm()
 
   $(window).scrollTop($(document).height())
