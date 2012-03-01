@@ -1,10 +1,62 @@
 @import "../lib/styles.less";
 
 section {
+  padding:20px 0 40px 0;
   margin-top:50px;
   margin-bottom:30px;
   position:relative;
   z-index:2;
+}
+
+section#apply {
+  padding:0 0 40px 0;
+}
+
+section#contact {
+  margin-top:0;
+  padding-left:40px;
+  .clearfix;
+}
+
+.logo {
+  float:left;
+  margin-right:30px;
+}
+.contact_content {
+  float:left;
+  padding:17px 0 0 0px;
+  .contact_line {
+    vertical-align:top;
+    &:hover {
+      color:@primary;
+      .contact_icon
+    }
+
+    a {
+      vertical-align:top;
+      &:hover {
+        text-decoration:underline;
+      }
+    }
+  }
+
+  .contact_icon {
+    display:inline-block;
+    width:24px;
+    height:24px;
+    text-align:right;
+  }
+  .contact_icon.email {
+    background: transparent url(../../img/mail_default.png) no-repeat center center;
+  }
+  .contact_icon.twitter {
+    background: transparent url(../../img/twitter_default.png) no-repeat center center;
+  }
+  .contact_icon.hash {
+    &:hover {
+      cursor:pointer;
+    }
+  }
 }
 
 ol {
@@ -15,6 +67,7 @@ ol ol {
 }
 
 #scroll_up {
+  visibility:hidden; // Start invisible while page is loading
   position:fixed;
   top:20px;
   right:40px;
@@ -44,7 +97,6 @@ ol ol {
 }
 
 #about {
-  padding:20px 0 60px 0;
   .curriculum_section {
     margin:40px 0;
     padding-left:40px;
@@ -84,10 +136,6 @@ ol ol {
   }
 }
 
-#why {
-  padding:20px 0 60px 0;
-}
-
 #instructions_container {
   position:absolute;
   margin:0 12% 0 4%;
@@ -111,7 +159,7 @@ ol ol {
     border-bottom:1px solid @secondary;
   }
 
-  .instruction_header {
+  #instruction_header {
     border-top:1px solid @tertiary;
     padding:4px 0 6px 0;
     font-size:20px;
@@ -151,10 +199,11 @@ ol ol {
 }
 #success {
   display:none;
+  margin-top:40px;
   padding:20px 90px 20px 40px;
   font-size:24px;
-  color:@primary;
 }
+
 #application {
   padding:40px 90px 20px 40px;
 
@@ -194,7 +243,7 @@ ol ol {
 #hero {
   height:auto;
   font-size:40px;
-  margin-bottom:80px;
+  margin-bottom:-30px;
 
   .hero_content{
     padding:10px 90px 10px 40px;
@@ -252,15 +301,14 @@ ol ol {
   }
 }
 .apply_header {
-  color:@primary;
+  color:@orange;
 }
 
 #page {
   position:relative;
-  padding-top:50px;
   padding-bottom:390px;
   width:63%;
-  visibility:hidden;
+  visibility:hidden; // Start invisible while page is loading
 
 }
 
@@ -313,13 +361,14 @@ ol ol {
 }
 
 #call_to_action {
+  visibility:hidden;  // Start invisible while page is loading
   display:table;
   position:fixed;
   bottom:45%;
-  right:3%;
+  right:6%;
 
   padding:15px 5x;
-  width:20%;
+  width:14%;
 
   /*color:@white;*/
   font-size:24px;

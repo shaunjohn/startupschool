@@ -79,12 +79,19 @@ onResize = ->
   adjustLogo()
   fixCurriculum()
   headers('fix_width')
+  setupElements()
 
 show_scroll = 0
+instructions_shown = false
 onScroll = ->
 
   if show_scroll == 10
     $("#scroll_up").fadeOut('slow')
+
+  if not instructions_shown
+    if $(window).scrollTop() < $("#instruction_header").offset().top + 5
+      $("#instruction_header").trigger("click")
+      instructions_shown = true
 
   arrowHeight()
   fixCurriculum()
@@ -206,7 +213,7 @@ formSubmission = (e) ->
       if r.Success is 1
         $(window).scrollTop(0)
         $("#application").fadeOut()
-        $("#success").fadeOut()
+        $("#success").fadeIn()
       else
         if r.FieldErrors?
           for error in r.FieldErrors
@@ -322,19 +329,29 @@ jQuery.fn.serializeObject = ->
 
   return objectData
 
-
-jQuery ->
-  # Setup the logo and arrow height for the first time
-  onResize()
+setupElements = ->
   $(".section_header").show()
 
+  $("#instructions").css
+    top:"-#{$("#instruction_content").outerHeight()}px"
+  # Need to make sure hidden container
+  h = $("#instruction_header").outerHeight() + 10
+  $("#instructions_container").height h
+
+  cta_t = $("#svg_logo").outerHeight() + LOGO_MARGIN
+  $("#call_to_action").css
+    bottom:"#{cta_t - $("#call_to_action").outerHeight()}px"
+
+  $("#page, #scroll_up, #call_to_action").css
+    visibility:"visible"
+
+  $(window).scrollTop($(document).height())
+
+
+events = ->
   # Bind resizing and scrolling
   $(window).resize onResize
   $(window).scroll onScroll
-
-  $(window).scrollTop($(document).height())
-  $("#page").css
-    visibility:"visible"
 
   $("#application").submit formSubmission
 
@@ -350,8 +367,6 @@ jQuery ->
   $(".section_header").click ->
     $section = $("##{$(@).data("section")}")
     correction = $(@).data("order") * $(@).height() + $(@).height()
-    # correction = $(@).offset().top - $(window).scrollTop() + $(@).height()
-    # correction = ($(".fixed_top").length + additional) * $(@).height() * $(@).height()
     $("body,html").animate
       scrollTop: $section.offset().top - correction
 
@@ -362,12 +377,6 @@ jQuery ->
       scrollTop: $section.offset().top - correction
     ,'slow'
 
-  $("#instructions").css
-    top:"-#{$("#instruction_content").outerHeight()}px"
-  # Need to make sure hidden container
-  h = $(".instruction_header").outerHeight() + 10
-  $("#instructions_container").height h
-
   $(".instruction_toggle").click ->
     $instructions = $("#instructions")
     $container = $("#instructions_container")
@@ -375,13 +384,20 @@ jQuery ->
       $instructions.animate
         top:"-#{$('#instruction_content').outerHeight()}px"
       , ->
-        $container.height($(".instruction_header").outerHeight() + 10)
+        $container.height($("#instruction_header").outerHeight() + 10)
       $instructions.toggleClass "opened"
       $("#toggle_instructions").html "open"
     else
-      h = $(".instruction_header").outerHeight() + $("#instruction_content").outerHeight() + 20
+      h = $("#instruction_header").outerHeight() + $("#instruction_content").outerHeight() + 20
       $container.height h
       $instructions.animate
         top:"0px"
       $instructions.toggleClass "opened"
       $("#toggle_instructions").html "close"
+
+jQuery ->
+  # Setup the logo and arrow height for the first time
+  events()
+  onResize()
+
+  $(window).scrollTop($(document).height())

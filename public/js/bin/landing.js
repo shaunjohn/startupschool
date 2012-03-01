@@ -1,5 +1,5 @@
 (function() {
-  var A_BOTTOM, A_LEFT, A_WIDTH, LOGO_FACTOR, LOGO_MARGIN, PAGE_FACTOR, adjustArrow, adjustLogo, arrowHeight, fixCurriculum, formSubmission, headers, limitChar, limitWord, onResize, onScroll, show_scroll, validateForm;
+  var A_BOTTOM, A_LEFT, A_WIDTH, LOGO_FACTOR, LOGO_MARGIN, PAGE_FACTOR, adjustArrow, adjustLogo, arrowHeight, events, fixCurriculum, formSubmission, headers, instructions_shown, limitChar, limitWord, onResize, onScroll, setupElements, show_scroll, validateForm;
 
   LOGO_FACTOR = 270 / 91;
 
@@ -64,13 +64,22 @@
   onResize = function() {
     adjustLogo();
     fixCurriculum();
-    return headers('fix_width');
+    headers('fix_width');
+    return setupElements();
   };
 
   show_scroll = 0;
 
+  instructions_shown = false;
+
   onScroll = function() {
     if (show_scroll === 10) $("#scroll_up").fadeOut('slow');
+    if (!instructions_shown) {
+      if ($(window).scrollTop() < $("#instruction_header").offset().top + 5) {
+        $("#instruction_header").trigger("click");
+        instructions_shown = true;
+      }
+    }
     arrowHeight();
     fixCurriculum();
     headers();
@@ -196,7 +205,7 @@
         if (r.Success === 1) {
           $(window).scrollTop(0);
           $("#application").fadeOut();
-          return $("#success").fadeOut();
+          return $("#success").fadeIn();
         } else {
           if (r.FieldErrors != null) {
             _ref = r.FieldErrors;
@@ -330,16 +339,27 @@
     return objectData;
   };
 
-  jQuery(function() {
-    var h;
-    onResize();
+  setupElements = function() {
+    var cta_t, h;
     $(".section_header").show();
-    $(window).resize(onResize);
-    $(window).scroll(onScroll);
-    $(window).scrollTop($(document).height());
-    $("#page").css({
+    $("#instructions").css({
+      top: "-" + ($("#instruction_content").outerHeight()) + "px"
+    });
+    h = $("#instruction_header").outerHeight() + 10;
+    $("#instructions_container").height(h);
+    cta_t = $("#svg_logo").outerHeight() + LOGO_MARGIN;
+    $("#call_to_action").css({
+      bottom: "" + (cta_t - $("#call_to_action").outerHeight()) + "px"
+    });
+    $("#page, #scroll_up, #call_to_action").css({
       visibility: "visible"
     });
+    return $(window).scrollTop($(document).height());
+  };
+
+  events = function() {
+    $(window).resize(onResize);
+    $(window).scroll(onScroll);
     $("#application").submit(formSubmission);
     $("#whoami").keyup(function(e) {
       return limitChar.call(this, 140);
@@ -366,25 +386,20 @@
         scrollTop: $section.offset().top - correction
       }, 'slow');
     });
-    $("#instructions").css({
-      top: "-" + ($("#instruction_content").outerHeight()) + "px"
-    });
-    h = $(".instruction_header").outerHeight() + 10;
-    $("#instructions_container").height(h);
     return $(".instruction_toggle").click(function() {
-      var $container, $instructions;
+      var $container, $instructions, h;
       $instructions = $("#instructions");
       $container = $("#instructions_container");
       if ($instructions.hasClass("opened")) {
         $instructions.animate({
           top: "-" + ($('#instruction_content').outerHeight()) + "px"
         }, function() {
-          return $container.height($(".instruction_header").outerHeight() + 10);
+          return $container.height($("#instruction_header").outerHeight() + 10);
         });
         $instructions.toggleClass("opened");
         return $("#toggle_instructions").html("open");
       } else {
-        h = $(".instruction_header").outerHeight() + $("#instruction_content").outerHeight() + 20;
+        h = $("#instruction_header").outerHeight() + $("#instruction_content").outerHeight() + 20;
         $container.height(h);
         $instructions.animate({
           top: "0px"
@@ -393,6 +408,12 @@
         return $("#toggle_instructions").html("close");
       }
     });
+  };
+
+  jQuery(function() {
+    events();
+    onResize();
+    return $(window).scrollTop($(document).height());
   });
 
 }).call(this);
