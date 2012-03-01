@@ -13,16 +13,33 @@ A_WIDTH = 0.048
 # Adjusts the Cirriculum bars. Fired on scroll
 
 # Sets the logo size and position and blank padding space above the logo
-adjustLogo = ->
+window.adjustLogo = ->
+  console.log "ADJUSTING LOGO"
   $logo = $("#svg_logo")
   w = $(window).width()
   logo_w = w * PAGE_FACTOR
   logo_h = w * PAGE_FACTOR / LOGO_FACTOR
-  $logo.css
-    width: logo_w
-    height: logo_h
+
   $logo.hide()
   $logo.show()
+
+  $logo.css
+    width: "#{logo_w}px !important"
+    height: "#{logo_h}px !important"
+  $logo.attr 'width', "#{logo_w}px !important"
+  $logo.attr 'height', "#{logo_h}px !important"
+
+  console.log $logo
+  $logo_svg = $($logo[0].contentDocument).find("svg")
+  if $logo_svg.length
+    console.log "Fixing SVG dom element", $logo_svg
+    $logo_svg.attr "width", "#{logo_w}px"
+    $logo_svg.attr "height", "#{logo_h}px"
+    $logo_svg.attr "viewBox", "0 0 #{logo_w} #{logo_h}"
+    $logo_svg.attr "enable-background", "new 0 0 #{logo_w} #{logo_h}"
+    $logo_svg.css
+      width: "#{logo_w}px !important"
+      height: "#{logo_h}px !important"
 
   # Setting padding so no content accidentally flows over the logo.
   $("#page").css
@@ -330,6 +347,10 @@ jQuery.fn.serializeObject = ->
   return objectData
 
 setupElements = ->
+  window.addEventListener 'SVGLoad', (e) ->
+    console.log "SVG LOADED", e
+    adjustLogo()
+
   $(".section_header").show()
 
   $("#instructions").css

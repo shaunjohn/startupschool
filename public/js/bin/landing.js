@@ -1,5 +1,5 @@
 (function() {
-  var A_BOTTOM, A_LEFT, A_WIDTH, LOGO_FACTOR, LOGO_MARGIN, PAGE_FACTOR, adjustArrow, adjustLogo, arrowHeight, events, fixCurriculum, formSubmission, headers, instructions_shown, limitChar, limitWord, onResize, onScroll, setupElements, show_scroll, validateForm;
+  var A_BOTTOM, A_LEFT, A_WIDTH, LOGO_FACTOR, LOGO_MARGIN, PAGE_FACTOR, adjustArrow, arrowHeight, events, fixCurriculum, formSubmission, headers, instructions_shown, limitChar, limitWord, onResize, onScroll, setupElements, show_scroll, validateForm;
 
   LOGO_FACTOR = 270 / 91;
 
@@ -13,18 +13,34 @@
 
   A_WIDTH = 0.048;
 
-  adjustLogo = function() {
-    var $logo, logo_h, logo_w, m, stack, w;
+  window.adjustLogo = function() {
+    var $logo, $logo_svg, logo_h, logo_w, m, stack, w;
+    console.log("ADJUSTING LOGO");
     $logo = $("#svg_logo");
     w = $(window).width();
     logo_w = w * PAGE_FACTOR;
     logo_h = w * PAGE_FACTOR / LOGO_FACTOR;
-    $logo.css({
-      width: logo_w,
-      height: logo_h
-    });
     $logo.hide();
     $logo.show();
+    $logo.css({
+      width: "" + logo_w + "px !important",
+      height: "" + logo_h + "px !important"
+    });
+    $logo.attr('width', "" + logo_w + "px !important");
+    $logo.attr('height', "" + logo_h + "px !important");
+    console.log($logo);
+    $logo_svg = $($logo[0].contentDocument).find("svg");
+    if ($logo_svg.length) {
+      console.log("Fixing SVG dom element", $logo_svg);
+      $logo_svg.attr("width", "" + logo_w + "px");
+      $logo_svg.attr("height", "" + logo_h + "px");
+      $logo_svg.attr("viewBox", "0 0 " + logo_w + " " + logo_h);
+      $logo_svg.attr("enable-background", "new 0 0 " + logo_w + " " + logo_h);
+      $logo_svg.css({
+        width: "" + logo_w + "px !important",
+        height: "" + logo_h + "px !important"
+      });
+    }
     $("#page").css({
       "padding-bottom": logo_h + LOGO_MARGIN
     });
@@ -341,6 +357,10 @@
 
   setupElements = function() {
     var cta_t, h;
+    window.addEventListener('SVGLoad', function(e) {
+      console.log("SVG LOADED", e);
+      return adjustLogo();
+    });
     $(".section_header").show();
     $("#instructions").css({
       top: "-" + ($("#instruction_content").outerHeight()) + "px"

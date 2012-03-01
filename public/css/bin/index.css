@@ -4291,6 +4291,7 @@ ol ol {
   position: relative;
   top: 0;
   color: #ffffff;
+  background: #717171;
   background: rgba(100, 100, 100, 0.9);
   border: 1px solid #818285;
   -webkit-box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
@@ -4310,6 +4311,7 @@ ol ol {
   padding: 4px 0 6px 0;
   font-size: 20px;
   text-align: center;
+  background: #666666;
   background: rgba(0, 0, 0, 0.1);
 }
 #instructions #instruction_header:hover {
