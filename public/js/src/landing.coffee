@@ -2,6 +2,8 @@ LOGO_FACTOR = 1484 / 500 # Ratio of width to height
 LOGO_MARGIN = 40 # Static pixel margins around the logo
 PAGE_FACTOR = .8 # How much of the page the logo takes up
 
+SIZE_CUTOFF = 640
+
 # Relative position of the left side of the arrow relative to the logo's left.
 # A_LEFT = 0.7820
 A_LEFT = 0.7820
@@ -18,6 +20,14 @@ A_WIDTH = 0.048
 # Sets the logo size and position and blank padding space above the logo
 window.adjustLogo = ->
   $logo = $("#svg_logo")
+
+  if $(window).width() < SIZE_CUTOFF
+    $("#call_to_action").hide()
+    $logo.attr("src", "img/BSS_Logo_256x761.png")
+  else
+    $("#call_to_action").show()
+    $logo.attr("src", "img/BSS_Logo_500x1484_noarrow.png")
+
   w = $(window).width()
   logo_w = w * PAGE_FACTOR
   logo_h = w * PAGE_FACTOR / LOGO_FACTOR
@@ -59,6 +69,15 @@ window.adjustLogo = ->
 # Sizes the arrow proporationally to the logo and positions it properly
 adjustArrow = (logo_w, logo_h) ->
   $arrow = $("#arrow")
+  $arrow.show()
+  if $(window).width() < SIZE_CUTOFF
+    A_LEFT = 1
+    $arrow.css "visibility", "hidden"
+  else
+    A_LEFT = 0.7820
+    $arrow.css "visibility", "visible"
+
+  $arrow = $("#arrow")
   $head = $("#arrow_head")
   $body = $("#arrow_body")
   # $tail = $("#arrow_tail")
@@ -86,8 +105,6 @@ adjustArrow = (logo_w, logo_h) ->
   $arrow.css "bottom", arrow_b
 
   arrowHeight()
-
-  $arrow.show()
 
   page_w = $body.offset().left + arrow_w + 30
   $("#page").width page_w
@@ -181,13 +198,21 @@ headers = (fix_width=false)->
 arrowHeight = ->
   if show_scroll < 10 then return
 
+  if $(window).width() < SIZE_CUTOFF
+    if $("#arrow_body").height() < 20 then return
+    else
+      $("#arrow_body").animate
+        height:"#20px"
+      ,70
+      return
+
   wh = $(window).height()
   dh = $(document).height()
   $arrow_body = $("#arrow_body")
 
   # We're scrolled near the bottom
   if $(window).scrollTop() + wh + 40 > dh
-    arrow_height = 2
+    arrow_height = 20
   else
     view_visible = wh/dh
 

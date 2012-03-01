@@ -1,11 +1,13 @@
 (function() {
-  var A_BOTTOM, A_LEFT, A_WIDTH, LOGO_FACTOR, LOGO_MARGIN, PAGE_FACTOR, adjustArrow, arrowHeight, events, fixCurriculum, formSubmission, headers, instructions_shown, limitChar, limitWord, onResize, onScroll, setupElements, show_scroll, validateForm;
+  var A_BOTTOM, A_LEFT, A_WIDTH, LOGO_FACTOR, LOGO_MARGIN, PAGE_FACTOR, SIZE_CUTOFF, adjustArrow, arrowHeight, events, fixCurriculum, formSubmission, headers, instructions_shown, limitChar, limitWord, onResize, onScroll, setupElements, show_scroll, validateForm;
 
   LOGO_FACTOR = 1484 / 500;
 
   LOGO_MARGIN = 40;
 
   PAGE_FACTOR = .8;
+
+  SIZE_CUTOFF = 640;
 
   A_LEFT = 0.7820;
 
@@ -16,6 +18,13 @@
   window.adjustLogo = function() {
     var $logo, logo_h, logo_w, m, stack, w;
     $logo = $("#svg_logo");
+    if ($(window).width() < SIZE_CUTOFF) {
+      $("#call_to_action").hide();
+      $logo.attr("src", "img/BSS_Logo_256x761.png");
+    } else {
+      $("#call_to_action").show();
+      $logo.attr("src", "img/BSS_Logo_500x1484_noarrow.png");
+    }
     w = $(window).width();
     logo_w = w * PAGE_FACTOR;
     logo_h = w * PAGE_FACTOR / LOGO_FACTOR;
@@ -39,6 +48,15 @@
   adjustArrow = function(logo_w, logo_h) {
     var $arrow, $body, $head, arrow_b, arrow_l, arrow_w, page_w;
     $arrow = $("#arrow");
+    $arrow.show();
+    if ($(window).width() < SIZE_CUTOFF) {
+      A_LEFT = 1;
+      $arrow.css("visibility", "hidden");
+    } else {
+      A_LEFT = 0.7820;
+      $arrow.css("visibility", "visible");
+    }
+    $arrow = $("#arrow");
     $head = $("#arrow_head");
     $body = $("#arrow_body");
     arrow_w = logo_w * A_WIDTH;
@@ -56,7 +74,6 @@
     $arrow.css("left", arrow_l);
     $arrow.css("bottom", arrow_b);
     arrowHeight();
-    $arrow.show();
     page_w = $body.offset().left + arrow_w + 30;
     return $("#page").width(page_w);
   };
@@ -160,11 +177,21 @@
   arrowHeight = function() {
     var $arrow_body, arrow_height, dh, doc_top, from_top, scroll_percent, view_visible, wh;
     if (show_scroll < 10) return;
+    if ($(window).width() < SIZE_CUTOFF) {
+      if ($("#arrow_body").height() < 20) {
+        return;
+      } else {
+        $("#arrow_body").animate({
+          height: "#20px"
+        }, 70);
+        return;
+      }
+    }
     wh = $(window).height();
     dh = $(document).height();
     $arrow_body = $("#arrow_body");
     if ($(window).scrollTop() + wh + 40 > dh) {
-      arrow_height = 2;
+      arrow_height = 20;
     } else {
       view_visible = wh / dh;
       from_top = -0.666 * view_visible + 0.666;
