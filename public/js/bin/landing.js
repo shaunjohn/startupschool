@@ -1,5 +1,5 @@
 (function() {
-  var A_BOTTOM, A_LEFT, A_WIDTH, LOGO_FACTOR, LOGO_MARGIN, PAGE_FACTOR, SIZE_CUTOFF, adjustArrow, arrowHeight, events, fixCurriculum, formSubmission, headers, instruction_show_time, instructions_shown, limitChar, limitWord, onResize, onScroll, retrieveForm, saveForm, setupElements, show_scroll, validateForm;
+  var A_BOTTOM, A_LEFT, A_WIDTH, LOGO_FACTOR, LOGO_MARGIN, PAGE_FACTOR, SIZE_CUTOFF, adjustArrow, arrowHeight, events, fixCurriculum, formSubmission, gettingStarted, headers, instruction_show_time, instructions_shown, limitChar, limitWord, onResize, onScroll, retrieveForm, saveForm, setupElements, show_scroll, validateForm;
 
   LOGO_FACTOR = 1484 / 500;
 
@@ -231,12 +231,11 @@
     }
   };
 
-  formSubmission = function(e) {
+  formSubmission = function() {
     var data, submit_delta;
-    e.preventDefault();
     $(".help-inline").html("");
     if (validateForm()) {
-      data = $(this).serializeObject();
+      data = $("#application").serializeObject();
       $.post("pages/wufoo", data, function(r) {
         var error, id, submit_delta, _i, _len, _ref;
         if (r.Success === 1) {
@@ -269,6 +268,56 @@
       onScroll();
     }
     return false;
+  };
+
+  gettingStarted = function() {
+    var data;
+    data = $("#getting_started").serializeObject();
+    console.log(data);
+    $.post("pages/wufoo", data, function(r) {
+      var error, id, _i, _len, _ref;
+      if (r.Success === 1) {
+        mpq.track("Submit Getting Started Success", {
+          "mp_note": "A user successfully signed up."
+        });
+        return showApplication();
+      } else {
+        console.log("ERROR", r);
+        if (r.FieldErrors != null) {
+          _ref = r.FieldErrors;
+          for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+            error = _ref[_i];
+            id = $("input[name='app[" + error.ID + "]']").attr('id');
+            $("#" + id + "_error").html(error.ErrorText);
+          }
+          return onScroll();
+        }
+      }
+    });
+    return false;
+  };
+
+  window.showApplication = function() {
+    $("#application").slideDown(400, function() {
+      return onScroll();
+    });
+    $("#getting_started").slideUp();
+    $("#instructions_container").fadeIn();
+    $("#instructions").css('top', '-180px');
+    $("#instructions").removeClass('opened');
+    return $("#email").val($("#getting_started_email").val());
+  };
+
+  window.hideApplication = function() {
+    $("#application").slideUp();
+    $("#getting_started").slideDown(500, function() {
+      return onScroll();
+    });
+    $("#instructions_container").fadeOut();
+    $("#instructions").css('top', '-180px');
+    $("#instructions").removeClass('opened');
+    $("#getting_started_email").val($("#email").val());
+    return onScroll();
   };
 
   validateForm = function() {
@@ -443,7 +492,14 @@
     $(window).resize(onResize);
     $(window).scroll(onScroll);
     $("input, textarea").blur(saveForm);
-    $("#application").submit(formSubmission);
+    $("#submit_getting_started").click(function() {
+      console.log("GETTING STARTED CLICK");
+      return gettingStarted();
+    });
+    $("#submit_application").click(function() {
+      console.log("APPLICATION SUBMISSION CLICK");
+      return formSubmission();
+    });
     $("#whoami").keyup(function(e) {
       return limitChar.call(this, 140);
     });
@@ -461,6 +517,16 @@
         scrollTop: $section.offset().top - correction
       });
     });
+    $(".show_application").click(function() {
+      var email;
+      email = $("#getting_started_email").val();
+      mpq.track("Show Application", {
+        "user_email": email,
+        "mp_note": "User with email " + email + " viewed the full application"
+      });
+      return showApplication();
+    });
+    $(".hide_application").click(hideApplication);
     $("#call_to_action").click(function() {
       var $section, correction, scroll_pos;
       scroll_pos = $(window).scrollTop() / ($(document).height() - $(window).height()) * 100;

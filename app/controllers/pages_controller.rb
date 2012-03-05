@@ -7,7 +7,8 @@ class PagesController < ApplicationController
   def wufoo
     account = 'shaunjohn'
     api_key = '9R6D-7KXW-08UV-ZPC6'
-    form_id = 'z7x3x5'
+
+    form_id = params[:form_id]
 
     wufoo = WuParty.new(account, api_key)
 

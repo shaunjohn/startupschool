@@ -256,12 +256,10 @@ fixCurriculum = ->
   else
     $(".bar_cover").width bar_w
 
-# Catch submission, validate, send it to wufoo backend and display results.
-formSubmission = (e) ->
-  e.preventDefault()
+formSubmission = ->
   $(".help-inline").html ""
   if validateForm()
-    data = $(@).serializeObject()
+    data = $("#application").serializeObject()
     $.post "pages/wufoo", data, (r) ->
       if r.Success is 1
         submit_delta = Math.round((new Date().getTime() - instruction_show_time) / 1000)
@@ -281,6 +279,43 @@ formSubmission = (e) ->
     mpq.track("Submit Application Error", {"time_to_submit":submit_delta, "mp_note":"A user tried to submit an application but had errors. They took #{submit_delta} seconds to fill it out."})
     onScroll()
   return false
+
+# Catch submission, validate, send it to wufoo backend and display results.
+gettingStarted = ->
+  data = $("#getting_started").serializeObject()
+  console.log data
+  $.post "pages/wufoo", data, (r) ->
+    if r.Success is 1
+      mpq.track("Submit Getting Started Success", {"mp_note":"A user successfully signed up."})
+
+      showApplication()
+    else
+      console.log "ERROR", r
+      if r.FieldErrors?
+        for error in r.FieldErrors
+          id = $("input[name='app[#{error.ID}]']").attr('id')
+          $("##{id}_error").html error.ErrorText
+        onScroll()
+  return false
+
+window.showApplication = ->
+  $("#application").slideDown 400, ->
+    onScroll()
+  $("#getting_started").slideUp()
+  $("#instructions_container").fadeIn()
+  $("#instructions").css('top', '-180px')
+  $("#instructions").removeClass('opened')
+  $("#email").val($("#getting_started_email").val())
+
+window.hideApplication = ->
+  $("#application").slideUp()
+  $("#getting_started").slideDown 500, ->
+    onScroll()
+  $("#instructions_container").fadeOut()
+  $("#instructions").css('top', '-180px')
+  $("#instructions").removeClass('opened')
+  $("#getting_started_email").val($("#email").val())
+  onScroll()
 
 # Custom front-end form validators
 validateForm = ->
@@ -435,7 +470,12 @@ events = ->
 
   $("input, textarea").blur saveForm
 
-  $("#application").submit formSubmission
+  $("#submit_getting_started").click ->
+    console.log "GETTING STARTED CLICK"
+    gettingStarted()
+  $("#submit_application").click ->
+    console.log "APPLICATION SUBMISSION CLICK"
+    formSubmission()
 
   $("#whoami").keyup (e) ->
     limitChar.call(@, 140)
@@ -451,6 +491,12 @@ events = ->
     correction = $(@).data("order") * $(@).height() + $(@).height()
     $("body,html").animate
       scrollTop: $section.offset().top - correction
+
+  $(".show_application").click ->
+    email = $("#getting_started_email").val()
+    mpq.track("Show Application", {"user_email":email, "mp_note":"User with email #{email} viewed the full application"})
+    showApplication()
+  $(".hide_application").click hideApplication
 
   $("#call_to_action").click ->
     scroll_pos = $(window).scrollTop() / ($(document).height() - $(window).height()) * 100

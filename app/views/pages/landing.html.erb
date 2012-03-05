@@ -50,18 +50,35 @@
       <p><a href="https://twitter.com/#!/search/%23LearnToDo">#LearnToDo</a> <a href="https://twitter.com/BOStartupSchool">@BOStartupSchool</a></p>
     </div>
 
-    <form id="application">
-
+    <form id="getting_started">
+      <input type="hidden" name="form_id" value="m7x3r3">
       <div class="control-group">
-        <label for="app[Field7]">Full name</label>
-        <input type="text" name="app[Field7]" id="name" />
-        <span class="help-inline" id="name_error"></span>
+        <label for="app[Field1]">Email</label>
+        <input type="text" name="app[Field1]" id="getting_started_email" />
+        <span class="help-inline" id="getting_started_email_error"></span>
       </div>
+
+      <button type="button" class="btn btn-warning" id="submit_getting_started">Submit</button>
+
+      <p>That's all we need to get started. <a href="javascript:void();" class="show_application">Click here</a> to see the full application.</p>
+    </form>
+
+    <form id="application">
+      <input type="hidden" name="form_id" value="z7x3x5">
+
+      <p class="green">Awesome! Take your time come back later to fill out the full application. We'll be in contact through the email you just provided.</p>
+      <p><a href="javascript:void();" class="hide_application">Hide Application</a></p>
 
       <div class="control-group">
         <label for="app[Field3]">Email</label>
         <input type="text" name="app[Field3]" id="email" />
         <span class="help-inline" id="email_error"></span>
+      </div>
+
+      <div class="control-group">
+        <label for="app[Field7]">Full name</label>
+        <input type="text" name="app[Field7]" id="name" />
+        <span class="help-inline" id="name_error"></span>
       </div>
 
       <div class="control-group">
@@ -127,7 +144,7 @@
       </div>
 
       <br/>
-      <button type="submit" class="btn btn-warning" id="submit_application">Submit Application</button>
+      <button type="button" class="btn btn-warning" id="submit_application">Submit Application</button>
 
     </form>
   </section>

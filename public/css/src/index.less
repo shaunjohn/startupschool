@@ -138,6 +138,7 @@ ol ol {
 }
 
 #instructions_container {
+  display:none; // shown by javascript
   position:absolute;
   margin:0 12% 0 4%;
   width:84%;
@@ -206,8 +207,15 @@ ol ol {
   padding:20px 90px 20px 40px;
   font-size:24px;
 }
+.green {
+  color:@green;
+}
 
 #application {
+  display:none;
+}
+
+form {
   padding:40px 90px 20px 40px;
 
   .control-group {

@@ -4285,6 +4285,7 @@ ol ol {
   background: url(../../img/icon_sales.png) no-repeat;
 }
 #instructions_container {
+  display: none;
   position: absolute;
   margin: 0 12% 0 4%;
   width: 84%;
@@ -4353,35 +4354,41 @@ ol ol {
   padding: 20px 90px 20px 40px;
   font-size: 24px;
 }
+.green {
+  color: #46a546;
+}
 #application {
+  display: none;
+}
+form {
   padding: 40px 90px 20px 40px;
 }
-#application .control-group {
+form .control-group {
   max-width: 640px;
 }
-#application input[type=text],
-#application textarea {
+form input[type=text],
+form textarea {
   width: 95%;
   min-width: 250px;
   max-width: 640px;
 }
-#application textarea {
+form textarea {
   height: 6em;
 }
-#application label {
+form label {
   font-weight: bold;
   width: 95%;
   min-width: 250px;
   max-width: 640px;
 }
-#application .help-inline {
+form .help-inline {
   color: #9d261d;
   font-size: 15px;
 }
-#application .control-group {
+form .control-group {
   margin-top: 20px;
 }
-#application .counter {
+form .counter {
   font-size: 13px;
   color: #818285;
 }
