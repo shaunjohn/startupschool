@@ -289,6 +289,7 @@ gettingStarted = ->
       mpq.track("Submit Getting Started Success", {"mp_note":"A user successfully signed up."})
 
       showApplication()
+      $("#awesome").show()
     else
       console.log "ERROR", r
       if r.FieldErrors?
