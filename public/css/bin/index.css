@@ -4284,6 +4284,21 @@ ol ol {
 #about .curriculum_section #sales_icon {
   background: url(../../img/icon_sales.png) no-repeat;
 }
+#about .curric_bar {
+  *zoom: 1;
+  *zoom: 1;
+}
+#about .curric_bar:before,
+#about .curric_bar:after {
+  display: table;
+  content: "";
+}
+#about .curric_bar:after {
+  clear: both;
+}
+#about .curriculum_section_details {
+  margin: 0 90px 0 135px;
+}
 #instructions_container {
   display: none;
   position: absolute;
@@ -4549,4 +4564,7 @@ img#svg_logo {
   text-align: center;
   vertical-align: middle;
   display: table-cell;
+}
+@media (max-device-width: 640px) {
+  
 }
