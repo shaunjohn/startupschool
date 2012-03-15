@@ -1,5 +1,5 @@
 (function() {
-  var A_BOTTOM, A_LEFT, A_WIDTH, LOGO_FACTOR, LOGO_MARGIN, PAGE_FACTOR, SIZE_CUTOFF, adjustArrow, arrowHeight, events, fixCurriculum, formSubmission, gettingStarted, headers, instruction_show_time, instructions_shown, limitChar, limitWord, onResize, onScroll, retrieveForm, saveForm, setupElements, show_scroll, validateForm;
+  var A_BOTTOM, A_LEFT, A_WIDTH, LOGO_FACTOR, LOGO_MARGIN, PAGE_FACTOR, SIZE_CUTOFF, adjustArrow, arrowHeight, clearFormErrorState, events, fixCurriculum, formSubmission, gettingStarted, headers, instruction_show_time, instructions_shown, limitChar, limitWord, onResize, onScroll, retrieveForm, saveForm, setFormErrorState, setupElements, show_scroll, validateForm;
 
   LOGO_FACTOR = 1484 / 500;
 
@@ -231,6 +231,18 @@
     }
   };
 
+  setFormErrorState = function() {
+    $(".form_error_area").show();
+    $("#submit_application").html("Fix Errors & Try Again");
+    return onScroll();
+  };
+
+  clearFormErrorState = function() {
+    $(".form_error_area").hide();
+    $("#submit_application").html("Submit Application");
+    return onScroll();
+  };
+
   formSubmission = function() {
     var data, submit_delta;
     $(".help-inline").html("");
@@ -245,10 +257,19 @@
             "mp_note": "A user successfully submitted an application. They took " + submit_delta + " seconds to fill it out."
           });
           $(window).scrollTop(0);
-          $("#application").fadeOut();
-          return $("#success").fadeIn();
+          $("#application").fadeOut(function() {
+            return onScroll();
+          });
+          return $("#success").fadeIn(function() {
+            return onScroll();
+          });
         } else {
           if (r.FieldErrors != null) {
+            setFormErrorState();
+            mpq.track("Submit Application Error", {
+              "time_to_submit": submit_delta,
+              "mp_note": "A user tried to submit an application but had errors. They took " + submit_delta + " seconds to fill it out."
+            });
             _ref = r.FieldErrors;
             for (_i = 0, _len = _ref.length; _i < _len; _i++) {
               error = _ref[_i];
@@ -260,6 +281,7 @@
         }
       });
     } else {
+      setFormErrorState();
       submit_delta = Math.round((new Date().getTime() - instruction_show_time) / 1000);
       mpq.track("Submit Application Error", {
         "time_to_submit": submit_delta,
@@ -354,11 +376,11 @@
     }
     if ($("#the_why").val() === "") {
       num_errors += 1;
-      $("#the_why_error").html("Come on, a 60 second video is super simple. You can do it with your phone.");
+      $("#the_why_error").html("Come on, aren't you interested?");
     }
     if ($("#accomplished").val() === "") {
       num_errors += 1;
-      $("#accomplished_error").html("Come on, a 60 second video is super simple. You can do it with your phone.");
+      $("#accomplished_error").html("It can even be that volcano you built in 1st grade.");
     }
     if ($("#good_hire").val().length > 250) {
       num_errors += 1;
@@ -493,6 +515,7 @@
     $(window).resize(onResize);
     $(window).scroll(onScroll);
     $("input, textarea").blur(saveForm);
+    $("input, textarea").focus(clearFormErrorState);
     $("#submit_getting_started").click(function() {
       console.log("GETTING STARTED CLICK");
       return gettingStarted();

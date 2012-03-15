@@ -4366,7 +4366,7 @@ ol ol {
 #success {
   display: none;
   margin-top: 40px;
-  padding: 20px 90px 20px 40px;
+  padding: 40px 90px 0px 40px;
   font-size: 24px;
 }
 .green {
@@ -4377,6 +4377,11 @@ ol ol {
 }
 #application {
   display: none;
+}
+.form_error_area {
+  display: none;
+  margin-top: 20px;
+  color: #9d261d;
 }
 form {
   padding: 40px 90px 20px 40px;

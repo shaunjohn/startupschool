@@ -256,6 +256,15 @@ fixCurriculum = ->
   else
     $(".bar_cover").width bar_w
 
+setFormErrorState = ->
+  $(".form_error_area").show()
+  $("#submit_application").html("Fix Errors & Try Again")
+  onScroll()
+clearFormErrorState = ->
+  $(".form_error_area").hide()
+  $("#submit_application").html("Submit Application")
+  onScroll()
+
 formSubmission = ->
   $(".help-inline").html ""
   if validateForm()
@@ -266,15 +275,20 @@ formSubmission = ->
         mpq.track("Submit Application Success", {"time_to_submit":submit_delta, "mp_note":"A user successfully submitted an application. They took #{submit_delta} seconds to fill it out."})
 
         $(window).scrollTop(0)
-        $("#application").fadeOut()
-        $("#success").fadeIn()
+        $("#application").fadeOut ->
+          onScroll()
+        $("#success").fadeIn ->
+          onScroll()
       else
         if r.FieldErrors?
+          setFormErrorState()
+          mpq.track("Submit Application Error", {"time_to_submit":submit_delta, "mp_note":"A user tried to submit an application but had errors. They took #{submit_delta} seconds to fill it out."})
           for error in r.FieldErrors
             id = $("input[name='app[#{error.ID}]'],textarea[name='app[#{error.ID}]']").attr('id')
             $("##{id}_error").html error.ErrorText
           onScroll()
   else
+    setFormErrorState()
     submit_delta = Math.round((new Date().getTime() - instruction_show_time) / 1000)
     mpq.track("Submit Application Error", {"time_to_submit":submit_delta, "mp_note":"A user tried to submit an application but had errors. They took #{submit_delta} seconds to fill it out."})
     onScroll()
@@ -350,11 +364,11 @@ validateForm = ->
 
   if $("#the_why").val() is ""
     num_errors += 1
-    $("#the_why_error").html "Come on, a 60 second video is super simple. You can do it with your phone."
+    $("#the_why_error").html "Come on, aren't you interested?"
 
   if $("#accomplished").val() is ""
     num_errors += 1
-    $("#accomplished_error").html "Come on, a 60 second video is super simple. You can do it with your phone."
+    $("#accomplished_error").html "It can even be that volcano you built in 1st grade."
 
   if $("#good_hire").val().length > 250
     num_errors += 1
@@ -470,6 +484,7 @@ events = ->
   $(window).scroll onScroll
 
   $("input, textarea").blur saveForm
+  $("input, textarea").focus clearFormErrorState
 
   $("#submit_getting_started").click ->
     console.log "GETTING STARTED CLICK"
@@ -497,6 +512,7 @@ events = ->
     email = $("#getting_started_email").val()
     mpq.track("Show Application", {"user_email":email, "mp_note":"User with email #{email} viewed the full application"})
     showApplication()
+
   $(".hide_application").click hideApplication
 
   $("#call_to_action").click ->
