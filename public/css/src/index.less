@@ -1,64 +1,9 @@
-@import "../lib/styles.less";
+@import "css/lib/bootstrap.less";
+@import "css/src/startupschool/variables.less";
+@import "css/src/startupschool/scaffolding.less";
+@import "css/src/startupschool/type.less";
 
-section {
-  padding:20px 0 40px 0;
-  margin-top:50px;
-  margin-bottom:30px;
-  position:relative;
-  z-index:2;
-}
-
-section#apply {
-  padding:0 0 40px 0;
-}
-
-section#contact {
-  margin-top:0;
-  padding:20px 90px 40px 40px;
-  .clearfix;
-}
-
-.logo {
-  float:left;
-  margin-right:30px;
-}
-.contact_content {
-  float:left;
-  padding:17px 0 0 0px;
-  .contact_line {
-    vertical-align:top;
-    &:hover {
-      color:@primary;
-      .contact_icon
-    }
-
-    a {
-      vertical-align:top;
-      &:hover {
-        text-decoration:underline;
-      }
-    }
-  }
-
-  .contact_icon {
-    display:inline-block;
-    width:24px;
-    height:24px;
-    text-align:right;
-  }
-  .contact_icon.email {
-    background: transparent url(../../img/mail_default.png) no-repeat center center;
-  }
-  .contact_icon.twitter {
-    background: transparent url(../../img/twitter_default.png) no-repeat center center;
-  }
-  .contact_icon.hash {
-    &:hover {
-      cursor:pointer;
-    }
-  }
-}
-
+// ==== Miscellaneous =============================================== //
 ol {
   margin-left:1.5em;
 }
@@ -95,54 +40,83 @@ ol ol {
     }
   }
 }
+#call_to_action {
+  visibility:hidden;  // Start invisible while page is loading
+  display:table;
+  position:fixed;
+  bottom:45%;
+  right:6%;
 
-#about {
-  .curriculum_section {
-    margin:40px 0;
-    padding-left:40px;
-    .clearfix;
-    .icon {
-      float:left;
-      width:128px;
-      height:128px;
-    }
+  padding:15px 5x;
+  width:14%;
 
-    .bar_cover {
-      margin:43px 0 0 -10px;
-      float:left;
-      overflow:hidden;
-      width:100px;
-      .border-radius(0 20px 20px 0);
-    }
-    .bar {
+  /*color:@white;*/
+  font-size:24px;
+  text-transform:uppercase;
 
-      padding:4px 0 0 15px;
-      height:41px;
-      font-size:25px;
+  /*background:@orange;*/
 
-      color:@white;
+  .border-radius(5px);
 
-      background:@primary;
-      width:692px;
-    }
-    .subtext {
-      .opacity(60);
-    }
-
-    #dev_icon {background: url(../../img/icon_dev.png) no-repeat}
-    #marketing_icon {background: url(../../img/icon_marketing.png) no-repeat}
-    #design_icon {background: url(../../img/icon_design.png) no-repeat}
-    #sales_icon {background: url(../../img/icon_sales.png) no-repeat}
-
+  &:hover {
+    /*cursor:pointer;*/
+    /*background:@tertiary;*/
   }
-  .curric_bar {
-    .clearfix;
+  &:active {
+    /*background:@secondary;*/
   }
-  .curriculum_section_details {
-    margin:0 90px 0 135px;
+
+  #call_text {
+    text-align:center;
+    vertical-align:middle;
+    display:table-cell;
   }
 }
 
+
+// ==== Contact ===================================================== //
+section#contact {
+  #contact_logo {
+    width:100%;
+  }
+  .contact_line {
+    vertical-align:top;
+    &:hover {
+      color:@primary;
+      .contact_icon
+    }
+
+    a {
+      vertical-align:top;
+      &:hover {
+        text-decoration:underline;
+      }
+    }
+  }
+
+  .contact_icon {
+    display:inline-block;
+    width:24px;
+    height:24px;
+    text-align:right;
+  }
+  .contact_icon.email {
+    background: transparent url(../../img/mail_default.png) no-repeat center center;
+  }
+  .contact_icon.twitter {
+    background: transparent url(../../img/twitter_default.png) no-repeat center center;
+  }
+  .contact_icon.hash {
+    &:hover {
+      cursor:pointer;
+    }
+  }
+}
+
+// ==== Apply ======================================================= //
+section#apply {
+  padding:0 0 40px 0;
+}
 #instructions_container {
   display:none; // shown by javascript
   position:absolute;
@@ -266,6 +240,74 @@ form {
   }
 }
 
+// ==== Trust ======================================================= //
+
+
+// ==== Who ========================================================= //
+
+
+// ==== Details ===================================================== //
+
+
+// ==== Why ========================================================= //
+
+
+// ==== About ======================================================= //
+#about {
+  .curriculum_section {
+    margin:40px 0;
+    padding-left:40px;
+    .clearfix;
+    .icon {
+      float:left;
+      width:128px;
+      height:128px;
+    }
+
+    .bar_cover {
+      margin:43px 0 0 -10px;
+      float:left;
+      overflow:hidden;
+      width:100px;
+      .border-radius(0 20px 20px 0);
+    }
+    .bar {
+
+      padding:4px 0 0 15px;
+      height:41px;
+      font-size:25px;
+
+      color:@white;
+
+      background:@primary;
+      width:692px;
+    }
+    .subtext {
+      .opacity(60);
+    }
+
+    #dev_icon {background: url(../../img/icon_dev.png) no-repeat}
+    #marketing_icon {background: url(../../img/icon_marketing.png) no-repeat}
+    #design_icon {background: url(../../img/icon_design.png) no-repeat}
+    #sales_icon {background: url(../../img/icon_sales.png) no-repeat}
+
+  }
+  .curric_bar {
+    .clearfix;
+  }
+  .curriculum_section_details {
+    margin:0 90px 0 135px;
+  }
+}
+
+
+// ==== When Where ================================================== //
+
+
+// ==== Nutshell ==================================================== //
+
+
+// ==== Hero ======================================================== //
 #hero {
   height:auto;
   font-size:40px;
@@ -285,6 +327,52 @@ form {
   }
 }
 
+#logo {
+  position:absolute;
+  bottom:40px;
+  left:40px;
+}
+img#logo {
+  max-width:none;
+}
+
+
+
+// ==== Arrow ======================================================= //
+#arrow {
+  position:absolute;
+  z-index:1;
+  bottom:60px;
+  left:100px;
+  display:none;
+  #arrow_head {
+    width:0px;
+    height:0px;
+    border-top:0;
+    border-right:80px solid transparent;
+    border-left:80px solid transparent;
+    border-bottom:80px solid @primary;
+  }
+  #arrow_body {
+    position:relative;
+    height:25px;
+    width:80px;
+    margin-left:40px;
+    background:@primary;
+  }
+  #arrow_tail {
+    margin-left:40px;
+    width:0px;
+    height:0px;
+    border-top:40px solid @primary;
+    border-right:40px solid @primary;
+    border-left:40px solid @primary;
+    border-bottom:40px solid transparent;
+  }
+}
+
+
+// ==== Nav ========================================================= //
 .section_header {
   display:none;
   position:absolute;
@@ -335,9 +423,8 @@ form {
 #page {
   position:relative;
   padding-bottom:390px;
-  width:63%;
+  width:@columnWrapWidth * 100%;
   visibility:hidden; // Start invisible while page is loading
-
 }
 
 .content {
@@ -350,79 +437,4 @@ form {
   /*border-bottom:1px solid @secondary;*/
 }
 
-#svg_logo {
-  position:absolute;
-  bottom:40px;
-  left:40px;
-}
-img#svg_logo {
-  max-width:none;
-}
-
-#arrow {
-  position:absolute;
-  z-index:1;
-  bottom:60px;
-  left:100px;
-  display:none;
-  #arrow_head {
-    width:0px;
-    height:0px;
-    border-top:0;
-    border-right:80px solid transparent;
-    border-left:80px solid transparent;
-    border-bottom:80px solid @primary;
-  }
-  #arrow_body {
-    position:relative;
-    height:25px;
-    width:80px;
-    margin-left:40px;
-    background:@primary;
-  }
-  #arrow_tail {
-    margin-left:40px;
-    width:0px;
-    height:0px;
-    border-top:40px solid @primary;
-    border-right:40px solid @primary;
-    border-left:40px solid @primary;
-    border-bottom:40px solid transparent;
-  }
-}
-
-#call_to_action {
-  visibility:hidden;  // Start invisible while page is loading
-  display:table;
-  position:fixed;
-  bottom:45%;
-  right:6%;
-
-  padding:15px 5x;
-  width:14%;
-
-  /*color:@white;*/
-  font-size:24px;
-  text-transform:uppercase;
-
-  /*background:@orange;*/
-
-  .border-radius(5px);
-
-  &:hover {
-    /*cursor:pointer;*/
-    /*background:@tertiary;*/
-  }
-  &:active {
-    /*background:@secondary;*/
-  }
-
-  #call_text {
-    text-align:center;
-    vertical-align:middle;
-    display:table-cell;
-  }
-}
-
-@media (max-device-width: 640px) {
-}
+@import "css/src/startupschool/responsive.less";

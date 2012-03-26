@@ -26,12 +26,13 @@
   <script type="text/javascript">
     Modernizr.load([
       {
-         load: '//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js',
-         complete: function() {
-            if ( !window.jQuery ) {
-               Modernizr.load('js/lib/jquery-1.7.1.min.js');
-            }
-         }
+         load: 'js/lib/jquery-1.7.1.min.js',
+         // load: '//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js',
+         // complete: function() {
+         //    if ( !window.jQuery ) {
+         //       Modernizr.load('js/lib/jquery-1.7.1.min.js');
+         //    }
+         // }
       },
       {
          // Detect IE polyfill for JSON parsing
@@ -44,7 +45,7 @@
       },
       {
          // Load minified lib
-        load: 'js/bin/landing.js'
+         load: 'js/bin/landing.js'
       }
 
       // Anything else that needs to be loaded should happen here!

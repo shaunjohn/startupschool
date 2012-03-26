@@ -46,7 +46,7 @@
   };
 
   adjustArrow = function(logo_w, logo_h) {
-    var $arrow, $body, $head, arrow_b, arrow_l, arrow_w, page_w;
+    var $arrow, $body, $head, arrow_b, arrow_l, arrow_w;
     $arrow = $("#arrow");
     $arrow.show();
     if ($(window).width() < SIZE_CUTOFF) {
@@ -73,9 +73,7 @@
     });
     $arrow.css("left", arrow_l);
     $arrow.css("bottom", arrow_b);
-    arrowHeight();
-    page_w = $body.offset().left + arrow_w + 30;
-    return $("#page").width(page_w);
+    return arrowHeight();
   };
 
   onResize = function() {

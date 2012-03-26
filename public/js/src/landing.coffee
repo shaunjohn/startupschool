@@ -106,8 +106,8 @@ adjustArrow = (logo_w, logo_h) ->
 
   arrowHeight()
 
-  page_w = $body.offset().left + arrow_w + 30
-  $("#page").width page_w
+  # page_w = $body.offset().left + arrow_w + 30
+  # $("#page").width page_w
 
 onResize = ->
   adjustLogo()

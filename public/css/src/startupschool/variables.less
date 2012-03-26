@@ -1,0 +1,56 @@
+// GLOBAL VALUES
+// --------------------------------------------------
+
+// LOGO Width: 269.6 pt
+// Logo Height: 91.1 pt
+// Logo distance from left 209.73pt
+// Logo distance from bottom 79.28pt
+// Logo U width: 12.26pt
+
+// COLOR SCHEME
+@primary:               #3ba4db;
+@secondary:             #58585a; // Dary Gray
+@tertiary:              #818285; // Light Gray
+@grayDark:              #58585a;
+@grayLight:             #818285;
+
+// Typography
+@baseFontSize:          16px;
+@baseFontFamily:        "Flama-Book", "Helvetica Neue", Helvetica, Arial, sans-serif;
+@mediumFontFamily:      "Flama-Medium", "Helvetica Neue", Helvetica, Arial, sans-serif;
+@boldFontFamily:        "Flama-Bold", "Helvetica Neue", Helvetica, Arial, sans-serif;
+@baseLineHeight:        1.4;
+@textColor:             @grayDark;
+
+// Links
+@linkColor:             #08c;
+@linkColorHover:        darken(@linkColor, 15%);
+
+  // columnwrapwidth
+  // 240px
+  // 480px
+
+// Primary Content Column information
+@columnWrapWidth: 0.63; // The absolute percentage width of the content wrap.
+@fullColumn: 1.00; // Percent of container for a full column
+@halfColumn: 0.50; // Percent of container for a half column
+@thirdColumn: 0.33333; // Percent of container for a third column
+@minColumnWidth: 240px; // Absolute minimum width of a column.
+@maxColumnWidth: 480px; // Absolute maximum width of a column.
+
+@gutter: 20px; // Default spacing between elements.
+
+// One column breakpoint is when 50% of 70% is less than or equal to 240px
+
+// Responsive Breakpoints
+// The breakpoints are calculated by the primary content columns.
+// Breakpoints should be determined by the best flow of content, not arbitrary
+// pixel sizes. There are so many devices that one cannot guarantee that
+// 1280px will be anything meaningful.
+@breakpointMinimal : @maxColumnWidth;
+@breakpointOneColumn  : @maxColumnWidth / (@fullColumn * @columnWrapWidth);
+@breakpointTwoColumn  : @maxColumnWidth / (@halfColumn * @columnWrapWidth);
+@breakpointThreeColumn  : @maxColumnWidth / (@thirdColumn * @columnWrapWidth);
+
+// A given row can never be larger than 3 columns
+@maxRowWidth: @maxColumnWidth * 3;

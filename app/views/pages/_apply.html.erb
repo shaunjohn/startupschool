@@ -1,0 +1,125 @@
+<section id="apply" style="margin-top:0">
+
+  <div id="instructions_container"><div id="instructions">
+
+    <div id="instruction_content">
+      <div class="x_close instruction_toggle">X</div>
+      <p>
+      Our application process requires you to have access to record and post two video responses; we recommend using YouTube or Vimeo. Our priority and intention with this application is to get to know YOU.</p>
+      <p class="no_save" style="display:none">
+      Be prepared to complete the application in ONE-sitting, as it will not save your progress. 
+      </p>
+      <p>That's all! Good luck, have fun and we look forward to meeting you!</p>
+    </div>
+
+    <div id="instruction_header" class="instruction_toggle">
+      Application Instructions&nbsp;&nbsp;&nbsp;<a id="toggle_instructions">open</a>
+    </div>
+  </div></div>
+
+  <div id='success'>
+    <p style="margin-top:25px">You're done! For now.</p>
+    <p>Please be patient as we process applications over the next few weeks. Next steps may require invitation-only Skype, phone, or in-person interviews.</p>
+    <p>Thanks for applying and we look forward to getting to know you.</p>
+    <p><a href="https://twitter.com/#!/search/%23LearnToDo">#LearnToDo</a> <a href="https://twitter.com/BOStartupSchool">@BOStartupSchool</a></p>
+  </div>
+
+  <form id="getting_started">
+    <input type="hidden" name="form_id" value="m7x3r3">
+    <div class="control-group">
+      <label for="app[Field1]">Email</label>
+      <input type="text" name="app[Field1]" id="getting_started_email" />
+      <span class="help-inline" id="getting_started_email_error"></span>
+    </div>
+
+    <button type="button" class="btn btn-warning" id="submit_getting_started">Submit</button>
+
+    <p>That's all we need to get started. <a href="javascript:void(0);" class="show_application">Click here</a> to see the full application.</p>
+  </form>
+
+  <form id="application">
+    <input type="hidden" name="form_id" value="z7x3x5">
+
+    <p class="green" id="awesome">Awesome! Take your time come back later to fill out the full application. We'll be in contact through the email you just provided.</p>
+    <p><a href="javascript:void(0);" class="hide_application">Hide Application</a></p>
+
+    <div class="control-group">
+      <label for="app[Field3]">Email</label>
+      <input type="text" name="app[Field3]" id="email" />
+      <span class="help-inline" id="email_error"></span>
+    </div>
+
+    <div class="control-group">
+      <label for="app[Field7]">Full name</label>
+      <input type="text" name="app[Field7]" id="name" />
+      <span class="help-inline" id="name_error"></span>
+    </div>
+
+    <div class="control-group">
+      <label for="app[Field10]">What college/university do you attend, what is your major, and what is your year?</label>
+      <input type="text" name="app[Field10]" id="college"/>
+      <span class="help-inline" id="college_error"></span>
+    </div>
+
+    <div class="control-group">
+      <label for="app[Field11]">What track are you applying to?</label>
+      <label class="radio">
+        <input type="radio" name="app[Field11]" class="track" value="Track A - Product & Design" /> Track A - Product &amp; Design
+      </label>
+      <label class="radio">
+        <input type="radio" name="app[Field11]" class="track" value="Track B - Business Development & Sales" /> Track B - Business Development &amp; Sales
+      </label>
+      <label class="radio">
+        <input type="radio" name="app[Field11]" class="track" value="Track C - Marketing" /> Track C - Marketing
+      </label>
+      <label class="radio">
+        <input type="radio" name="app[Field11]" class="track" value="Track D - Software Development" /> Track D - Software Development
+      </label>
+      <span class="help-inline" id="track_error"></span>
+    </div>
+
+    <div class="control-group">
+      <label for="app[Field12]">In 140 characters or less, who are you?</label>
+      <textarea name="app[Field12]" id="whoami"></textarea>
+      <span class="help-inline" id="whoami_error"></span>
+      <label for="app[Field12]" class="counter whoami_count">0/140 characters</label>
+    </div>
+
+    <div class="control-group">
+      <label for="app[Field13]">Provide up to 5 links to sites where we can find your social footprint.</label>
+      <textarea name="app[Field13]" id="social" placeholder="For example, LinkedIn, Tumblr, Github, etc"></textarea>
+      <span class="help-inline" id="social_error"></span>
+    </div>
+
+    <div class="control-group">
+      <label for="app[Field17]">Tell us: (1) Why you want to enroll in Boston Startup School and (2) what makes you a strong candidate for admission.</label>
+      <textarea name="app[Field17]" id="the_why" data-required="true"></textarea>
+      <span class="help-inline" id="the_why_error"></span>
+    </div>
+
+    <div class="control-group">
+      <label for="app[Field18]">Tell us about something you created or accomplished that you are most proud of and why it wouldn't have happened without you.</label>
+      <textarea name="app[Field18]" id="accomplished" data-required="true"></textarea>
+      <span class="help-inline" id="accomplished_error"></span>
+    </div>
+
+    <div class="control-group">
+      <label for="app[Field15]">Why do you think you will be an awesome hire upon completion of this program? (250 character limit)</label>
+      <textarea name="app[Field15]" id="good_hire"></textarea>
+      <span class="help-inline" id="good_hire_error"></span>
+      <label for="app[Field12]" class="counter good_hire_count">0/250 characters</label>
+    </div>
+
+    <div class="control-group">
+      <label for="app[Field5]">Is there anything else we should know about you? (250 word limit)</label>
+      <textarea name="app[Field5]" id="other"></textarea>
+      <span class="help-inline" id="other_error"></span>
+      <label for="app[Field12]" class="counter other_count">0/250 words</label>
+    </div>
+
+    <div class="form_error_area">Some parts of the application were not filled out properly. Please scroll up and fix.</div>
+    <br/>
+    <button type="button" class="btn btn-warning" id="submit_application">Submit Application</button>
+
+  </form>
+</section>

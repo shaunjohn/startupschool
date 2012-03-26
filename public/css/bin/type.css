@@ -1,0 +1,21 @@
+@font-face {
+  font-family: 'Flama-Bold';
+  src: url('Flama-Bold.eot');
+  src: url('Flama-Bold.eot?#iefix') format('embedded-opentype'), url('Flama-Bold.woff') format('woff'), url('Flama-Bold.ttf') format('truetype'), url('Flama-Bold.svg#Flama-Bold') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Flama-Book';
+  src: url('Flama-Book.eot');
+  src: url('Flama-Book.eot?#iefix') format('embedded-opentype'), url('Flama-Book.woff') format('woff'), url('Flama-Book.ttf') format('truetype'), url('Flama-Book.svg#Flama-Book') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Flama-Medium';
+  src: url('Flama-Medium.eot');
+  src: url('Flama-Medium.eot?#iefix') format('embedded-opentype'), url('Flama-Medium.woff') format('woff'), url('Flama-Medium.ttf') format('truetype'), url('Flama-Medium.svg#Flama-Medium') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
