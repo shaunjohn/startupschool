@@ -1,11 +1,5 @@
 (function() {
-  var A_BOTTOM, A_LEFT, A_WIDTH, LOGO_FACTOR, LOGO_MARGIN, PAGE_FACTOR, SIZE_CUTOFF, adjustArrow, arrowHeight, clearFormErrorState, events, fixCurriculum, formSubmission, gettingStarted, headers, instruction_show_time, instructions_shown, limitChar, limitWord, onResize, onScroll, retrieveForm, saveForm, setFormErrorState, setupElements, show_scroll, validateForm;
-
-  LOGO_FACTOR = 1484 / 500;
-
-  LOGO_MARGIN = 40;
-
-  PAGE_FACTOR = .8;
+  var A_BOTTOM, A_LEFT, A_WIDTH, SIZE_CUTOFF, adjustArrow, arrowHeight, clearFormErrorState, events, fixCurriculum, formSubmission, gettingStarted, headers, instruction_show_time, instructions_shown, limitChar, limitWord, onResize, onScroll, retrieveForm, saveForm, setFormErrorState, setupElements, show_scroll, validateForm;
 
   SIZE_CUTOFF = 640;
 
@@ -16,8 +10,8 @@
   A_WIDTH = 0.048;
 
   window.adjustLogo = function() {
-    var $logo, logo_h, logo_w, m, stack, w;
-    $logo = $("#svg_logo");
+    var $logo, m;
+    $logo = $("#logo");
     if ($(window).width() < SIZE_CUTOFF) {
       $("#call_to_action").hide();
       $logo.attr("src", "img/BSS_Logo_256x761.png");
@@ -25,29 +19,20 @@
       $("#call_to_action").show();
       $logo.attr("src", "img/BSS_Logo_500x1484_noarrow.png");
     }
-    w = $(window).width();
-    logo_w = w * PAGE_FACTOR;
-    logo_h = w * PAGE_FACTOR / LOGO_FACTOR;
-    $logo.css({
-      width: "" + logo_w + "px !important",
-      height: "" + logo_h + "px !important"
-    });
-    $logo.attr('width', "" + logo_w + "px !important");
-    $logo.attr('height', "" + logo_h + "px !important");
-    $("#page").css({
-      "padding-bottom": logo_h + LOGO_MARGIN
-    });
-    stack = logo_h + LOGO_MARGIN + $("#hero").outerHeight();
-    m = $(window).height() - stack + LOGO_MARGIN;
+    m = $(window).height() - $("#hero").height();
     $("#hero").css({
       "margin-top": "" + m + "px"
     });
-    return adjustArrow(logo_w, logo_h);
+    return adjustArrow();
   };
 
-  adjustArrow = function(logo_w, logo_h) {
-    var $arrow, $body, $head, arrow_b, arrow_l, arrow_w;
+  adjustArrow = function() {
+    var $arrow, $body, $head, arrow_b, arrow_l, arrow_w, logo_h, logo_w;
+    logo_w = $("#logo").outerWidth(true);
+    logo_h = $("#logo").outerHeight(true);
     $arrow = $("#arrow");
+    $head = $("#arrow_head");
+    $body = $("#arrow_body");
     $arrow.show();
     if ($(window).width() < SIZE_CUTOFF) {
       A_LEFT = 1;
@@ -56,12 +41,9 @@
       A_LEFT = 0.7820;
       $arrow.css("visibility", "visible");
     }
-    $arrow = $("#arrow");
-    $head = $("#arrow_head");
-    $body = $("#arrow_body");
     arrow_w = logo_w * A_WIDTH;
-    arrow_l = LOGO_MARGIN + logo_w * A_LEFT - arrow_w / 2;
-    arrow_b = LOGO_MARGIN + logo_h * A_BOTTOM;
+    arrow_l = logo_w * A_LEFT - arrow_w / 2;
+    arrow_b = logo_h * A_BOTTOM;
     $head.css({
       "border-right": "" + arrow_w + "px solid transparent",
       "border-left": "" + arrow_w + "px solid transparent",
@@ -463,7 +445,7 @@
     });
     h = $("#instruction_header").outerHeight() + 10;
     $("#instructions_container").height(h);
-    cta_t = $("#svg_logo").outerHeight() + LOGO_MARGIN;
+    cta_t = $("#logo").outerHeight(true);
     $("#call_to_action").css({
       bottom: "" + (cta_t - $("#call_to_action").outerHeight()) + "px"
     });

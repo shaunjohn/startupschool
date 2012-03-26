@@ -309,12 +309,14 @@ form {
 
 // ==== Hero ======================================================== //
 #hero {
-  height:auto;
-  font-size:40px;
-  margin-bottom:-30px;
+  .hero_content {
+    margin:@gutter;
+    font-size:40px;
+  }
 
-  .hero_content{
-    padding:10px 90px 10px 40px;
+  #logo {
+    margin:@gutter;
+    width:80%;
   }
 
   .trust {
@@ -326,17 +328,6 @@ form {
     height:40px;
   }
 }
-
-#logo {
-  position:absolute;
-  bottom:40px;
-  left:40px;
-}
-img#logo {
-  max-width:none;
-}
-
-
 
 // ==== Arrow ======================================================= //
 #arrow {
@@ -422,7 +413,6 @@ img#logo {
 
 #page {
   position:relative;
-  padding-bottom:390px;
   width:@columnWrapWidth * 100%;
   visibility:hidden; // Start invisible while page is loading
 }

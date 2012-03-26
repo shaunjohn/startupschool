@@ -19,7 +19,7 @@ body {
 // Default column systems.
 // All columns have a "padding" of 20px.
 // We use an interior element to get pixel padding on a percentage container
-section, .container {
+.container {
   .row {
     position: relative;
     width: auto; // Rows take up available space
@@ -40,35 +40,3 @@ section, .container {
 }
 
 
-@media (max-width:@breakpointMinimal) {
-  .column {
-    width:100%;
-  }
-  #page {
-    width:100%;
-  }
-}
-
-@media (min-width:@breakpointMinimal) and (max-width:@breakpointOneColumn) {
-  .column {
-    width:100%;
-  }
-}
-
-@media (min-width:@breakpointOneColumn) and (max-width:@breakpointTwoColumn) {
-  .column {
-    width:50%;
-  }
-}
-
-@media (min-width:@breakpointTwoColumn) and (max-width:@breakpointThreeColumn) {
-  .column {
-    width:33%;
-  }
-}
-
-@media (min-width:@breakpointThreeColumn) {
-  .column {
-    width:@maxColumnWidth;
-  }
-}

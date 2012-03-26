@@ -1,6 +1,6 @@
-LOGO_FACTOR = 1484 / 500 # Ratio of width to height
-LOGO_MARGIN = 40 # Static pixel margins around the logo
-PAGE_FACTOR = .8 # How much of the page the logo takes up
+# LOGO_FACTOR = 1484 / 500 # Ratio of width to height
+# LOGO_MARGIN = 40 # Static pixel margins around the logo
+# PAGE_FACTOR = .8 # How much of the page the logo takes up
 
 SIZE_CUTOFF = 640
 
@@ -19,7 +19,7 @@ A_WIDTH = 0.048
 
 # Sets the logo size and position and blank padding space above the logo
 window.adjustLogo = ->
-  $logo = $("#svg_logo")
+  $logo = $("#logo")
 
   if $(window).width() < SIZE_CUTOFF
     $("#call_to_action").hide()
@@ -28,16 +28,16 @@ window.adjustLogo = ->
     $("#call_to_action").show()
     $logo.attr("src", "img/BSS_Logo_500x1484_noarrow.png")
 
-  w = $(window).width()
-  logo_w = w * PAGE_FACTOR
-  logo_h = w * PAGE_FACTOR / LOGO_FACTOR
+  # w = $(window).width()
+  # logo_w = w * PAGE_FACTOR
+  # logo_h = w * PAGE_FACTOR / LOGO_FACTOR
 
   # Needed important flags for svg resizing
-  $logo.css
-    width: "#{logo_w}px !important"
-    height: "#{logo_h}px !important"
-  $logo.attr 'width', "#{logo_w}px !important"
-  $logo.attr 'height', "#{logo_h}px !important"
+  # $logo.css
+  #   width: "#{logo_w}px !important"
+  #   height: "#{logo_h}px !important"
+  # $logo.attr 'width', "#{logo_w}px !important"
+  # $logo.attr 'height', "#{logo_h}px !important"
 
   # $logo_svg = $($logo[0].contentDocument).find("svg")
   # if $logo_svg.length
@@ -49,26 +49,32 @@ window.adjustLogo = ->
   #     width: "#{logo_w}px !important"
   #     height: "#{logo_h}px !important"
 
-  # Setting padding so no content accidentally flows over the logo.
-  $("#page").css
-    "padding-bottom": logo_h + LOGO_MARGIN
+  # # Setting padding so no content accidentally flows over the logo.
+  # $("#page").css
+  #   "padding-bottom": logo_h + LOGO_MARGIN
 
   # $logo.hide()
   # $logo.show()
 
   # Calculate how much empty space we should generate above the logo to ensure
   # a clean landing page.
-  stack = logo_h + LOGO_MARGIN + $("#hero").outerHeight()
-  m = $(window).height() - stack + LOGO_MARGIN
+  # stack = logo_h + LOGO_MARGIN + $("#hero").outerHeight()
+  m = $(window).height() - $("#hero").height()
   $("#hero").css
     "margin-top":"#{m}px"
 
   # Adjust the arrow too.
-  adjustArrow(logo_w, logo_h)
+  adjustArrow()
 
 # Sizes the arrow proporationally to the logo and positions it properly
-adjustArrow = (logo_w, logo_h) ->
+adjustArrow = () ->
+  logo_w = $("#logo").outerWidth(true)
+  logo_h = $("#logo").outerHeight(true)
+
   $arrow = $("#arrow")
+  $head = $("#arrow_head")
+  $body = $("#arrow_body")
+
   $arrow.show()
   if $(window).width() < SIZE_CUTOFF
     A_LEFT = 1
@@ -77,15 +83,9 @@ adjustArrow = (logo_w, logo_h) ->
     A_LEFT = 0.7820
     $arrow.css "visibility", "visible"
 
-  $arrow = $("#arrow")
-  $head = $("#arrow_head")
-  $body = $("#arrow_body")
-  # $tail = $("#arrow_tail")
-
-
   arrow_w = logo_w * A_WIDTH
-  arrow_l = LOGO_MARGIN + logo_w * A_LEFT - arrow_w / 2
-  arrow_b = LOGO_MARGIN + logo_h * A_BOTTOM
+  arrow_l = logo_w * A_LEFT - arrow_w / 2
+  arrow_b = logo_h * A_BOTTOM
 
   $head.css
     "border-right":"#{arrow_w}px solid transparent"
@@ -448,7 +448,7 @@ setupElements = ->
   h = $("#instruction_header").outerHeight() + 10
   $("#instructions_container").height h
 
-  cta_t = $("#svg_logo").outerHeight() + LOGO_MARGIN
+  cta_t = $("#logo").outerHeight(true)
   $("#call_to_action").css
     bottom:"#{cta_t - $("#call_to_action").outerHeight()}px"
 

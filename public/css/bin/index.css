@@ -4002,7 +4002,6 @@ body {
   color: #58585a;
   background: #eeeeee url(../../img/bg.jpg) repeat;
 }
-section .row,
 .container .row {
   position: relative;
   width: auto;
@@ -4010,55 +4009,22 @@ section .row,
   margin: 0 auto 20px auto;
   *zoom: 1;
 }
-section .row:before,
 .container .row:before,
-section .row:after,
 .container .row:after {
   display: table;
   content: "";
 }
-section .row:after,
 .container .row:after {
   clear: both;
 }
-section .row .column,
 .container .row .column {
   float: left;
   position: relative;
 }
-section .row .column .column_content,
 .container .row .column .column_content {
   position: relative;
   width: auto;
   margin: 20px;
-}
-@media (max-width: 480px) {
-  .column {
-    width: 100%;
-  }
-  #page {
-    width: 100%;
-  }
-}
-@media (min-width: 480px) and (max-width: 761.9047619047619px) {
-  .column {
-    width: 100%;
-  }
-}
-@media (min-width: 761.9047619047619px) and (max-width: 1523.8095238095239px) {
-  .column {
-    width: 50%;
-  }
-}
-@media (min-width: 1523.8095238095239px) and (max-width: 2285.7371430857165px) {
-  .column {
-    width: 33%;
-  }
-}
-@media (min-width: 2285.7371430857165px) {
-  .column {
-    width: 480px;
-  }
 }
 @font-face {
   font-family: 'Flama-Bold';
@@ -4366,13 +4332,13 @@ form .counter {
 #about .curriculum_section_details {
   margin: 0 90px 0 135px;
 }
-#hero {
-  height: auto;
-  font-size: 40px;
-  margin-bottom: -30px;
-}
 #hero .hero_content {
-  padding: 10px 90px 10px 40px;
+  margin: 20px;
+  font-size: 40px;
+}
+#hero #logo {
+  margin: 20px;
+  width: 80%;
 }
 #hero .trust {
   font-size: 16px;
@@ -4380,14 +4346,6 @@ form .counter {
 }
 #hero #ts_logo {
   height: 40px;
-}
-#logo {
-  position: absolute;
-  bottom: 40px;
-  left: 40px;
-}
-img#logo {
-  max-width: none;
 }
 #arrow {
   position: absolute;
@@ -4472,7 +4430,6 @@ img#logo {
 }
 #page {
   position: relative;
-  padding-bottom: 390px;
   width: 63%;
   visibility: hidden;
 }
