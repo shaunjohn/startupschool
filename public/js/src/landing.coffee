@@ -15,6 +15,7 @@ A_BOTTOM = 0.74
 A_WIDTH = 0.048
 # A_WIDTH = 0.048
 CONTENT_H = 0
+nav_opacity = {} # Keeps track of nav opacity for hover
 
 # Adjusts the Cirriculum bars. Fired on scroll
 
@@ -23,10 +24,10 @@ window.adjustLogo = ->
   $logo = $("#logo")
 
   if $(window).width() < SIZE_CUTOFF
-    $("#call_to_action").hide()
+    # $("#call_to_action").hide()
     $logo.attr("src", "img/BSS_Logo_256x761.png")
   else
-    $("#call_to_action").show()
+    # $("#call_to_action").show()
     $logo.attr("src", "img/BSS_Logo_500x1484_noarrow.png")
 
   # w = $(window).width()
@@ -448,11 +449,11 @@ setupElements = ->
   h = $("#instruction_header").outerHeight() + 10
   $("#instructions_container").height h
 
-  cta_t = $("#logo").outerHeight(true)
-  $("#call_to_action").css
-    bottom:"#{cta_t - $("#call_to_action").outerHeight()}px"
+  # cta_t = $("#logo").outerHeight(true)
+  # $("#call_to_action").css
+  #   bottom:"#{cta_t - $("#call_to_action").outerHeight()}px"
 
-  $("#page, #scroll_up, #call_to_action").css
+  $("#page, #scroll_up").css
     visibility:"visible"
 
   $(window).scrollTop($(document).height())
@@ -477,6 +478,30 @@ saveForm = ->
       val = $(el).val()
       localStorage.setItem key, val
   else return false
+
+doNavColoring = ->
+  page_top = $(window).scrollTop()
+  page_bot = page_top + $(window).height()
+  page_h = page_bot - page_top
+  for section in $("section")
+    sec_top = $(section).offset().top
+    sec_bot = sec_top + $(section).outerHeight()
+    sec_h = sec_bot - sec_top
+    sec_id = $(section).attr("id")
+
+    if sec_top - page_top < 0 and page_bot - sec_bot < 0
+      # Div entirely in page and therefore 100%
+      percent_showing = 1
+    else
+      percent_from_top = Math.min(sec_h, sec_bot - page_top) / sec_h
+      percent_from_bot = Math.min(sec_h, page_bot - sec_top) / sec_h
+      percent_showing = Math.min(percent_from_top, percent_from_bot)
+      percent_showing = Math.max(percent_showing, 0)
+
+    nav_opacity["nav_#{sec_id}"] = percent_showing
+
+    $("#nav_#{sec_id}").find(".nav_bg").css
+      opacity:percent_showing
 
 events = ->
   # Bind resizing and scrolling
@@ -515,14 +540,14 @@ events = ->
 
   $(".hide_application").click hideApplication
 
-  $("#call_to_action").click ->
-    scroll_pos = $(window).scrollTop() / ($(document).height() - $(window).height()) * 100
-    mpq.track("Apply Now", {"scroll_pos":scroll_pos, "mp_note":"Sidebar Apply Now call to action clicked at #{scroll_pos}% on the page"})
-    $section = $("#apply")
-    correction = $(@).offset().top - $(window).scrollTop() + $(@).height()
-    $("body,html").animate
-      scrollTop: $section.offset().top - correction
-    ,'slow'
+  # $("#call_to_action").click ->
+  #   scroll_pos = $(window).scrollTop() / ($(document).height() - $(window).height()) * 100
+  #   mpq.track("Apply Now", {"scroll_pos":scroll_pos, "mp_note":"Sidebar Apply Now call to action clicked at #{scroll_pos}% on the page"})
+  #   $section = $("#apply")
+  #   correction = $(@).offset().top - $(window).scrollTop() + $(@).height()
+  #   $("body,html").animate
+  #     scrollTop: $section.offset().top - correction
+  #   ,'slow'
 
   $(".instruction_toggle").click ->
     $instructions = $("#instructions")
@@ -542,6 +567,19 @@ events = ->
       $instructions.toggleClass "opened"
       $("#toggle_instructions").html "close"
 
+  # NAVIGATION
+  $("#floating_nav > ul > li").click ->
+    $("html, body").animate
+      scrollTop : $("##{$(@).data("section_id")}").offset().top
+  $("#floating_nav > ul > li").hover ->
+    $(@).find(".nav_bg").css
+      opacity : 1
+  , ->
+    $(@).find(".nav_bg").css
+      opacity : nav_opacity[$(@).attr("id")]
+
+  $(window).scroll doNavColoring
+
 jQuery ->
 
   # Setup the logo and arrow height for the first time
@@ -549,5 +587,6 @@ jQuery ->
   onResize()
 
   retrieveForm()
+  doNavColoring()
 
   $(window).scrollTop($(document).height())

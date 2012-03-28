@@ -380,52 +380,97 @@ form {
 
 
 // ==== Nav ========================================================= //
-.section_header {
-  display:none;
-  position:absolute;
-  z-index:15;
-
-  padding-right:100px;
-  width:90%;
-  height:40px;
-
-  font-family: @mediumFontFamily;
-  font-weight: normal;
-  letter-spacing:1px;
-  text-align:right;
-  line-height:1.5em;
-  text-shadow: -2px -2px 1px rgba(0,0,0,0.2);
-  font-size:24px;
-  color:@white;
-
-  background:@secondary;
-  #gradient > .vertical(lighten(@secondary, 3%), @secondary);
-  .box-shadow(0px 3px 6px rgba(0,0,0,0.3));
-  border-top:1px solid @tertiary;
-  border-bottom:1px solid darken(@secondary,5%);
-
-  &:hover {
-    cursor:pointer;
-    background:@tertiary;
+#floating_nav {
+  position:fixed;
+  z-index:1;
+  right:0;
+  top:0;
+  width:25%;
+  ul{
   }
+  li {
+    display:block;
+    position:relative;
+    margin:0;
+    border-bottom:1px solid @black;
+    padding:0;
+    text-align:right;
 
-  &:after {
-    content:"";
-    position:absolute;
-    right:0px;
-    bottom:-31px;
+    .nav_text {
+      position:relative;
+      z-index:2;
+      padding:4px 50px 5px 40px;
+      font-size:14px;
+      text-transform:uppercase;
+    }
+    .nav_bg{
+      position:absolute;
+      z-index:1;
+      width:100%;
+      height:100%;
+      background:@primary;
+      .transition(300ms);
+      .opacity(0);
+    }
 
-    border-top: 15px solid @tertiary;
-    border-right: 15px solid transparent;
-    border-bottom: 15px solid transparent;
-    border-left: 15px solid @tertiary;
-    width:0;
-    height:0;
+    background:rgb(220,220,220);
+
+    &:before {content:""}
+
+    &:hover {
+      .nav_bg {
+        .opacity(100);
+      }
+      cursor: pointer;
+    }
   }
 }
-.apply_header {
-  color:@orange;
-}
+// .section_header {
+//   display:none;
+//   position:absolute;
+//   z-index:15;
+// 
+//   padding-right:100px;
+//   width:90%;
+//   height:40px;
+// 
+//   font-family: @mediumFontFamily;
+//   font-weight: normal;
+//   letter-spacing:1px;
+//   text-align:right;
+//   line-height:1.5em;
+//   text-shadow: -2px -2px 1px rgba(0,0,0,0.2);
+//   font-size:24px;
+//   color:@white;
+// 
+//   background:@secondary;
+//   #gradient > .vertical(lighten(@secondary, 3%), @secondary);
+//   .box-shadow(0px 3px 6px rgba(0,0,0,0.3));
+//   border-top:1px solid @tertiary;
+//   border-bottom:1px solid darken(@secondary,5%);
+// 
+//   &:hover {
+//     cursor:pointer;
+//     background:@tertiary;
+//   }
+// 
+//   &:after {
+//     content:"";
+//     position:absolute;
+//     right:0px;
+//     bottom:-31px;
+// 
+//     border-top: 15px solid @tertiary;
+//     border-right: 15px solid transparent;
+//     border-bottom: 15px solid transparent;
+//     border-left: 15px solid @tertiary;
+//     width:0;
+//     height:0;
+//   }
+// }
+// .apply_header {
+//   color:@orange;
+// }
 
 #page {
   position:relative;
@@ -433,14 +478,14 @@ form {
   visibility:hidden; // Start invisible while page is loading
 }
 
-.content {
-  margin:20px 0 20px 40px;
-  width:80%;
-  min-width:250px;
-  max-width:640px;
-  /*background:@tertiary;*/
-  /*color:white;*/
-  /*border-bottom:1px solid @secondary;*/
-}
+// .content {
+//   margin:20px 0 20px 40px;
+//   width:80%;
+//   min-width:250px;
+//   max-width:640px;
+//   /*background:@tertiary;*/
+//   /*color:white;*/
+//   /*border-bottom:1px solid @secondary;*/
+// }
 
 @import "css/src/startupschool/responsive.less";

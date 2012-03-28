@@ -1,5 +1,5 @@
 (function() {
-  var A_BOTTOM, A_WIDTH, CONTENT_H, SIZE_CUTOFF, adjustArrow, arrowHeight, clearFormErrorState, events, fixCurriculum, formSubmission, gettingStarted, headers, instruction_show_time, instructions_shown, limitChar, limitWord, onResize, onScroll, retrieveForm, saveForm, setFormErrorState, setupElements, show_scroll, validateForm;
+  var A_BOTTOM, A_WIDTH, CONTENT_H, SIZE_CUTOFF, adjustArrow, arrowHeight, clearFormErrorState, doNavColoring, events, fixCurriculum, formSubmission, gettingStarted, headers, instruction_show_time, instructions_shown, limitChar, limitWord, nav_opacity, onResize, onScroll, retrieveForm, saveForm, setFormErrorState, setupElements, show_scroll, validateForm;
 
   SIZE_CUTOFF = 640;
 
@@ -9,14 +9,14 @@
 
   CONTENT_H = 0;
 
+  nav_opacity = {};
+
   window.adjustLogo = function() {
     var $logo, m;
     $logo = $("#logo");
     if ($(window).width() < SIZE_CUTOFF) {
-      $("#call_to_action").hide();
       $logo.attr("src", "img/BSS_Logo_256x761.png");
     } else {
-      $("#call_to_action").show();
       $logo.attr("src", "img/BSS_Logo_500x1484_noarrow.png");
     }
     m = $(window).height() - $("#hero").height();
@@ -435,18 +435,14 @@
   };
 
   setupElements = function() {
-    var cta_t, h;
+    var h;
     $(".section_header").show();
     $("#instructions").css({
       top: "-" + ($("#instruction_content").outerHeight()) + "px"
     });
     h = $("#instruction_header").outerHeight() + 10;
     $("#instructions_container").height(h);
-    cta_t = $("#logo").outerHeight(true);
-    $("#call_to_action").css({
-      bottom: "" + (cta_t - $("#call_to_action").outerHeight()) + "px"
-    });
-    $("#page, #scroll_up, #call_to_action").css({
+    $("#page, #scroll_up").css({
       visibility: "visible"
     });
     $(window).scrollTop($(document).height());
@@ -486,6 +482,35 @@
     } else {
       return false;
     }
+  };
+
+  doNavColoring = function() {
+    var page_bot, page_h, page_top, percent_from_bot, percent_from_top, percent_showing, sec_bot, sec_h, sec_id, sec_top, section, _i, _len, _ref, _results;
+    page_top = $(window).scrollTop();
+    page_bot = page_top + $(window).height();
+    page_h = page_bot - page_top;
+    _ref = $("section");
+    _results = [];
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      section = _ref[_i];
+      sec_top = $(section).offset().top;
+      sec_bot = sec_top + $(section).outerHeight();
+      sec_h = sec_bot - sec_top;
+      sec_id = $(section).attr("id");
+      if (sec_top - page_top < 0 && page_bot - sec_bot < 0) {
+        percent_showing = 1;
+      } else {
+        percent_from_top = Math.min(sec_h, sec_bot - page_top) / sec_h;
+        percent_from_bot = Math.min(sec_h, page_bot - sec_top) / sec_h;
+        percent_showing = Math.min(percent_from_top, percent_from_bot);
+        percent_showing = Math.max(percent_showing, 0);
+      }
+      nav_opacity["nav_" + sec_id] = percent_showing;
+      _results.push($("#nav_" + sec_id).find(".nav_bg").css({
+        opacity: percent_showing
+      }));
+    }
+    return _results;
   };
 
   events = function() {
@@ -528,20 +553,7 @@
       return showApplication();
     });
     $(".hide_application").click(hideApplication);
-    $("#call_to_action").click(function() {
-      var $section, correction, scroll_pos;
-      scroll_pos = $(window).scrollTop() / ($(document).height() - $(window).height()) * 100;
-      mpq.track("Apply Now", {
-        "scroll_pos": scroll_pos,
-        "mp_note": "Sidebar Apply Now call to action clicked at " + scroll_pos + "% on the page"
-      });
-      $section = $("#apply");
-      correction = $(this).offset().top - $(window).scrollTop() + $(this).height();
-      return $("body,html").animate({
-        scrollTop: $section.offset().top - correction
-      }, 'slow');
-    });
-    return $(".instruction_toggle").click(function() {
+    $(".instruction_toggle").click(function() {
       var $container, $instructions, h;
       $instructions = $("#instructions");
       $container = $("#instructions_container");
@@ -563,12 +575,28 @@
         return $("#toggle_instructions").html("close");
       }
     });
+    $("#floating_nav > ul > li").click(function() {
+      return $("html, body").animate({
+        scrollTop: $("#" + ($(this).data("section_id"))).offset().top
+      });
+    });
+    $("#floating_nav > ul > li").hover(function() {
+      return $(this).find(".nav_bg").css({
+        opacity: 1
+      });
+    }, function() {
+      return $(this).find(".nav_bg").css({
+        opacity: nav_opacity[$(this).attr("id")]
+      });
+    });
+    return $(window).scroll(doNavColoring);
   };
 
   jQuery(function() {
     events();
     onResize();
     retrieveForm();
+    doNavColoring();
     return $(window).scrollTop($(document).height());
   });
 
