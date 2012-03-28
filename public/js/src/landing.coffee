@@ -6,14 +6,15 @@ SIZE_CUTOFF = 640
 
 # Relative position of the left side of the arrow relative to the logo's left.
 # A_LEFT = 0.7820
-A_LEFT = 0.7820
+# A_LEFT = 0.7820
 # Relative position of the bottom of the arrow relative to the logo's bottom.
 # A_BOTTOM = 0.870252
 # A_BOTTOM = 0.65
-A_BOTTOM = 0.65
+A_BOTTOM = 0.74
 # Relative width of the arrow relative to the logo's width
-# A_WIDTH = 0.048
 A_WIDTH = 0.048
+# A_WIDTH = 0.048
+CONTENT_H = 0
 
 # Adjusts the Cirriculum bars. Fired on scroll
 
@@ -60,6 +61,7 @@ window.adjustLogo = ->
   # a clean landing page.
   # stack = logo_h + LOGO_MARGIN + $("#hero").outerHeight()
   m = $(window).height() - $("#hero").height()
+  m = Math.max(m, 80)
   $("#hero").css
     "margin-top":"#{m}px"
 
@@ -68,7 +70,7 @@ window.adjustLogo = ->
 
 # Sizes the arrow proporationally to the logo and positions it properly
 adjustArrow = () ->
-  logo_w = $("#logo").outerWidth(true)
+  # logo_w = $("#logo").outerWidth(true)
   logo_h = $("#logo").outerHeight(true)
 
   $arrow = $("#arrow")
@@ -76,32 +78,29 @@ adjustArrow = () ->
   $body = $("#arrow_body")
 
   $arrow.show()
-  if $(window).width() < SIZE_CUTOFF
-    A_LEFT = 1
-    $arrow.css "visibility", "hidden"
-  else
-    A_LEFT = 0.7820
-    $arrow.css "visibility", "visible"
+  # if $(window).width() < SIZE_CUTOFF
+  #   A_LEFT = 1
+  #   $arrow.css "visibility", "hidden"
+  # else
+  #   A_LEFT = 0.7820
+  #   $arrow.css "visibility", "visible"
 
-  arrow_w = logo_w * A_WIDTH
-  arrow_l = logo_w * A_LEFT - arrow_w / 2
+  arrow_w = $("#logo").outerWidth() * A_WIDTH
+  # arrow_l = logo_w * A_LEFT - arrow_w / 2
   arrow_b = logo_h * A_BOTTOM
-
   $head.css
     "border-right":"#{arrow_w}px solid transparent"
     "border-left":"#{arrow_w}px solid transparent"
     "border-bottom":"#{arrow_w}px solid #3ba4db"
-  # $tail.css
-  #   "border-top":"#{arrow_w/2}px solid #3ba4db"
-  #   "border-right":"#{arrow_w/2}px solid #3ba4db"
-  #   "border-left":"#{arrow_w/2}px solid #3ba4db"
-  #   "border-bottom":"#{arrow_w/2}px solid transparent"
-  #   "margin-left":"#{arrow_w/2}px"
   $body.css
     "width":"#{arrow_w}px"
     "margin-left":"#{arrow_w/2}px"
+  $("#arrow_track").css
+    "height":"#{CONTENT_H}px"
+    "width":"#{arrow_w}px"
+    "margin-left":"-#{(arrow_w+2)/2}px"
 
-  $arrow.css "left", arrow_l
+  # $arrow.css "left", arrow_l
   $arrow.css "bottom", arrow_b
 
   arrowHeight()
@@ -110,6 +109,7 @@ adjustArrow = () ->
   # $("#page").width page_w
 
 onResize = ->
+  CONTENT_H = $(document).height() - $("#hero").outerHeight(true)
   adjustLogo()
   fixCurriculum()
   headers('fix_width')

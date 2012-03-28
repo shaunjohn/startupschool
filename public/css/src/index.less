@@ -4,11 +4,22 @@
 @import "css/src/startupschool/type.less";
 
 // ==== Miscellaneous =============================================== //
+hr {
+  border-top:1px solid rgba(0,0,0,0.1);
+  border-bottom:1px solid rgba(255,255,255,0.7);
+  height:2px;
+  background:rgba(128,128,128,0.1);
+}
+
 ol {
   margin-left:1.5em;
 }
 ol ol {
   list-style:lower-alpha;
+}
+
+.bold {
+  font-family: @mediumFontFamily;
 }
 
 #scroll_up {
@@ -246,14 +257,8 @@ form {
 // ==== Who ========================================================= //
 
 
-// ==== Details ===================================================== //
-
-
-// ==== Why ========================================================= //
-
-
-// ==== About ======================================================= //
-#about {
+// ==== Details ======================================================= //
+#details {
   .curriculum_section {
     margin:40px 0;
     padding-left:40px;
@@ -299,6 +304,7 @@ form {
     margin:0 90px 0 135px;
   }
 }
+// ==== Why ========================================================= //
 
 
 // ==== When Where ================================================== //
@@ -308,15 +314,18 @@ form {
 
 
 // ==== Hero ======================================================== //
+#logo {
+  position:relative;
+  z-index:2;
+  margin:@gutter 4% 4% 4%;
+  width:80%;
+}
+
 #hero {
   .hero_content {
-    margin:@gutter;
+    width:60%;
+    margin:0 0 @gutter 4%;
     font-size:40px;
-  }
-
-  #logo {
-    margin:@gutter;
-    width:80%;
   }
 
   .trust {
@@ -332,11 +341,12 @@ form {
 // ==== Arrow ======================================================= //
 #arrow {
   position:absolute;
-  z-index:1;
-  bottom:60px;
-  left:100px;
+  z-index:3;
+  left:68.52%;
   display:none;
   #arrow_head {
+    position:relative;
+    left:-50%;
     width:0px;
     height:0px;
     border-top:0;
@@ -346,20 +356,26 @@ form {
   }
   #arrow_body {
     position:relative;
+    left:-50%;
     height:25px;
     width:80px;
     margin-left:40px;
     background:@primary;
   }
-  #arrow_tail {
-    margin-left:40px;
-    width:0px;
-    height:0px;
-    border-top:40px solid @primary;
-    border-right:40px solid @primary;
-    border-left:40px solid @primary;
-    border-bottom:40px solid transparent;
-  }
+}
+
+#arrow_track {
+  position:absolute;
+  z-index:1;
+  top:0;
+  height:100%;
+  left:68.52%;
+  background:rgba(0,0,0,0.25);
+  border-left:1px solid rgba(0,0,0,0.2);
+  border-right:2px solid rgba(255,255,255,0.8);
+  .box-shadow(inset 0px 0px 5px rgba(0,0,0,0.3));
+  -webkit-mask-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, rgba(0,0,0,0)), color-stop(0.1, rgba(0,0,0,1)));
+  /*-webkit-mask-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));*/
 }
 
 

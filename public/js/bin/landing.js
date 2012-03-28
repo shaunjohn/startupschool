@@ -1,13 +1,13 @@
 (function() {
-  var A_BOTTOM, A_LEFT, A_WIDTH, SIZE_CUTOFF, adjustArrow, arrowHeight, clearFormErrorState, events, fixCurriculum, formSubmission, gettingStarted, headers, instruction_show_time, instructions_shown, limitChar, limitWord, onResize, onScroll, retrieveForm, saveForm, setFormErrorState, setupElements, show_scroll, validateForm;
+  var A_BOTTOM, A_WIDTH, CONTENT_H, SIZE_CUTOFF, adjustArrow, arrowHeight, clearFormErrorState, events, fixCurriculum, formSubmission, gettingStarted, headers, instruction_show_time, instructions_shown, limitChar, limitWord, onResize, onScroll, retrieveForm, saveForm, setFormErrorState, setupElements, show_scroll, validateForm;
 
   SIZE_CUTOFF = 640;
 
-  A_LEFT = 0.7820;
-
-  A_BOTTOM = 0.65;
+  A_BOTTOM = 0.74;
 
   A_WIDTH = 0.048;
+
+  CONTENT_H = 0;
 
   window.adjustLogo = function() {
     var $logo, m;
@@ -20,6 +20,7 @@
       $logo.attr("src", "img/BSS_Logo_500x1484_noarrow.png");
     }
     m = $(window).height() - $("#hero").height();
+    m = Math.max(m, 80);
     $("#hero").css({
       "margin-top": "" + m + "px"
     });
@@ -27,22 +28,13 @@
   };
 
   adjustArrow = function() {
-    var $arrow, $body, $head, arrow_b, arrow_l, arrow_w, logo_h, logo_w;
-    logo_w = $("#logo").outerWidth(true);
+    var $arrow, $body, $head, arrow_b, arrow_w, logo_h;
     logo_h = $("#logo").outerHeight(true);
     $arrow = $("#arrow");
     $head = $("#arrow_head");
     $body = $("#arrow_body");
     $arrow.show();
-    if ($(window).width() < SIZE_CUTOFF) {
-      A_LEFT = 1;
-      $arrow.css("visibility", "hidden");
-    } else {
-      A_LEFT = 0.7820;
-      $arrow.css("visibility", "visible");
-    }
-    arrow_w = logo_w * A_WIDTH;
-    arrow_l = logo_w * A_LEFT - arrow_w / 2;
+    arrow_w = $("#logo").outerWidth() * A_WIDTH;
     arrow_b = logo_h * A_BOTTOM;
     $head.css({
       "border-right": "" + arrow_w + "px solid transparent",
@@ -53,12 +45,17 @@
       "width": "" + arrow_w + "px",
       "margin-left": "" + (arrow_w / 2) + "px"
     });
-    $arrow.css("left", arrow_l);
+    $("#arrow_track").css({
+      "height": "" + CONTENT_H + "px",
+      "width": "" + arrow_w + "px",
+      "margin-left": "-" + ((arrow_w + 2) / 2) + "px"
+    });
     $arrow.css("bottom", arrow_b);
     return arrowHeight();
   };
 
   onResize = function() {
+    CONTENT_H = $(document).height() - $("#hero").outerHeight(true);
     adjustLogo();
     fixCurriculum();
     headers('fix_width');

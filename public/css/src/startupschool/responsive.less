@@ -1,5 +1,5 @@
 @media (max-width:@breakpointMinimal) {
-  .column {
+  .column, .two_column {
     width:100%;
   }
   #page {
@@ -8,7 +8,7 @@
 }
 
 @media (min-width:@breakpointMinimal) and (max-width:@breakpointOneColumn) {
-  .column {
+  .column, .two_column {
     width:100%;
   }
 }
@@ -17,16 +17,25 @@
   .column {
     width:50%;
   }
+  .two_column {
+    width:100%;
+  }
 }
 
 @media (min-width:@breakpointTwoColumn) and (max-width:@breakpointThreeColumn) {
   .column {
     width:33%;
   }
+  .two_column {
+    width:66%;
+  }
 }
 
 @media (min-width:@breakpointThreeColumn) {
   .column {
     width:@maxColumnWidth;
+  }
+  .two_column {
+    width:2 * @maxColumnWidth;
   }
 }
