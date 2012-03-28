@@ -1,5 +1,5 @@
 (function() {
-  var A_BOTTOM, A_WIDTH, CONTENT_H, SIZE_CUTOFF, adjustArrow, arrowHeight, clearFormErrorState, doNavColoring, events, fixCurriculum, formSubmission, gettingStarted, headers, instruction_show_time, instructions_shown, limitChar, limitWord, nav_opacity, onResize, onScroll, retrieveForm, saveForm, setFormErrorState, setupElements, show_scroll, validateForm;
+  var A_BOTTOM, A_WIDTH, CONTENT_H, SIZE_CUTOFF, adjustArrow, arrowHeight, clearFormErrorState, doNavColoring, events, fixCurriculum, formSubmission, gettingStarted, instruction_show_time, instructions_shown, limitChar, limitWord, nav_opacity, onResize, onScroll, placeVideos, retrieveForm, saveForm, setFormErrorState, setupElements, show_scroll, validateForm;
 
   SIZE_CUTOFF = 640;
 
@@ -13,12 +13,7 @@
 
   window.adjustLogo = function() {
     var $logo, m;
-    $logo = $("#logo");
-    if ($(window).width() < SIZE_CUTOFF) {
-      $logo.attr("src", "img/BSS_Logo_256x761.png");
-    } else {
-      $logo.attr("src", "img/BSS_Logo_500x1484_noarrow.png");
-    }
+    $logo = $(".logo");
     m = $(window).height() - $("#hero").height();
     m = Math.max(m, 80);
     $("#hero").css({
@@ -29,12 +24,12 @@
 
   adjustArrow = function() {
     var $arrow, $body, $head, arrow_b, arrow_w, logo_h;
-    logo_h = $("#logo").outerHeight(true);
+    logo_h = $(".logo").outerHeight(true);
     $arrow = $("#arrow");
     $head = $("#arrow_head");
     $body = $("#arrow_body");
     $arrow.show();
-    arrow_w = $("#logo").outerWidth() * A_WIDTH;
+    arrow_w = $(".logo").outerWidth() * A_WIDTH;
     arrow_b = logo_h * A_BOTTOM;
     $head.css({
       "border-right": "" + arrow_w + "px solid transparent",
@@ -46,7 +41,7 @@
       "margin-left": "" + (arrow_w / 2) + "px"
     });
     $("#arrow_track").css({
-      "height": "" + CONTENT_H + "px",
+      "height": "" + (CONTENT_H + 140) + "px",
       "width": "" + arrow_w + "px",
       "margin-left": "-" + ((arrow_w + 2) / 2) + "px"
     });
@@ -58,7 +53,6 @@
     CONTENT_H = $(document).height() - $("#hero").outerHeight(true);
     adjustLogo();
     fixCurriculum();
-    headers('fix_width');
     setupElements();
     return adjustLogo();
   };
@@ -70,7 +64,12 @@
   instruction_show_time = null;
 
   onScroll = function() {
-    if (show_scroll === 10) $("#scroll_up").fadeOut('slow');
+    if (show_scroll === 10) {
+      $("#scroll_up").fadeOut('slow');
+      $(".nav_item").animate({
+        opacity: 100
+      });
+    }
     if (!instructions_shown) {
       if ($(window).scrollTop() < $("#instruction_header").offset().top + 5) {
         instruction_show_time = new Date().getTime();
@@ -80,94 +79,15 @@
     }
     arrowHeight();
     fixCurriculum();
-    headers();
     return show_scroll += 1;
-  };
-
-  headers = function(fix_width) {
-    var $header, $section, d_apply, h, header, nav_bot_h, nav_h, num_sections, opacity, scroll_top, section_headers, section_top, win_h, _i, _j, _len, _len2, _results;
-    if (fix_width == null) fix_width = false;
-    section_headers = $(".section_header");
-    scroll_top = $(window).scrollTop();
-    h = section_headers.outerHeight();
-    d_apply = Math.min(Math.abs(scroll_top - $("#apply").offset().top), 1500);
-    opacity = Math.max(1 / 750 * d_apply - 1, 0);
-    $("#call_to_action").css({
-      opacity: opacity
-    });
-    if (fix_width === true || fix_width === 'fix_width') {
-      section_headers.width($("#page").width() - 100);
-    }
-    nav_h = 0;
-    nav_bot_h = 0;
-    for (_i = 0, _len = section_headers.length; _i < _len; _i++) {
-      header = section_headers[_i];
-      if ($(header).hasClass('fixed_top')) {
-        nav_h += h;
-      } else if ($(header).hasClass('fixed_bot')) {
-        nav_bot_h += h;
-      }
-    }
-    win_h = $(window).height();
-    _results = [];
-    for (_j = 0, _len2 = section_headers.length; _j < _len2; _j++) {
-      header = section_headers[_j];
-      $section = $("#" + ($(header).data("section")));
-      section_top = $section.offset().top;
-      $header = $(header);
-      num_sections = $(".section_header").length - 1;
-      if ($header.hasClass('fixed_top')) {
-        if (scroll_top + nav_h > section_top) {
-          _results.push(null);
-        } else {
-          $header.css('position', 'absolute');
-          $header.removeClass('fixed_bot');
-          $header.removeClass('fixed_top');
-          _results.push($header.css('top', section_top - h));
-        }
-      } else if ($header.hasClass('fixed_bot')) {
-        if (scroll_top + win_h - nav_bot_h + h < section_top) {
-          _results.push(null);
-        } else {
-          $header.css('position', 'absolute');
-          $header.removeClass('fixed_bot');
-          $header.removeClass('fixed_top');
-          _results.push($header.css('top', section_top - h));
-        }
-      } else {
-        if (scroll_top + nav_h > section_top - h) {
-          $header.css('position', 'fixed');
-          $header.css('bottom', 'auto');
-          $header.css('top', h * $(header).data("order"));
-          $header.removeClass('fixed_bot');
-          _results.push($header.addClass('fixed_top'));
-        } else if ($header.offset().top + h + nav_bot_h > scroll_top + win_h) {
-          $header.css('position', 'fixed');
-          $header.css('top', 'auto');
-          $header.css('bottom', h * (num_sections - $(header).data("order")));
-          $header.addClass('fixed_bot');
-          _results.push($header.removeClass('fixed_top'));
-        } else {
-          _results.push($header.css('top', section_top - h));
-        }
-      }
-    }
-    return _results;
   };
 
   arrowHeight = function() {
     var $arrow_body, arrow_height, dh, doc_top, from_top, scroll_percent, view_visible, wh;
     if (show_scroll < 10) return;
-    if ($(window).width() < SIZE_CUTOFF) {
-      if ($("#arrow_body").height() < 20) {
-        return;
-      } else {
-        $("#arrow_body").animate({
-          height: "#20px"
-        }, 70);
-        return;
-      }
-    }
+    $("#arrow_body").animate({
+      height: "#20px"
+    }, 70);
     wh = $(window).height();
     dh = $(document).height();
     $arrow_body = $("#arrow_body");
@@ -189,9 +109,9 @@
   fixCurriculum = function() {
     var EXP_LEN, X_END, X_START, bar_w, el, factor, scroll_top, _i, _len, _ref, _results;
     X_START = 40 + 128 - 10;
-    X_END = $("#page").width() - 30;
+    X_END = $("#page").width();
     EXP_LEN = 400;
-    bar_w = X_END - X_START - 15;
+    bar_w = X_END - X_START;
     $(".bar").width(bar_w);
     if ($(window).width() >= SIZE_CUTOFF) {
       scroll_top = $(window).scrollTop();
@@ -442,11 +362,10 @@
     });
     h = $("#instruction_header").outerHeight() + 10;
     $("#instructions_container").height(h);
-    $("#page, #scroll_up").css({
+    $("#page, #scroll_up, #arrow_track").css({
       visibility: "visible"
     });
-    $(window).scrollTop($(document).height());
-    if ($(window).width() < SIZE_CUTOFF) return $("#scroll_up").hide();
+    return $(window).scrollTop($(document).height());
   };
 
   retrieveForm = function() {
@@ -513,7 +432,16 @@
     return _results;
   };
 
+  placeVideos = function() {
+    var h, w;
+    w = $("#video_one").width();
+    h = w * 0.5625;
+    $("#video_one").append("<iframe src=\"http://fast.wistia.com/embed/iframe/518902fe54?videoWidth=640&amp;videoHeight=360&amp;controlsVisibleOnLoad=true&amp;plugin%5BpostRoll%5D%5Bversion%5D=v1&amp;plugin%5BpostRoll%5D%5Btext%5D=Learn%20more%20at%26nbsp%3Bhttp%3A%2F%2Fviximo.com&amp;plugin%5BpostRoll%5D%5Blink%5D=http%3A%2F%2Fviximo.com%2Fwant-join-team-awesome&amp;plugin%5BpostRoll%5D%5Bstyle%5D%5BbackgroundColor%5D=%23616161&amp;plugin%5BpostRoll%5D%5Bstyle%5D%5Bcolor%5D=%23ffffff&amp;plugin%5BpostRoll%5D%5Bstyle%5D%5BfontSize%5D=36px&amp;plugin%5BpostRoll%5D%5Bstyle%5D%5BfontFamily%5D=Gill%20Sans%2C%20Helvetica%2C%20Arial%2C%20sans-serif\" allowtransparency=\"true\" frameborder=\"0\" class=\"wistia_embed\" name=\"wistia_embed\" width=\"" + w + "px\" height=\"" + h + "px\"></iframe>");
+    return $("#video_two").append("<iframe src=\"http://player.vimeo.com/video/39066066\" width=\"" + w + "px\" height=\"" + h + "px\" frameborder=\"0\" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>");
+  };
+
   events = function() {
+    placeVideos();
     $(window).resize(onResize);
     $(window).scroll(onScroll);
     $("input, textarea").blur(saveForm);
@@ -577,7 +505,7 @@
     });
     $("#floating_nav > ul > li").click(function() {
       return $("html, body").animate({
-        scrollTop: $("#" + ($(this).data("section_id"))).offset().top
+        scrollTop: $("#" + ($(this).data("section_id"))).offset().top - 70
       });
     });
     $("#floating_nav > ul > li").hover(function() {

@@ -21,14 +21,14 @@ nav_opacity = {} # Keeps track of nav opacity for hover
 
 # Sets the logo size and position and blank padding space above the logo
 window.adjustLogo = ->
-  $logo = $("#logo")
+  $logo = $(".logo")
 
-  if $(window).width() < SIZE_CUTOFF
-    # $("#call_to_action").hide()
-    $logo.attr("src", "img/BSS_Logo_256x761.png")
-  else
-    # $("#call_to_action").show()
-    $logo.attr("src", "img/BSS_Logo_500x1484_noarrow.png")
+  # if $(window).width() < SIZE_CUTOFF
+  #   # $("#call_to_action").hide()
+  #   $logo.attr("src", "img/BSS_Logo_256x761.png")
+  # else
+  #   # $("#call_to_action").show()
+  #   $logo.attr("src", "img/BSS_Logo_500x1484_noarrow.png")
 
   # w = $(window).width()
   # logo_w = w * PAGE_FACTOR
@@ -71,8 +71,7 @@ window.adjustLogo = ->
 
 # Sizes the arrow proporationally to the logo and positions it properly
 adjustArrow = () ->
-  # logo_w = $("#logo").outerWidth(true)
-  logo_h = $("#logo").outerHeight(true)
+  logo_h = $(".logo").outerHeight(true)
 
   $arrow = $("#arrow")
   $head = $("#arrow_head")
@@ -86,7 +85,7 @@ adjustArrow = () ->
   #   A_LEFT = 0.7820
   #   $arrow.css "visibility", "visible"
 
-  arrow_w = $("#logo").outerWidth() * A_WIDTH
+  arrow_w = $(".logo").outerWidth() * A_WIDTH
   # arrow_l = logo_w * A_LEFT - arrow_w / 2
   arrow_b = logo_h * A_BOTTOM
   $head.css
@@ -97,7 +96,7 @@ adjustArrow = () ->
     "width":"#{arrow_w}px"
     "margin-left":"#{arrow_w/2}px"
   $("#arrow_track").css
-    "height":"#{CONTENT_H}px"
+    "height":"#{CONTENT_H+140}px"
     "width":"#{arrow_w}px"
     "margin-left":"-#{(arrow_w+2)/2}px"
 
@@ -113,7 +112,7 @@ onResize = ->
   CONTENT_H = $(document).height() - $("#hero").outerHeight(true)
   adjustLogo()
   fixCurriculum()
-  headers('fix_width')
+  # headers('fix_width')
   setupElements()
   adjustLogo() # Re-setup now that elements have been setup
 
@@ -124,6 +123,8 @@ onScroll = ->
 
   if show_scroll == 10
     $("#scroll_up").fadeOut('slow')
+    $(".nav_item").animate
+      opacity:100
 
   if not instructions_shown
     if $(window).scrollTop() < $("#instruction_header").offset().top + 5
@@ -133,82 +134,85 @@ onScroll = ->
 
   arrowHeight()
   fixCurriculum()
-  headers()
+  # headers()
 
   show_scroll += 1
 
-headers = (fix_width=false)->
-  section_headers = $(".section_header")
-  scroll_top = $(window).scrollTop()
-  h = section_headers.outerHeight()
-
-  # Fade out the 'Apply now' button if we're close to the apply section
-  d_apply = Math.min(Math.abs(scroll_top - $("#apply").offset().top), 1500)
-  opacity = Math.max(1/750 * d_apply - 1, 0)
-  $("#call_to_action").css
-    opacity:opacity
-
-  if fix_width is true or fix_width is 'fix_width'
-    section_headers.width $("#page").width() - 100
-
-  # Determine which are currently fixed and how high the stack is.
-  nav_h = 0
-  nav_bot_h = 0
-  for header in section_headers
-    if $(header).hasClass('fixed_top') then nav_h += h
-    else if $(header).hasClass('fixed_bot') then nav_bot_h += h
-
-  win_h = $(window).height()
-  for header in section_headers
-    $section = $("##{$(header).data("section")}")
-    section_top = $section.offset().top
-    $header = $(header)
-    num_sections = $(".section_header").length - 1
-
-    if $header.hasClass('fixed_top')
-      if scroll_top + nav_h > section_top
-        null
-      else
-        $header.css 'position', 'absolute'
-        $header.removeClass 'fixed_bot'
-        $header.removeClass 'fixed_top'
-        $header.css('top', section_top - h)
-    else if $header.hasClass('fixed_bot')
-      if scroll_top + win_h - nav_bot_h + h < section_top
-        null
-      else
-        $header.css 'position', 'absolute'
-        $header.removeClass 'fixed_bot'
-        $header.removeClass 'fixed_top'
-        $header.css('top', section_top - h)
-    else
-      # The header is positioned absolutely, determine which fixed mode it should be in given the position on the page
-      if scroll_top + nav_h > section_top - h
-        $header.css 'position', 'fixed'
-        $header.css('bottom', 'auto')
-        $header.css('top', h * $(header).data("order"))
-        $header.removeClass 'fixed_bot'
-        $header.addClass 'fixed_top'
-      else if $header.offset().top + h + nav_bot_h > scroll_top + win_h
-        $header.css 'position', 'fixed'
-        $header.css('top', 'auto')
-        $header.css('bottom', h * (num_sections - $(header).data("order")))
-        $header.addClass 'fixed_bot'
-        $header.removeClass 'fixed_top'
-      else
-        $header.css('top', section_top - h)
+# headers = (fix_width=false)->
+#   section_headers = $(".section_header")
+#   scroll_top = $(window).scrollTop()
+#   h = section_headers.outerHeight()
+# 
+#   # Fade out the 'Apply now' button if we're close to the apply section
+#   d_apply = Math.min(Math.abs(scroll_top - $("#apply").offset().top), 1500)
+#   opacity = Math.max(1/750 * d_apply - 1, 0)
+#   $("#call_to_action").css
+#     opacity:opacity
+# 
+#   if fix_width is true or fix_width is 'fix_width'
+#     section_headers.width $("#page").width() - 100
+# 
+#   # Determine which are currently fixed and how high the stack is.
+#   nav_h = 0
+#   nav_bot_h = 0
+#   for header in section_headers
+#     if $(header).hasClass('fixed_top') then nav_h += h
+#     else if $(header).hasClass('fixed_bot') then nav_bot_h += h
+# 
+#   win_h = $(window).height()
+#   for header in section_headers
+#     $section = $("##{$(header).data("section")}")
+#     section_top = $section.offset().top
+#     $header = $(header)
+#     num_sections = $(".section_header").length - 1
+# 
+#     if $header.hasClass('fixed_top')
+#       if scroll_top + nav_h > section_top
+#         null
+#       else
+#         $header.css 'position', 'absolute'
+#         $header.removeClass 'fixed_bot'
+#         $header.removeClass 'fixed_top'
+#         $header.css('top', section_top - h)
+#     else if $header.hasClass('fixed_bot')
+#       if scroll_top + win_h - nav_bot_h + h < section_top
+#         null
+#       else
+#         $header.css 'position', 'absolute'
+#         $header.removeClass 'fixed_bot'
+#         $header.removeClass 'fixed_top'
+#         $header.css('top', section_top - h)
+#     else
+#       # The header is positioned absolutely, determine which fixed mode it should be in given the position on the page
+#       if scroll_top + nav_h > section_top - h
+#         $header.css 'position', 'fixed'
+#         $header.css('bottom', 'auto')
+#         $header.css('top', h * $(header).data("order"))
+#         $header.removeClass 'fixed_bot'
+#         $header.addClass 'fixed_top'
+#       else if $header.offset().top + h + nav_bot_h > scroll_top + win_h
+#         $header.css 'position', 'fixed'
+#         $header.css('top', 'auto')
+#         $header.css('bottom', h * (num_sections - $(header).data("order")))
+#         $header.addClass 'fixed_bot'
+#         $header.removeClass 'fixed_top'
+#       else
+#         $header.css('top', section_top - h)
 
 # Adjusts the height of the arrow on page resize or scroll
 arrowHeight = ->
   if show_scroll < 10 then return
 
-  if $(window).width() < SIZE_CUTOFF
-    if $("#arrow_body").height() < 20 then return
-    else
-      $("#arrow_body").animate
-        height:"#20px"
-      ,70
-      return
+  # if $(window).width() < SIZE_CUTOFF
+  #   if $("#arrow_body").height() < 20 then return
+  #   else
+  #     $("#arrow_body").animate
+  #       height:"#20px"
+  #     ,70
+  #     return
+  $("#arrow_body").animate
+    height:"#20px"
+  ,70
 
   wh = $(window).height()
   dh = $(document).height()
@@ -241,12 +245,12 @@ fixCurriculum = ->
   # Position of the start of the sliding bar
   X_START = 40 + 128 - 10
   # End position of the sliding bar
-  X_END = $("#page").width() - 30
+  X_END = $("#page").width()
 
   # How many pixels of scroll does it take to fully expand the bar
   EXP_LEN = 400
 
-  bar_w = X_END - X_START - 15
+  bar_w = X_END - X_START
   $(".bar").width(bar_w)
 
   if $(window).width() >= SIZE_CUTOFF
@@ -449,17 +453,17 @@ setupElements = ->
   h = $("#instruction_header").outerHeight() + 10
   $("#instructions_container").height h
 
-  # cta_t = $("#logo").outerHeight(true)
+  # cta_t = $(".logo").outerHeight(true)
   # $("#call_to_action").css
   #   bottom:"#{cta_t - $("#call_to_action").outerHeight()}px"
 
-  $("#page, #scroll_up").css
+  $("#page, #scroll_up, #arrow_track").css
     visibility:"visible"
 
   $(window).scrollTop($(document).height())
 
-  if $(window).width() < SIZE_CUTOFF
-    $("#scroll_up").hide()
+  # if $(window).width() < SIZE_CUTOFF
+  #   $("#scroll_up").hide()
 
 retrieveForm = ->
   if window.localStorage?
@@ -503,7 +507,21 @@ doNavColoring = ->
     $("#nav_#{sec_id}").find(".nav_bg").css
       opacity:percent_showing
 
+# Videos inserted asynchronously after the page loads
+placeVideos = ->
+  w = $("#video_one").width()
+  h = w * 0.5625
+  $("#video_one").append """
+    <iframe src="http://fast.wistia.com/embed/iframe/518902fe54?videoWidth=640&amp;videoHeight=360&amp;controlsVisibleOnLoad=true&amp;plugin%5BpostRoll%5D%5Bversion%5D=v1&amp;plugin%5BpostRoll%5D%5Btext%5D=Learn%20more%20at%26nbsp%3Bhttp%3A%2F%2Fviximo.com&amp;plugin%5BpostRoll%5D%5Blink%5D=http%3A%2F%2Fviximo.com%2Fwant-join-team-awesome&amp;plugin%5BpostRoll%5D%5Bstyle%5D%5BbackgroundColor%5D=%23616161&amp;plugin%5BpostRoll%5D%5Bstyle%5D%5Bcolor%5D=%23ffffff&amp;plugin%5BpostRoll%5D%5Bstyle%5D%5BfontSize%5D=36px&amp;plugin%5BpostRoll%5D%5Bstyle%5D%5BfontFamily%5D=Gill%20Sans%2C%20Helvetica%2C%20Arial%2C%20sans-serif" allowtransparency="true" frameborder="0" class="wistia_embed" name="wistia_embed" width="#{w}px" height="#{h}px"></iframe>
+  """
+
+  $("#video_two").append """
+    <iframe src="http://player.vimeo.com/video/39066066" width="#{w}px" height="#{h}px" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+  """
+
 events = ->
+  placeVideos()
+
   # Bind resizing and scrolling
   $(window).resize onResize
   $(window).scroll onScroll
@@ -570,7 +588,7 @@ events = ->
   # NAVIGATION
   $("#floating_nav > ul > li").click ->
     $("html, body").animate
-      scrollTop : $("##{$(@).data("section_id")}").offset().top
+      scrollTop : $("##{$(@).data("section_id")}").offset().top - 70 # 70 for the header
   $("#floating_nav > ul > li").hover ->
     $(@).find(".nav_bg").css
       opacity : 1
@@ -579,6 +597,7 @@ events = ->
       opacity : nav_opacity[$(@).attr("id")]
 
   $(window).scroll doNavColoring
+
 
 jQuery ->
 

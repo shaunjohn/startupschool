@@ -25,28 +25,33 @@ ol ol {
 #scroll_up {
   visibility:hidden; // Start invisible while page is loading
   position:fixed;
-  top:20px;
-  right:40px;
+  top:90px;
+  left:67.3%;
   text-align:center;
 
   .opacity(20);
 
+  .scroll_prompt {
+    float:left;
+    margin:20px 0 0 10px;
+  }
+
   .scroll_arrow {
-    margin:20px auto 0 auto;
-    width:80px;
+    float:left;
+    width:30px;
     .scroll_arrow_head {
       width:0px;
       height:0px;
       border-top:0;
-      border-right:40px solid transparent;
-      border-left:40px solid transparent;
-      border-bottom:40px solid @tertiary;
+      border-right:15px solid transparent;
+      border-left:15px solid transparent;
+      border-bottom:15px solid @tertiary;
     }
     .scroll_arrow_body {
       position:relative;
-      height:100px;
-      width:40px;
-      margin-left:20px;
+      height:30px;
+      width:15px;
+      margin-left:7.5px;
       background:@tertiary;
     }
   }
@@ -261,7 +266,6 @@ form {
 #details {
   .curriculum_section {
     margin:40px 0;
-    padding-left:40px;
     .clearfix;
     .icon {
       float:left;
@@ -314,12 +318,13 @@ form {
 
 
 // ==== Hero ======================================================== //
-#logo {
+.logo {
   position:relative;
   z-index:2;
   margin:@gutter 4% 4% 4%;
   width:80%;
 }
+#logo_arrowhead { display:none; }
 
 #hero {
   .hero_content {
@@ -365,6 +370,7 @@ form {
 }
 
 #arrow_track {
+  visibility:hidden; // Shown by javascript after page load
   position:absolute;
   z-index:1;
   top:0;
@@ -387,19 +393,23 @@ form {
   top:0;
   width:25%;
   ul{
+    margin:0;
   }
   li {
     display:block;
     position:relative;
     margin:0;
-    border-bottom:1px solid @black;
+    border-left:1px solid rgba(0,0,0,0.2);
+    border-top:1px solid rgba(0,0,0,0.2);
+    border-bottom:1px solid rgba(255,255,255,0.5);
     padding:0;
     text-align:right;
+    .transition(300ms);
 
     .nav_text {
       position:relative;
       z-index:2;
-      padding:4px 50px 5px 40px;
+      padding:4px 10% 5px 5%;
       font-size:14px;
       text-transform:uppercase;
     }
@@ -408,12 +418,12 @@ form {
       z-index:1;
       width:100%;
       height:100%;
-      background:@primary;
+      background:rgba(255,255,255,0.5);
       .transition(300ms);
       .opacity(0);
     }
 
-    background:rgb(220,220,220);
+    background:rgba(0,0,0,0.1);
 
     &:before {content:""}
 
@@ -422,6 +432,16 @@ form {
         .opacity(100);
       }
       cursor: pointer;
+    }
+  }
+  .nav_item {
+    .opacity(0);
+  }
+  .nav_apply {
+    .nav_text {
+      font-size:18px;
+      color:@primary;
+      font-family:@mediumFontFamily;
     }
   }
 }

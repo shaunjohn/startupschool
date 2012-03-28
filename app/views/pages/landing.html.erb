@@ -28,35 +28,35 @@ We switch the number of columns on a row when each breakpoint is hit.
 <%# <button id="call_to_action" class="btn btn-warning">Apply Now</button> %>
 <nav id="floating_nav">
   <ul>
-    <li id="nav_contact" data-section_id="contact" >
+    <li id="nav_contact" class="nav_item" data-section_id="contact" >
       <div class="nav_bg"></div>
       <div class="nav_text">Contact</div>
     </li>
-    <li id="nav_apply" data-section_id="apply" >
+    <li id="nav_apply" class="nav_apply" data-section_id="apply" >
       <div class="nav_bg"></div>
       <div class="nav_text">APPLY NOW</div>
     </li>
-    <li id="nav_trust" data-section_id="trust" >
-      <div class="nav_bg"></div>
-      <div class="nav_text">Press</div>
-    </li>
-    <li id="nav_who" data-section_id="who" >
-      <div class="nav_bg"></div>
-      <div class="nav_text">Who's Involved</div>
-    </li>
-    <li id="nav_details" data-section_id="details" >
+    <%# <li id="nav_trust" class="nav_item" data-section_id="trust" >
+    <%#   <div class="nav_bg"></div>
+    <%#   <div class="nav_text">Press</div>
+    <%# </li>
+    <%# <li id="nav_who" class="nav_item" data-section_id="who" >
+    <%#   <div class="nav_bg"></div>
+    <%#   <div class="nav_text">Who's Involved</div>
+    <%# </li> %>
+    <li id="nav_details" class="nav_item" data-section_id="details" >
       <div class="nav_bg"></div>
       <div class="nav_text">About the Program</div>
     </li>
-    <li id="nav_why" data-section_id="why" >
+    <li id="nav_why" class="nav_item" data-section_id="why" >
       <div class="nav_bg"></div>
       <div class="nav_text">Why Startup School</div>
     </li>
-    <li id="nav_when_where" data-section_id="when_where" >
+    <li id="nav_when_where" class="nav_item" data-section_id="when_where" >
       <div class="nav_bg"></div>
       <div class="nav_text">When &amp; Where</div>
     </li>
-    <li id="nav_nutshell" data-section_id="nutshell" >
+    <li id="nav_nutshell" class="nav_item" data-section_id="nutshell" >
       <div class="nav_bg"></div>
       <div class="nav_text">In a Nutshell</div>
     </li>
@@ -64,11 +64,12 @@ We switch the number of columns on a row when each breakpoint is hit.
 </nav>
 
 <div id="scroll_up">
-  Scroll up<br/>
-  for more info
   <div class="scroll_arrow">
     <div class="scroll_arrow_head"></div>
     <div class="scroll_arrow_body"></div>
+  </div>
+  <div class="scroll_prompt">
+    Scroll <span class="bold">UP</span>
   </div>
 </div>
 
@@ -87,9 +88,9 @@ We switch the number of columns on a row when each breakpoint is hit.
 
   <%= render "apply" %>
 
-  <%= render "trust" %>
+  <%# render "trust" %>
 
-  <%= render "who" %>
+  <%# render "who" %>
 
   <%= render "details" %>
 
