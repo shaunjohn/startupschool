@@ -531,6 +531,12 @@ placeVideos = ->
     <iframe src="http://player.vimeo.com/video/39066066" width="#{w}px" height="#{h}px" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
   """
 
+slideTo = (section) ->
+  $section = $("##{section}")
+  header_height = $section.prev("h1").outerHeight()
+  $("html, body").animate
+    scrollTop : $section.offset().top - header_height - $("#top_nav").outerHeight() # include floating header
+
 events = ->
   placeVideos()
 
@@ -597,10 +603,7 @@ events = ->
 
   # NAVIGATION
   $("#floating_nav > ul > li").click ->
-    $section =  $("##{$(@).data("section_id")}")
-    header_height = $section.prev("h1").outerHeight()
-    $("html, body").animate
-      scrollTop : $section.offset().top - header_height
+    slideTo $(@).data("section_id")
   $("#floating_nav > ul > li").hover ->
     $(@).find(".nav_bg").css
       opacity : 1
@@ -611,10 +614,10 @@ events = ->
   $(window).scroll doNavColoring
 
   $("#nav_selector").change (e) ->
-    $section = $("##{$(@).val()}")
-    header_height = $section.prev("h1").outerHeight()
-    $("html, body").animate
-      scrollTop : $section.offset().top - header_height - $("#top_nav").outerHeight() # include floating header
+    slideTo $(@).val()
+
+  $("#apply_now_top_nav").click (e) ->
+    slideTo "apply"
 
 jQuery ->
 

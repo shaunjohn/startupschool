@@ -3998,7 +3998,7 @@ body {
   font-family: "Flama-Book", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 16px;
   line-height: 1.4;
-  text-shadow: -1px -1px rgba(0, 0, 0, 0.1);
+  text-shadow: 0px 1px rgba(255, 255, 255, 0.6);
   color: #58585a;
   background: #eeeeee url(../../img/bg.jpg) repeat;
 }
@@ -4055,7 +4055,7 @@ h1 {
   font-family: "Flama-Medium", "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-transform: uppercase;
   letter-spacing: 2px;
-  text-shadow: 0 1px 0 #ffffff, 0 -1px 0 rgba(0, 0, 0, 0.2);
+  text-shadow: 0 2px 0 white;
   line-height: 2;
 }
 @font-face {
@@ -4515,6 +4515,7 @@ form .counter {
   font-size: 18px;
   color: #3ba4db;
   font-family: "Flama-Medium", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-shadow: 0 0 0;
 }
 #top_nav #apply_now_top_nav a:hover {
   color: #ffffff;
@@ -4523,8 +4524,10 @@ form .counter {
 }
 #top_nav #nav_selector_container {
   float: right;
+  text-align: right;
 }
 #top_nav #nav_selector {
+  width: 90%;
   margin: 0;
 }
 #page {
@@ -4541,7 +4544,7 @@ form .counter {
     width: 100%;
   }
   #page {
-    padding-top: 50px;
+    padding-top: 38px;
     width: 100%;
   }
   #logo_arrowhead {

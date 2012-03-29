@@ -1,5 +1,5 @@
 (function() {
-  var A_BOTTOM, A_WIDTH, CONTENT_H, SIZE_CUTOFF, adjustArrow, arrowHeight, clearFormErrorState, doNavColoring, events, fixCurriculum, formSubmission, gettingStarted, instruction_show_time, instructions_shown, limitChar, limitWord, nav_opacity, onResize, onScroll, placeVideos, retrieveForm, saveForm, setFormErrorState, setupElements, show_scroll, updateCache, validateForm;
+  var A_BOTTOM, A_WIDTH, CONTENT_H, SIZE_CUTOFF, adjustArrow, arrowHeight, clearFormErrorState, doNavColoring, events, fixCurriculum, formSubmission, gettingStarted, instruction_show_time, instructions_shown, limitChar, limitWord, nav_opacity, onResize, onScroll, placeVideos, retrieveForm, saveForm, setFormErrorState, setupElements, show_scroll, slideTo, updateCache, validateForm;
 
   SIZE_CUTOFF = 640;
 
@@ -447,6 +447,15 @@
     return $("#video_two").append("<iframe src=\"http://player.vimeo.com/video/39066066\" width=\"" + w + "px\" height=\"" + h + "px\" frameborder=\"0\" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>");
   };
 
+  slideTo = function(section) {
+    var $section, header_height;
+    $section = $("#" + section);
+    header_height = $section.prev("h1").outerHeight();
+    return $("html, body").animate({
+      scrollTop: $section.offset().top - header_height - $("#top_nav").outerHeight()
+    });
+  };
+
   events = function() {
     placeVideos();
     $(window).resize(onResize);
@@ -509,12 +518,7 @@
       }
     });
     $("#floating_nav > ul > li").click(function() {
-      var $section, header_height;
-      $section = $("#" + ($(this).data("section_id")));
-      header_height = $section.prev("h1").outerHeight();
-      return $("html, body").animate({
-        scrollTop: $section.offset().top - header_height
-      });
+      return slideTo($(this).data("section_id"));
     });
     $("#floating_nav > ul > li").hover(function() {
       return $(this).find(".nav_bg").css({
@@ -526,13 +530,11 @@
       });
     });
     $(window).scroll(doNavColoring);
-    return $("#nav_selector").change(function(e) {
-      var $section, header_height;
-      $section = $("#" + ($(this).val()));
-      header_height = $section.prev("h1").outerHeight();
-      return $("html, body").animate({
-        scrollTop: $section.offset().top - header_height - $("#top_nav").outerHeight()
-      });
+    $("#nav_selector").change(function(e) {
+      return slideTo($(this).val());
+    });
+    return $("#apply_now_top_nav").click(function(e) {
+      return slideTo("apply");
     });
   };
 
