@@ -4496,6 +4496,37 @@ form .counter {
   color: #3ba4db;
   font-family: "Flama-Medium", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
+#top_nav {
+  display: none;
+  position: fixed;
+  z-index: 10;
+  width: 92%;
+  padding: 5px 4%;
+  background: #58585a;
+  color: #ffffff;
+  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+}
+#top_nav #apply_now_top_nav {
+  float: left;
+}
+#top_nav #apply_now_top_nav a {
+  font-size: 18px;
+  color: #3ba4db;
+  font-family: "Flama-Medium", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+#top_nav #apply_now_top_nav a:hover {
+  color: #ffffff;
+  text-decoration: none;
+  cursor: pointer;
+}
+#top_nav #nav_selector_container {
+  float: right;
+}
+#top_nav #nav_selector {
+  margin: 0;
+}
 #page {
   position: relative;
   width: 66.666%;
@@ -4510,6 +4541,7 @@ form .counter {
     width: 100%;
   }
   #page {
+    padding-top: 50px;
     width: 100%;
   }
   #logo_arrowhead {
@@ -4529,6 +4561,9 @@ form .counter {
   }
   #scroll_up {
     display: none !important;
+  }
+  #top_nav {
+    display: block !important;
   }
   #hero .hero_content {
     margin: 0 4% 40px 4%;

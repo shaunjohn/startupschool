@@ -492,6 +492,7 @@ saveForm = ->
   else return false
 
 doNavColoring = ->
+  select_section_id = ""
   page_top = $(window).scrollTop()
   page_bot = page_top + $(window).height()
   page_h = page_bot - page_top
@@ -512,8 +513,14 @@ doNavColoring = ->
 
     nav_opacity["nav_#{sec_id}"] = percent_showing
 
+    if percent_showing > 0 and select_section_id == ""
+      select_section_id = sec_id
+
     $("#nav_#{sec_id}").find(".nav_bg").css
       opacity:percent_showing
+
+  console.log select_section_id
+  $("#nav_selector").val(select_section_id)
 
 # Videos inserted asynchronously after the page loads
 placeVideos = ->
@@ -595,8 +602,10 @@ events = ->
 
   # NAVIGATION
   $("#floating_nav > ul > li").click ->
+    $section =  $("##{$(@).data("section_id")}")
+    header_height = $section.prev("h1").outerHeight()
     $("html, body").animate
-      scrollTop : $("##{$(@).data("section_id")}").offset().top - 70 # 70 for the header
+      scrollTop : $section.offset().top - header_height
   $("#floating_nav > ul > li").hover ->
     $(@).find(".nav_bg").css
       opacity : 1
@@ -606,6 +615,11 @@ events = ->
 
   $(window).scroll doNavColoring
 
+  $("#nav_selector").change (e) ->
+    $section = $("##{$(@).val()}")
+    header_height = $section.prev("h1").outerHeight()
+    $("html, body").animate
+      scrollTop : $section.offset().top - header_height - $("#top_nav").outerHeight() # include floating header
 
 jQuery ->
 

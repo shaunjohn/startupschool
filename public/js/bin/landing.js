@@ -410,12 +410,12 @@
   };
 
   doNavColoring = function() {
-    var page_bot, page_h, page_top, percent_from_bot, percent_from_top, percent_showing, sec_bot, sec_h, sec_id, sec_top, section, _i, _len, _ref, _results;
+    var page_bot, page_h, page_top, percent_from_bot, percent_from_top, percent_showing, sec_bot, sec_h, sec_id, sec_top, section, select_section_id, _i, _len, _ref;
+    select_section_id = "";
     page_top = $(window).scrollTop();
     page_bot = page_top + $(window).height();
     page_h = page_bot - page_top;
     _ref = $("section");
-    _results = [];
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
       section = _ref[_i];
       sec_top = $(section).offset().top;
@@ -431,11 +431,15 @@
         percent_showing = Math.max(percent_showing, 0);
       }
       nav_opacity["nav_" + sec_id] = percent_showing;
-      _results.push($("#nav_" + sec_id).find(".nav_bg").css({
+      if (percent_showing > 0 && select_section_id === "") {
+        select_section_id = sec_id;
+      }
+      $("#nav_" + sec_id).find(".nav_bg").css({
         opacity: percent_showing
-      }));
+      });
     }
-    return _results;
+    console.log(select_section_id);
+    return $("#nav_selector").val(select_section_id);
   };
 
   placeVideos = function() {
@@ -510,8 +514,11 @@
       }
     });
     $("#floating_nav > ul > li").click(function() {
+      var $section, header_height;
+      $section = $("#" + ($(this).data("section_id")));
+      header_height = $section.prev("h1").outerHeight();
       return $("html, body").animate({
-        scrollTop: $("#" + ($(this).data("section_id"))).offset().top - 70
+        scrollTop: $section.offset().top - header_height
       });
     });
     $("#floating_nav > ul > li").hover(function() {
@@ -523,7 +530,15 @@
         opacity: nav_opacity[$(this).attr("id")]
       });
     });
-    return $(window).scroll(doNavColoring);
+    $(window).scroll(doNavColoring);
+    return $("#nav_selector").change(function(e) {
+      var $section, header_height;
+      $section = $("#" + ($(this).val()));
+      header_height = $section.prev("h1").outerHeight();
+      return $("html, body").animate({
+        scrollTop: $section.offset().top - header_height - $("#top_nav").outerHeight()
+      });
+    });
   };
 
   jQuery(function() {
