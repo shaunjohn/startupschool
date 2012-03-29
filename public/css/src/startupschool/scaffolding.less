@@ -35,7 +35,9 @@ body {
 
     &.first {
       margin:@gutter auto 0 auto; // Rows are centered with margins above and below.
-
+    }
+    &.compact {
+      margin:0 auto 0 auto;
     }
 
     .column, .two_column, .half_column {
@@ -45,6 +47,10 @@ body {
         position:relative;
         width:auto;
         margin:@gutter @gutter @gutter 0;
+
+        &.compact {
+          margin:0 @gutter 0 0;
+        }
 
         &.video {
           margin:4% 4% 4% 0;

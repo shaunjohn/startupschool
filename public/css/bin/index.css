@@ -4027,6 +4027,9 @@ body {
 .container .row.first {
   margin: 20px auto 0 auto;
 }
+.container .row.compact {
+  margin: 0 auto 0 auto;
+}
 .container .row .column,
 .container .row .two_column,
 .container .row .half_column {
@@ -4040,6 +4043,11 @@ body {
   width: auto;
   margin: 20px 20px 20px 0;
 }
+.container .row .column .column_content.compact,
+.container .row .two_column .column_content.compact,
+.container .row .half_column .column_content.compact {
+  margin: 0 20px 0 0;
+}
 .container .row .column .column_content.video,
 .container .row .two_column .column_content.video,
 .container .row .half_column .column_content.video {
@@ -4049,6 +4057,7 @@ body {
   max-height: 270px;
 }
 h1 {
+  padding: .5em 0;
   padding-left: 4%;
   padding-right: 4%;
   border-top: 10px solid rgba(0, 0, 0, 0.3);
@@ -4056,7 +4065,19 @@ h1 {
   text-transform: uppercase;
   letter-spacing: 2px;
   text-shadow: 0 2px 0 white;
-  line-height: 2;
+  line-height: 1.4;
+}
+h2 {
+  line-height: 1.4;
+}
+h3 {
+  margin: 0 0 1em 0;
+  color: #818285;
+  font-size: 1.2em;
+  font-family: "Flama-Medium", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  line-height: 1.4;
 }
 @font-face {
   font-family: 'Flama-Bold';
@@ -4367,6 +4388,20 @@ form .counter {
 }
 #details .curric_bar:after {
   clear: both;
+}
+.deadline {
+  font-size: 1.5em;
+}
+#nutshell ul {
+  margin: 0;
+  list-style: none;
+}
+#nutshell li {
+  font-size: 1.4em;
+  margin: 1em 0;
+}
+#nutshell li:first-child {
+  margin: 0;
 }
 .logo {
   position: relative;
