@@ -17,6 +17,12 @@ A_WIDTH = 0.048
 CONTENT_H = 0
 nav_opacity = {} # Keeps track of nav opacity for hover
 
+
+updateCache = ->
+  window.cache =
+    row_width: $(".row").width()
+    icon_width: $(".icon").width()
+
 # Adjusts the Cirriculum bars. Fired on scroll
 
 # Sets the logo size and position and blank padding space above the logo
@@ -110,6 +116,7 @@ adjustArrow = () ->
 
 onResize = ->
   CONTENT_H = $(document).height() - $("#hero").outerHeight(true)
+  updateCache()
   adjustLogo()
   fixCurriculum()
   # headers('fix_width')
@@ -243,14 +250,15 @@ arrowHeight = ->
 
 fixCurriculum = ->
   # Position of the start of the sliding bar
-  X_START = 40 + 128 - 10
+  # X_START = 40 + 128 - 10
   # End position of the sliding bar
-  X_END = $("#page").width()
+  # X_END = $("#page").width()
 
   # How many pixels of scroll does it take to fully expand the bar
   EXP_LEN = 400
 
-  bar_w = X_END - X_START
+  # bar_w = X_END - X_START
+  bar_w = cache.row_width - cache.icon_width
   $(".bar").width(bar_w)
 
   if $(window).width() >= SIZE_CUTOFF
@@ -323,7 +331,7 @@ window.showApplication = ->
     onScroll()
   $("#getting_started").slideUp()
   $("#instructions_container").fadeIn()
-  $("#instructions").css('top', '-180px')
+  $("#instructions").css('top',"-#{$('#instruction_content').outerHeight()}px")
   $("#instructions").removeClass('opened')
   $("#email").val($("#getting_started_email").val())
 
@@ -332,7 +340,7 @@ window.hideApplication = ->
   $("#getting_started").slideDown 500, ->
     onScroll()
   $("#instructions_container").fadeOut()
-  $("#instructions").css('top', '-180px')
+  $("#instructions").css('top',"-#{$('#instruction_content').outerHeight()}px")
   $("#instructions").removeClass('opened')
   $("#getting_started_email").val($("#email").val())
   onScroll()

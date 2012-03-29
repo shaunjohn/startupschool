@@ -1,5 +1,5 @@
 (function() {
-  var A_BOTTOM, A_WIDTH, CONTENT_H, SIZE_CUTOFF, adjustArrow, arrowHeight, clearFormErrorState, doNavColoring, events, fixCurriculum, formSubmission, gettingStarted, instruction_show_time, instructions_shown, limitChar, limitWord, nav_opacity, onResize, onScroll, placeVideos, retrieveForm, saveForm, setFormErrorState, setupElements, show_scroll, validateForm;
+  var A_BOTTOM, A_WIDTH, CONTENT_H, SIZE_CUTOFF, adjustArrow, arrowHeight, clearFormErrorState, doNavColoring, events, fixCurriculum, formSubmission, gettingStarted, instruction_show_time, instructions_shown, limitChar, limitWord, nav_opacity, onResize, onScroll, placeVideos, retrieveForm, saveForm, setFormErrorState, setupElements, show_scroll, updateCache, validateForm;
 
   SIZE_CUTOFF = 640;
 
@@ -10,6 +10,13 @@
   CONTENT_H = 0;
 
   nav_opacity = {};
+
+  updateCache = function() {
+    return window.cache = {
+      row_width: $(".row").width(),
+      icon_width: $(".icon").width()
+    };
+  };
 
   window.adjustLogo = function() {
     var $logo, m;
@@ -51,6 +58,7 @@
 
   onResize = function() {
     CONTENT_H = $(document).height() - $("#hero").outerHeight(true);
+    updateCache();
     adjustLogo();
     fixCurriculum();
     setupElements();
@@ -107,11 +115,9 @@
   };
 
   fixCurriculum = function() {
-    var EXP_LEN, X_END, X_START, bar_w, el, factor, scroll_top, _i, _len, _ref, _results;
-    X_START = 40 + 128 - 10;
-    X_END = $("#page").width();
+    var EXP_LEN, bar_w, el, factor, scroll_top, _i, _len, _ref, _results;
     EXP_LEN = 400;
-    bar_w = X_END - X_START;
+    bar_w = cache.row_width - cache.icon_width;
     $(".bar").width(bar_w);
     if ($(window).width() >= SIZE_CUTOFF) {
       scroll_top = $(window).scrollTop();
@@ -223,7 +229,7 @@
     });
     $("#getting_started").slideUp();
     $("#instructions_container").fadeIn();
-    $("#instructions").css('top', '-180px');
+    $("#instructions").css('top', "-" + ($('#instruction_content').outerHeight()) + "px");
     $("#instructions").removeClass('opened');
     return $("#email").val($("#getting_started_email").val());
   };
@@ -234,7 +240,7 @@
       return onScroll();
     });
     $("#instructions_container").fadeOut();
-    $("#instructions").css('top', '-180px');
+    $("#instructions").css('top', "-" + ($('#instruction_content').outerHeight()) + "px");
     $("#instructions").removeClass('opened');
     $("#getting_started_email").val($("#email").val());
     return onScroll();

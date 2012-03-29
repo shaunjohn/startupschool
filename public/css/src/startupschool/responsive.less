@@ -12,6 +12,30 @@
 
   #floating_nav { display:none !important; }
   #scroll_up { display:none !important; }
+
+  #hero { .hero_content {
+    margin:0 4% 2*@gutter 4%;
+    width:92%;
+  }}
+
+  #details {
+    .icon {
+      position:relative;
+      z-index:2;
+      width:45px;
+      height:45px;
+      background-size:45px 45px;
+    }
+    .bar_cover {
+      position:relative;
+      z-index:1;
+      margin:3px 0 0 -5px;
+      .bar {
+        background:transparent;
+        color:@primary;
+      }
+    }
+  }
 }
 
 @media (min-width:@breakpointMinimal) and (max-width:@breakpointOneColumn) {

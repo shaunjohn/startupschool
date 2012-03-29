@@ -130,14 +130,17 @@ section#contact {
 }
 
 // ==== Apply ======================================================= //
-section#apply {
-  padding:0 0 40px 0;
+#apply {
+  .column_content {
+    margin-top:0;
+    margin-right:0;
+  }
 }
 #instructions_container {
   display:none; // shown by javascript
   position:absolute;
-  margin:0 12% 0 4%;
-  width:84%;
+  // margin:0 12% 0 4%;
+  // width:84%;
   height:100%;
   overflow:hidden;
 }
@@ -200,7 +203,7 @@ section#apply {
 #success {
   display:none;
   margin-top:40px;
-  padding:40px 90px 0px 40px;
+  // padding:40px 90px 0px 40px;
   font-size:24px;
 }
 .green {
@@ -212,6 +215,7 @@ section#apply {
 
 #application {
   display:none;
+  padding:50px 0 0 0;
 }
 
 .form_error_area {
@@ -221,14 +225,12 @@ section#apply {
 }
 
 form {
-  padding:40px 90px 20px 40px;
-
   .control-group {
     max-width:640px;
   }
 
   input[type=text],textarea {
-    width:95%;
+    width:98%;
     min-width:250px;
     max-width:640px;
   }
@@ -237,7 +239,7 @@ form {
   }
   label {
     font-weight:bold;
-    width:95%;
+    width:100%;
     min-width:250px;
     max-width:640px;
   }
@@ -264,48 +266,42 @@ form {
 
 // ==== Details ======================================================= //
 #details {
-  .curriculum_section {
-    margin:40px 0;
-    .clearfix;
-    .icon {
-      float:left;
-      width:128px;
-      height:128px;
-    }
-
-    .bar_cover {
-      margin:43px 0 0 -10px;
-      float:left;
-      overflow:hidden;
-      width:100px;
-      .border-radius(0 20px 20px 0);
-    }
-    .bar {
-
-      padding:4px 0 0 15px;
-      height:41px;
-      font-size:25px;
-
-      color:@white;
-
-      background:@primary;
-      width:692px;
-    }
-    .subtext {
-      .opacity(60);
-    }
-
-    #dev_icon {background: url(../../img/icon_dev.png) no-repeat}
-    #marketing_icon {background: url(../../img/icon_marketing.png) no-repeat}
-    #design_icon {background: url(../../img/icon_design.png) no-repeat}
-    #sales_icon {background: url(../../img/icon_sales.png) no-repeat}
-
+  .clearfix;
+  .icon {
+    float:left;
+    width:128px;
+    height:128px;
   }
+
+  .bar_cover {
+    margin:43px 0 0 -10px;
+    float:left;
+    overflow:hidden;
+    width:100px;
+    .border-radius(0 20px 20px 0);
+  }
+  .bar {
+
+    padding:4px 0 0 15px;
+    height:41px;
+    font-size:25px;
+
+    color:@white;
+
+    background:@primary;
+    width:692px;
+  }
+  .subtext {
+    .opacity(60);
+  }
+
+  #dev_icon {background: url(../../img/icon_dev.png) no-repeat}
+  #marketing_icon {background: url(../../img/icon_marketing.png) no-repeat}
+  #design_icon {background: url(../../img/icon_design.png) no-repeat}
+  #sales_icon {background: url(../../img/icon_sales.png) no-repeat}
+
   .curric_bar {
     .clearfix;
-  }
-  .curriculum_section_details {
-    margin:0 90px 0 135px;
   }
 }
 // ==== Why ========================================================= //

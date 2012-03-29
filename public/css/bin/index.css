@@ -4011,7 +4011,7 @@ body {
 .container .row {
   position: relative;
   width: auto;
-  padding: 0 0 0 40px;
+  padding: 0 4% 0 4%;
   max-width: 1440px;
   margin: 0 auto 20px auto;
   *zoom: 1;
@@ -4049,7 +4049,8 @@ body {
   max-height: 270px;
 }
 h1 {
-  padding-left: 40px;
+  padding-left: 4%;
+  padding-right: 4%;
   border-top: 10px solid rgba(0, 0, 0, 0.3);
   font-family: "Flama-Medium", "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-transform: uppercase;
@@ -4192,14 +4193,13 @@ section#contact .contact_icon.twitter {
 section#contact .contact_icon.hash:hover {
   cursor: pointer;
 }
-section#apply {
-  padding: 0 0 40px 0;
+#apply .column_content {
+  margin-top: 0;
+  margin-right: 0;
 }
 #instructions_container {
   display: none;
   position: absolute;
-  margin: 0 12% 0 4%;
-  width: 84%;
   height: 100%;
   overflow: hidden;
 }
@@ -4262,7 +4262,6 @@ section#apply {
 #success {
   display: none;
   margin-top: 40px;
-  padding: 40px 90px 0px 40px;
   font-size: 24px;
 }
 .green {
@@ -4273,21 +4272,19 @@ section#apply {
 }
 #application {
   display: none;
+  padding: 50px 0 0 0;
 }
 .form_error_area {
   display: none;
   margin-top: 20px;
   color: #9d261d;
 }
-form {
-  padding: 40px 90px 20px 40px;
-}
 form .control-group {
   max-width: 640px;
 }
 form input[type=text],
 form textarea {
-  width: 95%;
+  width: 98%;
   min-width: 250px;
   max-width: 640px;
 }
@@ -4296,7 +4293,7 @@ form textarea {
 }
 form label {
   font-weight: bold;
-  width: 95%;
+  width: 100%;
   min-width: 250px;
   max-width: 640px;
 }
@@ -4311,24 +4308,23 @@ form .counter {
   font-size: 13px;
   color: #818285;
 }
-#details .curriculum_section {
-  margin: 40px 0;
+#details {
   *zoom: 1;
 }
-#details .curriculum_section:before,
-#details .curriculum_section:after {
+#details:before,
+#details:after {
   display: table;
   content: "";
 }
-#details .curriculum_section:after {
+#details:after {
   clear: both;
 }
-#details .curriculum_section .icon {
+#details .icon {
   float: left;
   width: 128px;
   height: 128px;
 }
-#details .curriculum_section .bar_cover {
+#details .bar_cover {
   margin: 43px 0 0 -10px;
   float: left;
   overflow: hidden;
@@ -4337,7 +4333,7 @@ form .counter {
   -moz-border-radius: 0 20px 20px 0;
   border-radius: 0 20px 20px 0;
 }
-#details .curriculum_section .bar {
+#details .bar {
   padding: 4px 0 0 15px;
   height: 41px;
   font-size: 25px;
@@ -4345,20 +4341,20 @@ form .counter {
   background: #3ba4db;
   width: 692px;
 }
-#details .curriculum_section .subtext {
+#details .subtext {
   opacity: 0.6;
   filter: alpha(opacity=60);
 }
-#details .curriculum_section #dev_icon {
+#details #dev_icon {
   background: url(../../img/icon_dev.png) no-repeat;
 }
-#details .curriculum_section #marketing_icon {
+#details #marketing_icon {
   background: url(../../img/icon_marketing.png) no-repeat;
 }
-#details .curriculum_section #design_icon {
+#details #design_icon {
   background: url(../../img/icon_design.png) no-repeat;
 }
-#details .curriculum_section #sales_icon {
+#details #sales_icon {
   background: url(../../img/icon_sales.png) no-repeat;
 }
 #details .curric_bar {
@@ -4371,9 +4367,6 @@ form .counter {
 }
 #details .curric_bar:after {
   clear: both;
-}
-#details .curriculum_section_details {
-  margin: 0 90px 0 135px;
 }
 .logo {
   position: relative;
@@ -4536,6 +4529,26 @@ form .counter {
   }
   #scroll_up {
     display: none !important;
+  }
+  #hero .hero_content {
+    margin: 0 4% 40px 4%;
+    width: 92%;
+  }
+  #details .icon {
+    position: relative;
+    z-index: 2;
+    width: 45px;
+    height: 45px;
+    background-size: 45px 45px;
+  }
+  #details .bar_cover {
+    position: relative;
+    z-index: 1;
+    margin: 3px 0 0 -5px;
+  }
+  #details .bar_cover .bar {
+    background: transparent;
+    color: #3ba4db;
   }
 }
 @media (min-width: 480px) and (max-width: 720.0072000720007px) {
