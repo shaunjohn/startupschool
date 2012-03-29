@@ -3,7 +3,7 @@
 
   SIZE_CUTOFF = 640;
 
-  A_BOTTOM = 0.74;
+  A_BOTTOM = 0.70;
 
   A_WIDTH = 0.048;
 
@@ -198,7 +198,6 @@
   gettingStarted = function() {
     var data;
     data = $("#getting_started").serializeObject();
-    console.log(data);
     $.post("pages/wufoo", data, function(r) {
       var error, id, _i, _len, _ref;
       if (r.Success === 1) {
@@ -208,7 +207,6 @@
         showApplication();
         return $("#awesome").show();
       } else {
-        console.log("ERROR", r);
         if (r.FieldErrors != null) {
           _ref = r.FieldErrors;
           for (_i = 0, _len = _ref.length; _i < _len; _i++) {
@@ -438,7 +436,6 @@
         opacity: percent_showing
       });
     }
-    console.log(select_section_id);
     return $("#nav_selector").val(select_section_id);
   };
 
@@ -457,11 +454,9 @@
     $("input, textarea").blur(saveForm);
     $("input, textarea").focus(clearFormErrorState);
     $("#submit_getting_started").click(function() {
-      console.log("GETTING STARTED CLICK");
       return gettingStarted();
     });
     $("#submit_application").click(function() {
-      console.log("APPLICATION SUBMISSION CLICK");
       return formSubmission();
     });
     $("#whoami").keyup(function(e) {

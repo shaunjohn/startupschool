@@ -4105,7 +4105,7 @@ ol ol {
 }
 #scroll_up .scroll_prompt {
   float: left;
-  margin: 20px 0 0 10px;
+  margin: 20px 0 0 20px;
 }
 #scroll_up .scroll_arrow {
   float: left;
@@ -4371,7 +4371,7 @@ form .counter {
 .logo {
   position: relative;
   z-index: 2;
-  margin: 20px 4% 4% 4%;
+  margin: 20px 4% 40px 4%;
   width: 80%;
 }
 #logo_arrowhead {

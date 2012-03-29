@@ -10,7 +10,7 @@ SIZE_CUTOFF = 640
 # Relative position of the bottom of the arrow relative to the logo's bottom.
 # A_BOTTOM = 0.870252
 # A_BOTTOM = 0.65
-A_BOTTOM = 0.74
+A_BOTTOM = 0.70
 # Relative width of the arrow relative to the logo's width
 A_WIDTH = 0.048
 # A_WIDTH = 0.048
@@ -310,7 +310,6 @@ formSubmission = ->
 # Catch submission, validate, send it to wufoo backend and display results.
 gettingStarted = ->
   data = $("#getting_started").serializeObject()
-  console.log data
   $.post "pages/wufoo", data, (r) ->
     if r.Success is 1
       mpq.track("Submit Getting Started Success", {"mp_note":"A user successfully signed up."})
@@ -318,7 +317,6 @@ gettingStarted = ->
       showApplication()
       $("#awesome").show()
     else
-      console.log "ERROR", r
       if r.FieldErrors?
         for error in r.FieldErrors
           id = $("input[name='app[#{error.ID}]']").attr('id')
@@ -519,7 +517,6 @@ doNavColoring = ->
     $("#nav_#{sec_id}").find(".nav_bg").css
       opacity:percent_showing
 
-  console.log select_section_id
   $("#nav_selector").val(select_section_id)
 
 # Videos inserted asynchronously after the page loads
@@ -545,10 +542,8 @@ events = ->
   $("input, textarea").focus clearFormErrorState
 
   $("#submit_getting_started").click ->
-    console.log "GETTING STARTED CLICK"
     gettingStarted()
   $("#submit_application").click ->
-    console.log "APPLICATION SUBMISSION CLICK"
     formSubmission()
 
   $("#whoami").keyup (e) ->
