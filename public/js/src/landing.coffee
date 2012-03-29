@@ -141,6 +141,7 @@ onScroll = ->
 
   arrowHeight()
   fixCurriculum()
+  doNavColoring()
   # headers()
 
   show_scroll += 1
@@ -543,6 +544,7 @@ events = ->
   # Bind resizing and scrolling
   $(window).resize onResize
   $(window).scroll onScroll
+  $("#page")[0].ontouchmove = onScroll
 
   $("input, textarea").blur saveForm
   $("input, textarea").focus clearFormErrorState
@@ -611,7 +613,6 @@ events = ->
     $(@).find(".nav_bg").css
       opacity : nav_opacity[$(@).attr("id")]
 
-  $(window).scroll doNavColoring
 
   $("#nav_selector").change (e) ->
     slideTo $(@).val()

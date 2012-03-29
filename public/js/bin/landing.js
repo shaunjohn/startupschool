@@ -87,6 +87,7 @@
     }
     arrowHeight();
     fixCurriculum();
+    doNavColoring();
     return show_scroll += 1;
   };
 
@@ -460,6 +461,7 @@
     placeVideos();
     $(window).resize(onResize);
     $(window).scroll(onScroll);
+    $("#page")[0].ontouchmove = onScroll;
     $("input, textarea").blur(saveForm);
     $("input, textarea").focus(clearFormErrorState);
     $("#submit_getting_started").click(function() {
@@ -529,7 +531,6 @@
         opacity: nav_opacity[$(this).attr("id")]
       });
     });
-    $(window).scroll(doNavColoring);
     $("#nav_selector").change(function(e) {
       return slideTo($(this).val());
     });
