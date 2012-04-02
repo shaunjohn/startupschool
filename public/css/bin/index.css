@@ -4243,6 +4243,9 @@ section#contact .contact_icon.hash:hover {
   padding: 10px 35px 15px 35px;
   border-bottom: 1px solid #58585a;
 }
+#instructions #instruction_content a {
+  color: #ffffff;
+}
 #instructions #instruction_header {
   border-top: 1px solid #818285;
   padding: 4px 0 6px 0;
