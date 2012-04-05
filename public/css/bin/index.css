@@ -4115,6 +4115,9 @@ ol ol {
 .bold {
   font-family: "Flama-Medium", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
+.color_emphasis {
+  color: #f89406;
+}
 #scroll_up {
   visibility: hidden;
   position: fixed;
@@ -4125,11 +4128,9 @@ ol ol {
   filter: alpha(opacity=20);
 }
 #scroll_up .scroll_prompt {
-  float: left;
-  margin: 20px 0 0 20px;
+  margin: 6px 0 0 -17px;
 }
 #scroll_up .scroll_arrow {
-  float: left;
   width: 30px;
 }
 #scroll_up .scroll_arrow .scroll_arrow_head {
@@ -4538,12 +4539,23 @@ form .counter {
   filter: alpha(opacity=100);
 }
 #floating_nav .nav_item {
-  opacity: 0;
-  filter: alpha(opacity=0);
+  opacity: 0.33;
+  filter: alpha(opacity=33);
+}
+#floating_nav .nav_item:hover {
+  opacity: 1;
+  filter: alpha(opacity=100);
+}
+#floating_nav .nav_apply {
+  border-top: 1px solid #818285;
+  border-bottom: 1px solid #818285;
+  background: #58585a;
 }
 #floating_nav .nav_apply .nav_text {
-  font-size: 18px;
-  color: #3ba4db;
+  font-size: 20px;
+  color: #eeeeee;
+  letter-spacing: 2px;
+  text-shadow: 0 0 0;
   font-family: "Flama-Medium", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 #top_nav {

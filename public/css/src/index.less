@@ -22,6 +22,10 @@ ol ol {
   font-family: @mediumFontFamily;
 }
 
+.color_emphasis {
+  color:@orange;
+}
+
 #scroll_up {
   visibility:hidden; // Start invisible while page is loading
   position:fixed;
@@ -32,12 +36,10 @@ ol ol {
   .opacity(20);
 
   .scroll_prompt {
-    float:left;
-    margin:20px 0 0 20px;
+    margin:6px 0 0 -17px;
   }
 
   .scroll_arrow {
-    float:left;
     width:30px;
     .scroll_arrow_head {
       width:0px;
@@ -462,14 +464,22 @@ form {
     }
   }
   .nav_item {
-    .opacity(0);
+    .opacity(33);
+    &:hover {
+      .opacity(100);
+    }
   }
   .nav_apply {
     .nav_text {
-      font-size:18px;
-      color:@primary;
+      font-size:20px;
+      color:@grayLighter;
+      letter-spacing:2px;
+      text-shadow:0 0 0;
       font-family:@mediumFontFamily;
     }
+    border-top:1px solid @tertiary;
+    border-bottom:1px solid @tertiary;
+    background:@secondary;
   }
 }
 
