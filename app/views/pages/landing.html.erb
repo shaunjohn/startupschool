@@ -39,11 +39,11 @@ We switch the number of columns on a row when each breakpoint is hit.
     <%# <li id="nav_trust" class="nav_item" data-section_id="trust" >
     <%#   <div class="nav_bg"></div>
     <%#   <div class="nav_text">Press</div>
-    <%# </li>
-    <%# <li id="nav_who" class="nav_item" data-section_id="who" >
-    <%#   <div class="nav_bg"></div>
-    <%#   <div class="nav_text">Who's Involved</div>
     <%# </li> %>
+    <li id="nav_who" class="nav_item" data-section_id="who" >
+      <div class="nav_bg"></div>
+      <div class="nav_text">Who's Involved</div>
+    </li>
     <li id="nav_details" class="nav_item" data-section_id="details" >
       <div class="nav_bg"></div>
       <div class="nav_text">About the Program</div>
@@ -105,7 +105,7 @@ We switch the number of columns on a row when each breakpoint is hit.
 
   <%# render "trust" %>
 
-  <%# render "who" %>
+  <%= render "who" %>
 
   <%= render "details" %>
 

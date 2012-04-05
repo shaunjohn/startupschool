@@ -4332,6 +4332,18 @@ form .counter {
   font-size: 13px;
   color: #818285;
 }
+#who img {
+  width: 100%;
+  -webkit-box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.45);
+  -moz-box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.45);
+  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.45);
+}
+#who .name {
+  width: 100%;
+  font-size: 1.1em;
+  text-align: center;
+  margin-top: 0.4em;
+}
 #details {
   *zoom: 1;
 }
