@@ -161,6 +161,7 @@
             "mp_note": "A user successfully submitted an application. They took " + submit_delta + " seconds to fill it out."
           });
           $(window).scrollTop(0);
+          $("#instructions_container").hide();
           $("#application").fadeOut(function() {
             return onScroll();
           });
