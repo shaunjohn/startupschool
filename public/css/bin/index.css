@@ -4025,6 +4025,9 @@ a.thumbnail:hover {
   min-height: 135px;
   max-height: 270px;
 }
+.last {
+  margin-bottom: 0;
+}
 body,
 html {
   width: 100%;
@@ -4044,10 +4047,13 @@ body {
   border-top: 1px solid rgba(0, 0, 0, 0.1);
   border-bottom: 1px solid rgba(255, 255, 255, 0.7);
   background: rgba(128, 128, 128, 0.1);
-  padding-top: 20px;
+  padding: 20px 0;
 }
 .container :last-child {
   margin-bottom: 0;
+}
+.padding-bottom {
+  padding-bottom: 20px;
 }
 h1,
 h2,
@@ -4082,6 +4088,8 @@ h3 {
 }
 p {
   margin: 0 0 20px 0;
+  max-width: 480px;
+  min-width: 240px;
 }
 @font-face {
   font-family: 'Flama-Bold';
@@ -4289,6 +4297,7 @@ section#contact .contact_icon.hash:hover {
 #instructions #toggle_instructions {
   color: #818285;
   font-size: 14px;
+  text-shadow: 0 0 0;
 }
 #instructions #toggle_instructions:hover {
   text-decoration: none;
@@ -4407,7 +4416,6 @@ form .counter {
   background: url(../../img/icon_sales.png) no-repeat;
 }
 #details .curric_bar {
-  margin-bottom: 20px;
   *zoom: 1;
 }
 #details .curric_bar:before,
@@ -4417,6 +4425,9 @@ form .counter {
 }
 #details .curric_bar:after {
   clear: both;
+}
+#details .curriculum_section_details {
+  margin: -25px 20px 0 135px;
 }
 #why .quote {
   font-size: 1.3em;
@@ -4685,6 +4696,9 @@ form .counter {
     background: transparent;
     color: #3ba4db;
   }
+  #details .curriculum_section_details {
+    margin: 15px 0 0 0;
+  }
 }
 @media (min-width: 480px) and (max-width: 720.0072000720007px) {
   .half_column {
@@ -4693,6 +4707,9 @@ form .counter {
   .column,
   .two_column {
     width: 100%;
+  }
+  #details .curriculum_section_details {
+    margin: 15px 0 0 0;
   }
 }
 @media (min-width: 720.0072000720007px) and (max-width: 1440.0144001440015px) {

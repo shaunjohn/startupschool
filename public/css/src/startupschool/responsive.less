@@ -1,3 +1,4 @@
+// Very small width where we can only fit one text column
 @media (max-width:@breakpointMinimal) {
   .half_column { width: 50%; }
   .column, .two_column { width:100%; }
@@ -40,26 +41,39 @@
         color:@primary;
       }
     }
+    .curriculum_section_details {
+      margin:15px 0 0 0;
+    }
   }
 }
 
+// Small width where we can fit one text column and the sidebar
 @media (min-width:@breakpointMinimal) and (max-width:@breakpointOneColumn) {
   .half_column { width:50%; }
   .column, .two_column { width:100%; }
+
+  #details {
+    .curriculum_section_details {
+      margin:15px 0 0 0;
+    }
+  }
 }
 
+// Medium width where we can fit two columns and the sidebar
 @media (min-width:@breakpointOneColumn) and (max-width:@breakpointTwoColumn) {
   .half_column { width:25%; }
   .column { width:50%; }
   .two_column { width:100%; }
 }
 
+// Large width where we can fit three columns and the sidebar
 @media (min-width:@breakpointTwoColumn) and (max-width:@breakpointThreeColumn) {
   .half_column { width:16.5%; }
   .column { width:33%; }
   .two_column { width:66%; }
 }
 
+// Very large width where we want to force only three columns and center them
 @media (min-width:@breakpointThreeColumn) {
   .half_column { width:0.5 * @maxColumnWidth; }
   .column { width:@maxColumnWidth; }

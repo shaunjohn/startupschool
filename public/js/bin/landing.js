@@ -72,7 +72,7 @@
   instruction_show_time = null;
 
   onScroll = function() {
-    if (show_scroll === 10) {
+    if (show_scroll >= 5 && show_scroll < 20) {
       $("#scroll_up").fadeOut('slow');
       $(".nav_item").animate({
         opacity: 100
@@ -447,7 +447,7 @@
     h = w * 0.5625;
     $("#video_one").append("<iframe src=\"http://fast.wistia.com/embed/iframe/518902fe54?videoWidth=640&amp;videoHeight=360&amp;controlsVisibleOnLoad=true&amp;plugin%5BpostRoll%5D%5Bversion%5D=v1&amp;plugin%5BpostRoll%5D%5Btext%5D=Learn%20more%20at%26nbsp%3Bhttp%3A%2F%2Fviximo.com&amp;plugin%5BpostRoll%5D%5Blink%5D=http%3A%2F%2Fviximo.com%2Fwant-join-team-awesome&amp;plugin%5BpostRoll%5D%5Bstyle%5D%5BbackgroundColor%5D=%23616161&amp;plugin%5BpostRoll%5D%5Bstyle%5D%5Bcolor%5D=%23ffffff&amp;plugin%5BpostRoll%5D%5Bstyle%5D%5BfontSize%5D=36px&amp;plugin%5BpostRoll%5D%5Bstyle%5D%5BfontFamily%5D=Gill%20Sans%2C%20Helvetica%2C%20Arial%2C%20sans-serif\" allowtransparency=\"true\" frameborder=\"0\" class=\"wistia_embed video_frame\" name=\"wistia_embed\" width=\"" + w + "px\" height=\"" + h + "px\"></iframe>");
     $("#video_two").append("<iframe class=\"video_frame\" src=\"http://player.vimeo.com/video/39066066\" width=\"" + w + "px\" height=\"" + h + "px\" frameborder=\"0\" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>");
-    return $("#video_three").append("<iframe class=\"video_frame\" src=\"http://player.vimeo.com/video/39482943\" width=\"" + w + "px\" height=\"" + h + "px\" frameborder=\"0\" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>");
+    return $("#video_three").append("<iframe class=\"video_fram\" width=\"" + w + "\" height=\"" + h + "\" src=\"http://www.youtube.com/embed/9V_7aSj0-jI\" frameborder=\"0\" allowfullscreen></iframe>");
   };
 
   slideTo = function(section) {

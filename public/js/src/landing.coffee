@@ -128,7 +128,9 @@ instructions_shown = false
 instruction_show_time = null
 onScroll = ->
 
-  if show_scroll == 10
+  # Sometimes on heavy load conditions we will miss the 5th scroll. Keep
+  # checking for a bit more afterwards to ensure we get rid of the element
+  if show_scroll >= 5 and show_scroll < 20
     $("#scroll_up").fadeOut('slow')
     $(".nav_item").animate
       opacity:100
@@ -534,7 +536,7 @@ placeVideos = ->
   """
 
   $("#video_three").append """
-    <iframe class="video_frame" src="http://player.vimeo.com/video/39482943" width="#{w}px" height="#{h}px" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+    <iframe class="video_fram" width="#{w}" height="#{h}" src="http://www.youtube.com/embed/9V_7aSj0-jI" frameborder="0" allowfullscreen></iframe>
   """
 
 slideTo = (section) ->
