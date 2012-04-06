@@ -1,5 +1,6 @@
 @import "css/lib/bootstrap.less";
 @import "css/src/startupschool/variables.less";
+@import "css/src/startupschool/grid.less";
 @import "css/src/startupschool/scaffolding.less";
 @import "css/src/startupschool/type.less";
 
@@ -274,6 +275,9 @@ form {
     width:100%;
     .box-shadow(3px 3px 8px rgba(0,0,0,0.45));
   }
+  .column_content {
+    margin-bottom:0;
+  }
   .name {
     width:100%;
     height:50px;
@@ -321,6 +325,7 @@ form {
   #sales_icon {background: url(../../img/icon_sales.png) no-repeat}
 
   .curric_bar {
+    margin-bottom:@gutter;
     .clearfix;
   }
 }
@@ -329,6 +334,16 @@ form {
   .quote {
     font-size:1.3em;
     color:@tertiary;
+  }
+  .quotation_mark {
+    color:@primary;
+    font-family:@mediumFontFamily;
+  }
+  .quoter {
+  }
+
+  .video_frame {
+    .box-shadow(3px 3px 10px rgba(0,0,0,0.4));
   }
 }
 
@@ -349,6 +364,18 @@ form {
   li {
     font-size:1.4em;
     margin:1em 0;
+    color:@tertiary;
+
+    &:before {
+      color:@primary;
+      content:"☆ ";
+    }
+    &:hover {
+      &:before {
+        color:@primary;
+        content:"★ ";
+      }
+    }
 
     &:first-child {
       margin:0;

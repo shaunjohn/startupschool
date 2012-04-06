@@ -24,42 +24,10 @@ body {
   border-top:1px solid rgba(0,0,0,0.1);
   border-bottom:1px solid rgba(255,255,255,0.7);
   background:rgba(128,128,128,0.1);
+  padding-top: @gutter;
 
-  .row {
-    position: relative;
-    width: auto; // Rows take up available space
-    padding:0 4% 0 4%;
-    max-width: @maxRowWidth;
-    margin:0 auto @gutter auto; // Rows are centered with margins above and below.
-    .clearfix();
-
-    &.first {
-      margin:@gutter auto 0 auto; // Rows are centered with margins above and below.
-    }
-    &.compact {
-      margin:0 auto 0 auto;
-    }
-
-    .column, .two_column, .half_column {
-      float:left;
-      position:relative;
-      .column_content {
-        position:relative;
-        width:auto;
-        margin:@gutter @gutter @gutter 0;
-
-        &.compact {
-          margin:0 @gutter 0 0;
-        }
-
-        &.video {
-          margin:4% 4% 4% 0;
-          width:94%;
-          min-height:135px;
-          max-height:270px;
-        }
-      }
-    }
+  :last-child {
+    margin-bottom:0;
   }
 }
 

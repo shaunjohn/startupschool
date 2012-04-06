@@ -1,3 +1,7 @@
+h1, h2, h3, h4, h5, h6 {
+  line-height:@baseLineHeight;
+}
+
 h1 {
   padding:.5em 0;
   padding-left:4%;
@@ -11,17 +15,21 @@ h1 {
 }
 
 h2 {
-  line-height:1.4;
+  margin-bottom:@gutter;
 }
 
 h3 {
   margin:0 0 1em 0;
   color:@tertiary;
   font-size:1.2em;
-  font-family: @mediumFontFamily;
+  font-family: @baseFontFamily;
   text-transform:uppercase;
   letter-spacing:2px;
   line-height:1.4;
+}
+
+p {
+  margin:0 0 @gutter 0;
 }
 
 @font-face {
