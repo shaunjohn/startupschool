@@ -4219,6 +4219,9 @@ section#contact .contact_icon.twitter {
 section#contact .contact_icon.hash:hover {
   cursor: pointer;
 }
+#apply {
+  padding-top: 0;
+}
 #apply .column_content {
   margin-top: 0;
   margin-right: 0;
@@ -4311,9 +4314,6 @@ section#contact .contact_icon.hash:hover {
   display: none;
   margin-top: 20px;
   color: #9d261d;
-}
-form .control-group {
-  max-width: 640px;
 }
 form input[type=text],
 form textarea {
