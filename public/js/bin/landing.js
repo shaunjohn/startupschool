@@ -1,5 +1,5 @@
 (function() {
-  var A_BOTTOM, A_WIDTH, CONTENT_H, SIZE_CUTOFF, adjustArrow, arrowHeight, clearFormErrorState, doNavColoring, events, fixCurriculum, formSubmission, gettingStarted, instruction_show_time, instructions_shown, limitChar, limitWord, nav_opacity, onResize, onScroll, placeVideos, retrieveForm, saveForm, setFormErrorState, setupElements, show_scroll, slideTo, updateCache, validateForm;
+  var A_BOTTOM, A_WIDTH, CONTENT_H, SIZE_CUTOFF, adjustArrow, arrowHeight, clearFormErrorState, doNavColoring, events, fixCurriculum, formSubmission, gettingStarted, instruction_show_time, instructions_shown, limitChar, limitWord, nav_opacity, onResize, onScroll, placeImages, placeVideos, retrieveForm, saveForm, setFormErrorState, setupElements, show_scroll, slideTo, updateCache, validateForm;
 
   SIZE_CUTOFF = 640;
 
@@ -451,11 +451,12 @@
   };
 
   slideTo = function(section) {
-    var $section, header_height;
+    var $section, header_height, nav_h;
     $section = $("#" + section);
     header_height = $section.prev("h1").outerHeight();
+    nav_h = $("#top_nav:visible").length === 0 ? 0 : $("#top_nav").outerHeight();
     return $("html, body").animate({
-      scrollTop: $section.offset().top - header_height - $("#top_nav").outerHeight()
+      scrollTop: $section.offset().top - header_height - nav_h
     });
   };
 
@@ -541,8 +542,35 @@
     });
   };
 
+  placeImages = function() {
+    var $img, base_name, format, img, pwidth, size, _i, _len, _ref, _results;
+    _ref = $(".post_load_img");
+    _results = [];
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      img = _ref[_i];
+      $img = $(img);
+      $img.load(onResize);
+      pwidth = $img.parent().width();
+      console.log(pwidth);
+      if (pwidth <= 320) {
+        size = "small";
+      } else if (pwidth > 320 && pwidth <= 640) {
+        size = "medium";
+      } else if (pwidth > 640) {
+        size = "large";
+      } else {
+        size = "large";
+      }
+      base_name = $img.data("base_name");
+      format = $img.data("format");
+      _results.push($img.attr("src", "img/" + base_name + "_" + size + "." + format));
+    }
+    return _results;
+  };
+
   jQuery(function() {
     events();
+    placeImages();
     onResize();
     retrieveForm();
     doNavColoring();

@@ -542,8 +542,9 @@ placeVideos = ->
 slideTo = (section) ->
   $section = $("##{section}")
   header_height = $section.prev("h1").outerHeight()
+  nav_h = if $("#top_nav:visible").length is 0 then 0 else $("#top_nav").outerHeight()
   $("html, body").animate
-    scrollTop : $section.offset().top - header_height - $("#top_nav").outerHeight() # include floating header
+    scrollTop : $section.offset().top - header_height - nav_h
 
 events = ->
   placeVideos()
@@ -627,10 +628,27 @@ events = ->
   $("#apply_now_top_nav").click (e) ->
     slideTo "apply"
 
+placeImages = ->
+  for img in $(".post_load_img")
+    $img = $(img)
+    $img.load onResize
+    pwidth = $img.parent().width()
+    console.log pwidth
+    if pwidth <= 320 then size = "small"
+    else if pwidth > 320 and pwidth <= 640 then size = "medium"
+    else if pwidth > 640 then size = "large"
+    else size = "large"
+
+    base_name = $img.data("base_name")
+    format = $img.data("format")
+    $img.attr("src", "img/#{base_name}_#{size}.#{format}")
+
+
 jQuery ->
 
   # Setup the logo and arrow height for the first time
   events()
+  placeImages()
   onResize()
 
   retrieveForm()

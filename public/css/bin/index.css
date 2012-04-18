@@ -4026,7 +4026,7 @@ a.thumbnail:hover {
   max-height: 270px;
 }
 .last {
-  margin-bottom: 0;
+  margin-bottom: 0 !important;
 }
 body,
 html {
@@ -4136,8 +4136,8 @@ ol ol {
   top: 90px;
   left: 67.3%;
   text-align: center;
-  opacity: 0.2;
-  filter: alpha(opacity=20);
+  opacity: 0.25;
+  filter: alpha(opacity=25);
 }
 #scroll_up .scroll_prompt {
   margin: 6px 0 0 -17px;
@@ -4392,12 +4392,13 @@ form .counter {
   border-radius: 0 20px 20px 0;
 }
 #details .bar {
-  padding: 4px 0 0 15px;
+  padding: 5px 0 0 15px;
   height: 41px;
   font-size: 25px;
   color: #ffffff;
   background: #3ba4db;
   width: 692px;
+  text-shadow: 0 0 0;
 }
 #details .subtext {
   opacity: 0.6;
@@ -4428,6 +4429,12 @@ form .counter {
 }
 #details .curriculum_section_details {
   margin: -25px 20px 0 135px;
+}
+#details .word_cloud {
+  margin-top: 20px;
+}
+#details .word_cloud img {
+  width: 100%;
 }
 #why .quote {
   font-size: 1.3em;
