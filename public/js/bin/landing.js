@@ -117,7 +117,7 @@
 
   fixCurriculum = function() {
     var EXP_LEN, bar_w, el, factor, scroll_top, _i, _len, _ref, _results;
-    EXP_LEN = 400;
+    EXP_LEN = $(window).height() / 4;
     bar_w = cache.row_width - cache.icon_width;
     $(".bar").width(bar_w);
     if ($(window).width() >= SIZE_CUTOFF) {

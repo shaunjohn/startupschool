@@ -258,7 +258,7 @@ fixCurriculum = ->
   # X_END = $("#page").width()
 
   # How many pixels of scroll does it take to fully expand the bar
-  EXP_LEN = 400
+  EXP_LEN = $(window).height() / 4
 
   # bar_w = X_END - X_START
   bar_w = cache.row_width - cache.icon_width
