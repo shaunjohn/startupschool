@@ -1,5 +1,5 @@
 (function() {
-  var A_BOTTOM, A_WIDTH, CONTENT_H, SIZE_CUTOFF, adjustArrow, arrowHeight, clearFormErrorState, doNavColoring, events, fixCurriculum, formSubmission, gettingStarted, instruction_show_time, instructions_shown, limitChar, limitWord, nav_opacity, onResize, onScroll, placeImages, placeVideos, retrieveForm, saveForm, setFormErrorState, setupElements, show_scroll, slideTo, updateCache, validateForm;
+  var A_BOTTOM, A_WIDTH, CONTENT_H, SIZE_CUTOFF, adjustArrow, arrowHeight, clearFormErrorState, doNavColoring, events, fixCurriculum, formSubmission, gettingStarted, hashChanged, instruction_show_time, instructions_shown, limitChar, limitWord, nav_opacity, navigateTo, onResize, onScroll, placeImages, placeVideos, retrieveForm, saveForm, setFormErrorState, setupElements, show_scroll, slideTo, updateCache, validateForm;
 
   SIZE_CUTOFF = 640;
 
@@ -62,7 +62,9 @@
     adjustLogo();
     fixCurriculum();
     setupElements();
-    return adjustLogo();
+    adjustLogo();
+    slideTo();
+    return onScroll();
   };
 
   show_scroll = 0;
@@ -72,7 +74,7 @@
   instruction_show_time = null;
 
   onScroll = function() {
-    if (show_scroll >= 5 && show_scroll < 20) {
+    if (show_scroll >= 15 && show_scroll < 20) {
       $("#scroll_up").fadeOut('slow');
       $(".nav_item").animate({
         opacity: 100
@@ -438,7 +440,11 @@
         opacity: percent_showing
       });
     }
-    return $("#nav_selector").val(select_section_id);
+    $("#nav_selector").val(select_section_id);
+    if (window.scrolling === false && window.enableHashUpdates === true) {
+      console.log("Changing the hash due to a scroll");
+      return window.location.hash = "!/" + select_section_id;
+    }
   };
 
   placeVideos = function() {
@@ -450,17 +456,37 @@
     return $("#video_three").append("<iframe class=\"video_fram\" width=\"" + w + "\" height=\"" + h + "\" src=\"http://www.youtube.com/embed/9V_7aSj0-jI\" frameborder=\"0\" allowfullscreen></iframe>");
   };
 
-  slideTo = function(section) {
-    var $section, header_height, nav_h;
+  slideTo = function() {
+    var $section, header_height, nav_h, section;
+    $("html, body").stop(true, true);
+    section = window.location.hash.slice(3, window.location.hash.length + 1 || 9e9);
+    if (section === "" || section === "!/") return;
     $section = $("#" + section);
     header_height = $section.prev("h1").outerHeight();
     nav_h = $("#top_nav:visible").length === 0 ? 0 : $("#top_nav").outerHeight();
+    window.scrolling = true;
     return $("html, body").animate({
       scrollTop: $section.offset().top - header_height - nav_h
+    }, function() {
+      return window.scrolling = false;
     });
   };
 
+  navigateTo = function(section) {
+    window.clicked = true;
+    console.log("Changing the hash due to a click");
+    return window.location.hash = "!/" + section;
+  };
+
+  hashChanged = function() {
+    if (window.clicked) {
+      slideTo();
+      return window.clicked = false;
+    }
+  };
+
   events = function() {
+    $(window).on("hashchange", hashChanged);
     placeVideos();
     $(window).resize(onResize);
     $(window).scroll(onScroll);
@@ -523,7 +549,7 @@
       }
     });
     $("#floating_nav > ul > li").click(function() {
-      return slideTo($(this).data("section_id"));
+      return navigateTo($(this).data("section_id"));
     });
     $("#floating_nav > ul > li").hover(function() {
       return $(this).find(".nav_bg").css({
@@ -535,10 +561,10 @@
       });
     });
     $("#nav_selector").change(function(e) {
-      return slideTo($(this).val());
+      return navigateTo($(this).val());
     });
     return $("#apply_now_top_nav").click(function(e) {
-      return slideTo("apply");
+      return navigateTo("apply");
     });
   };
 
@@ -574,7 +600,13 @@
     onResize();
     retrieveForm();
     doNavColoring();
-    return $(window).scrollTop($(document).height());
+    $(window).scrollTop($(document).height());
+    slideTo();
+    window.scrolling = false;
+    window.enableHashUpdates = false;
+    return setTimeout(function() {
+      return window.enableHashUpdates = true;
+    }, 1000);
   });
 
 }).call(this);

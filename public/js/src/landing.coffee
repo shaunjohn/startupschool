@@ -122,6 +122,8 @@ onResize = ->
   # headers('fix_width')
   setupElements()
   adjustLogo() # Re-setup now that elements have been setup
+  slideTo()
+  onScroll()
 
 show_scroll = 0
 instructions_shown = false
@@ -130,7 +132,7 @@ onScroll = ->
 
   # Sometimes on heavy load conditions we will miss the 5th scroll. Keep
   # checking for a bit more afterwards to ensure we get rid of the element
-  if show_scroll >= 5 and show_scroll < 20
+  if show_scroll >= 15 and show_scroll < 20
     $("#scroll_up").fadeOut('slow')
     $(".nav_item").animate
       opacity:100
@@ -523,6 +525,11 @@ doNavColoring = ->
 
   $("#nav_selector").val(select_section_id)
 
+  # Only update if we're not programmatically scrolling.
+  if window.scrolling is false and window.enableHashUpdates is true
+    console.log "Changing the hash due to a scroll"
+    window.location.hash = "!/#{select_section_id}"
+
 # Videos inserted asynchronously after the page loads
 placeVideos = ->
   w = $("#video_one").width()
@@ -539,14 +546,36 @@ placeVideos = ->
     <iframe class="video_fram" width="#{w}" height="#{h}" src="http://www.youtube.com/embed/9V_7aSj0-jI" frameborder="0" allowfullscreen></iframe>
   """
 
-slideTo = (section) ->
+# slideTo sets the hash variable. The hashchange event triggers the
+# slide_to section.
+slideTo = ->
+  $("html, body").stop(true, true) # Stop previous animations
+  section = window.location.hash[3..window.location.hash.length]
+  if section is "" or section is "!/"then return
   $section = $("##{section}")
   header_height = $section.prev("h1").outerHeight()
   nav_h = if $("#top_nav:visible").length is 0 then 0 else $("#top_nav").outerHeight()
+  window.scrolling = true
   $("html, body").animate
     scrollTop : $section.offset().top - header_height - nav_h
+  , ->
+    window.scrolling = false
+
+navigateTo = (section) ->
+  window.clicked = true
+  console.log "Changing the hash due to a click"
+  window.location.hash = "!/#{section}"
+
+hashChanged = ->
+  # Determine whether the hash changed because we clicked something, or
+  # just scrolled to a different part of the page
+  if window.clicked
+    slideTo()
+    window.clicked = false
 
 events = ->
+  $(window).on("hashchange", hashChanged)
+
   placeVideos()
 
   # Bind resizing and scrolling
@@ -613,7 +642,7 @@ events = ->
 
   # NAVIGATION
   $("#floating_nav > ul > li").click ->
-    slideTo $(@).data("section_id")
+    navigateTo $(@).data("section_id")
   $("#floating_nav > ul > li").hover ->
     $(@).find(".nav_bg").css
       opacity : 1
@@ -623,10 +652,10 @@ events = ->
 
 
   $("#nav_selector").change (e) ->
-    slideTo $(@).val()
+    navigateTo $(@).val()
 
   $("#apply_now_top_nav").click (e) ->
-    slideTo "apply"
+    navigateTo "apply"
 
 placeImages = ->
   for img in $(".post_load_img")
@@ -655,3 +684,16 @@ jQuery ->
   doNavColoring()
 
   $(window).scrollTop($(document).height())
+
+  # Go to the appropriate section if there's a hash in the url
+  slideTo()
+  window.scrolling = false
+
+  # Scroll events are triggered all the time while elements load onto the
+  # page (a side effect of trying to always have the bottom in focus).
+  # Delay scroll-based hash updates for a bit after the page loads to
+  # prevent this issue.
+  window.enableHashUpdates = false
+  setTimeout -> 
+    window.enableHashUpdates = true
+  , 1000
