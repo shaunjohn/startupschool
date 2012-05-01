@@ -526,6 +526,9 @@
       return showApplication();
     });
     $(".hide_application").click(hideApplication);
+    $("#apply_now_btn").click(function() {
+      return navigateTo("apply");
+    });
     $(".instruction_toggle").click(function() {
       var $container, $instructions, h;
       $instructions = $("#instructions");

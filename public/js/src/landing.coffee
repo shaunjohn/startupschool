@@ -622,6 +622,9 @@ events = ->
   #     scrollTop: $section.offset().top - correction
   #   ,'slow'
 
+  $("#apply_now_btn").click ->
+    navigateTo "apply"
+
   $(".instruction_toggle").click ->
     $instructions = $("#instructions")
     $container = $("#instructions_container")
