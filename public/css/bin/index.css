@@ -4131,8 +4131,14 @@ ol ol {
 .bold {
   font-family: "Flama-Medium", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
+.larger {
+  font-size: 1.2em;
+}
 .color_emphasis {
   color: #f89406;
+}
+.full_width {
+  width: 100%;
 }
 #scroll_up {
   visibility: hidden;

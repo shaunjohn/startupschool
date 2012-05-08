@@ -15,7 +15,7 @@ end
 desc 'Runs all javascript and css related jobs'
 task :default do
   Rake::Task['js'].invoke
-  # Rake::Task['minify'].invoke
+  Rake::Task['minify'].invoke
   Rake::Task['css'].invoke
   puts "==== DONE ===="
 end

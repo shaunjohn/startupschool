@@ -527,7 +527,6 @@ doNavColoring = ->
 
   # Only update if we're not programmatically scrolling.
   if window.scrolling is false and window.enableHashUpdates is true
-    console.log "Changing the hash due to a scroll"
     window.location.hash = "!/#{select_section_id}"
 
 # Videos inserted asynchronously after the page loads
@@ -563,7 +562,6 @@ slideTo = ->
 
 navigateTo = (section) ->
   window.clicked = true
-  console.log "Changing the hash due to a click"
   window.location.hash = "!/#{section}"
 
 hashChanged = ->
@@ -575,6 +573,8 @@ hashChanged = ->
 
 events = ->
   $(window).on("hashchange", hashChanged)
+
+  $("*[rel=popover]").popover({placement:'top'})
 
   placeVideos()
 
@@ -665,7 +665,6 @@ placeImages = ->
     $img = $(img)
     $img.load onResize
     pwidth = $img.parent().width()
-    console.log pwidth
     if pwidth <= 320 then size = "small"
     else if pwidth > 320 and pwidth <= 640 then size = "medium"
     else if pwidth > 640 then size = "large"

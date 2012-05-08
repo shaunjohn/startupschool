@@ -442,7 +442,6 @@
     }
     $("#nav_selector").val(select_section_id);
     if (window.scrolling === false && window.enableHashUpdates === true) {
-      console.log("Changing the hash due to a scroll");
       return window.location.hash = "!/" + select_section_id;
     }
   };
@@ -474,7 +473,6 @@
 
   navigateTo = function(section) {
     window.clicked = true;
-    console.log("Changing the hash due to a click");
     return window.location.hash = "!/" + section;
   };
 
@@ -487,6 +485,9 @@
 
   events = function() {
     $(window).on("hashchange", hashChanged);
+    $("*[rel=popover]").popover({
+      placement: 'top'
+    });
     placeVideos();
     $(window).resize(onResize);
     $(window).scroll(onScroll);
@@ -580,7 +581,6 @@
       $img = $(img);
       $img.load(onResize);
       pwidth = $img.parent().width();
-      console.log(pwidth);
       if (pwidth <= 320) {
         size = "small";
       } else if (pwidth > 320 && pwidth <= 640) {
