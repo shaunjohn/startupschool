@@ -4612,6 +4612,7 @@ form .counter {
   opacity: 0.33;
   filter: alpha(opacity=33);
 }
+.nav_item:hover {
   opacity: 1;
   filter: alpha(opacity=100);
 }
