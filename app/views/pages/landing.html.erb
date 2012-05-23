@@ -11,6 +11,7 @@
 <!-- Accolades          _trust      -->
 <!-- Apply Now          _apply      -->
 <!-- Contact            _contact    -->
+<!-- Blog               _blog       -->
 
 <!-- =================== Responsive Design Sizing ===================== -->
 <!--
@@ -56,10 +57,18 @@ We switch the number of columns on a row when each breakpoint is hit.
       <div class="nav_bg"></div>
       <div class="nav_text">When &amp; Where</div>
     </li>
-    <li id="nav_nutshell" class="nav_item" data-section_id="nutshell" >
+    <li id="nav_nutshell" class="nav_item" data-section_id="nutshell">
       <div class="nav_bg"></div>
       <div class="nav_text">In a Nutshell</div>
     </li>
+    
+<a href="http://bostonstartupschool.tumblr.com">
+    <li>
+      <div class="nav_bg"></div>
+      <div class="nav_text">Blog</div>
+    </li>
+</a>
+
   </ul>
 </nav>
 
@@ -85,6 +94,7 @@ We switch the number of columns on a row when each breakpoint is hit.
       <option value="why">Why Startup School</option>
       <option value="when_where">When &amp; Where</option>
       <option value="nutshell">In a Nutshell</option>
+      <option>Blog</option>
     </select>
   </div>
 </nav>
@@ -115,6 +125,7 @@ We switch the number of columns on a row when each breakpoint is hit.
   <%= render "when_where" %>
 
   <%= render "nutshell" %>
+
 
 </div>
 
