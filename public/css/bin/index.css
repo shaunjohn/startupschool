@@ -4550,6 +4550,7 @@ form .counter {
   right: 0;
   top: 0;
   width: 25%;
+  background: rgba(0, 0, 0, 0.1);
 }
 #floating_nav ul {
   margin: 0;
@@ -4568,16 +4569,22 @@ form .counter {
   -ms-transition: 300ms;
   -o-transition: 300ms;
   transition: 300ms;
-  background: rgba(0, 0, 0, 0.1);
 }
-#floating_nav li .nav_text {
+#floating_nav a {
+  text-decoration: none;
+  color: #818285;
+}
+#floating_nav a:hover {
+  color: #555555;
+}
+#floating_nav .nav_text {
   position: relative;
   z-index: 2;
   padding: 4px 10% 5px 5%;
   font-size: 14px;
   text-transform: uppercase;
 }
-#floating_nav li .nav_bg {
+#floating_nav .nav_bg {
   position: absolute;
   z-index: 1;
   width: 100%;
@@ -4591,30 +4598,29 @@ form .counter {
   opacity: 0;
   filter: alpha(opacity=0);
 }
-#floating_nav li:before {
+#floating_nav:before {
   content: "";
 }
-#floating_nav li:hover {
+#floating_nav:hover {
   cursor: pointer;
 }
-#floating_nav li:hover .nav_bg {
+#floating_nav:hover .nav_bg {
   opacity: 1;
   filter: alpha(opacity=100);
 }
-#floating_nav .nav_item {
+.nav_item {
   opacity: 0.33;
   filter: alpha(opacity=33);
 }
-#floating_nav .nav_item:hover {
   opacity: 1;
   filter: alpha(opacity=100);
 }
-#floating_nav .nav_apply {
+.nav_apply {
   border-top: 1px solid #818285;
   border-bottom: 1px solid #818285;
   background: #58585a;
 }
-#floating_nav .nav_apply .nav_text {
+.nav_apply .nav_text {
   font-size: 20px;
   color: #eeeeee;
   letter-spacing: 2px;

@@ -492,9 +492,16 @@ form {
     border-bottom:1px solid rgba(255,255,255,0.5);
     padding:0;
     text-align:right;
-    .transition(300ms);
+    .transition(300ms); 
+    }
 
-    .nav_text {
+ text-decoration:none;
+}
+a:hover {
+   color:@gray
+}
+  
+ .nav_text {
       position:relative;
       z-index:2;
       padding:4px 10% 5px 5%;
@@ -528,6 +535,7 @@ form {
       .opacity(100);
     }
   }
+
   .nav_apply {
     .nav_text {
       font-size:20px;
@@ -540,7 +548,7 @@ form {
     border-bottom:1px solid @tertiary;
     background:@secondary;
   }
-}
+
 
 // A small nav to use for small devices.
 #top_nav {
