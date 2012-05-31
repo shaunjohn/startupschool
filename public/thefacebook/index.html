@@ -22,6 +22,15 @@
         padding-top: 40px;
 		background:"images/bg.jpg"; 
       }
+	  .student_profile {
+  width: 220px;
+  margin: 10px;
+  float: left;
+}
+.student_profile img {
+width: 220px;
+} 
+	  
 	  .thumbnail {
 	  height: 200px;
 	  width: 200px;
@@ -33,19 +42,19 @@
 
     <!-- jQuery lightbox -->
     <script type="text/javascript" src="js/jquery.lightbox-0.5.js"></script>
+	<script type="text/javascript" src="js/jquery.imagesloaded.js"></script>
+	<script type="text/javascript" src="js/jquery.masonry.js"></script>
     <link rel="stylesheet" type="text/css" href="css/jquery.lightbox-0.5.css" media="screen" />
 
-    <script type="text/javascript">
-      $(function() {
-          $(".teach").click(function(){
-            $(".name").toggleClass("nameWhite");
-            $(".teach").toggle();
-            $(".teach").toggleClass("primary success");
-            });
-
-
-          });
-
+	<script>$(function() {var $container = $('#profile_container');
+	console.log ($container); 
+$container.imagesLoaded(function(){
+   console.log ("imagesLoaded"); 
+  $container.masonry({
+    itemSelector : '.student_profile',
+    columnWidth : 240
+  });
+});}); 
 </script>
 
 <script type="text/javascript">
@@ -68,214 +77,186 @@
         <p>These are all the folks you'll be spending the next 6 weeks with. We hope to expand these profiles to include a succinct biography of each student, along with a few other tidbits of information. For the time being, test your memory of each student's name by clicking "Teach Me!". Names will appear when you mouse over someone's mug.</p>
         <p><a class="teach btn primary large">Teach me!</a><a style="display: none" class="teach btn primary large">I'm Done</a></p>
       </div>
-	
-      <ul class="media-grid">
-        <h1 class="teamName"><center>Students</center></h1>
-        <li>
-          <a title="Andrew Dunn" class="lightbox" href="images/AndrewDunn.jpg">
-            <img class="thumbnail" src="images/AndrewDunn.jpg" alt="">
-            <h4 class="name">Andrew Dunn</h4>
-          </a>
-        </li>
-        <li>
-			<a title="Andrew Rosenblatt" class="lightbox" href="images/AndrewRosenblatt.jpg">
-			 <img class="thumbnail" src="images/AndrewRosenblatt.jpg" alt="">
-			 <h4 class="name">Andrew Rosenblatt</h4>
-			</a>
-        </li>
-        <li>
-			<a title="Annaliese Godderz" class="lightbox" href="images/AnnalieseGodderz.jpg">
-			 <img class="thumbnail" src="images/AnnalieseGodderz.jpg" alt="">
-			 <h4 class="name">Annaliese Godderz</h4>
-			</a>
-        </li>
-		 <li>
-			<a title="Assaad Lyn" class="lightbox" href="images/AssaadLyn.jpg">
-			 <img class="thumbnail" src="images/AssaadLyn.jpg" alt="">
-			 <h4 class="name">Assaad Lyn</h4>
-			</a>
-        </li>
-		 <li>
-			<a title="Brendan Sheehan" class="lightbox" href="images/BrendanSheehan.jpg">
-			 <img class="thumbnail" src="images/BrendanSheehan.jpg" alt="">
-			 <h4 class="name">Brendan Sheehan</h4>
-			</a>
-        </li>
-		 <li>
-			<a title="Dan Bourdeau" class="lightbox" href="images/DanBourdeau.jpg">
-			 <img class="thumbnail" src="images/DanBourdeau.jpg" alt="">
-			 <h4 class="name">Dan Bourdeau</h4>
-			</a>
-        </li>
-		 <li>
-			<a title="Dan Macleod" class="lightbox" href="images/DanMacleod.jpg">
-			 <img class="thumbnail" src="images/DanMacLeod.jpg" alt="">
-			 <h4 class="name">Dan MacLeod</h4>
-			</a>
-        </li>
-		 <li>
-			<a title="Dan Pratt" class="lightbox" href="images/DanPratt.jpg">
-			 <img class="thumbnail" src="images/DanPratt.jpg" alt="">
-			 <h4 class="name">Dan Pratt</h4>
-			</a>
-        </li>
-		 <li>
-			<a title="Dean Dieker" class="lightbox" href="images/DeanDieker.jpg">
-			 <img class="thumbnail" src="images/DeanDieker.jpg" alt="">
-			 <h4 class="name">Dean Dieker</h4>
-			</a>
-        </li>
-		 <li>
-			<a title="Erik Grueter" class="lightbox" href="images/ErikGrueter.jpg">
-			 <img class="thumbnail" src="images/ErikGrueter.jpg" alt="">
-			 <h4 class="name">Erik Grueter</h4>
-			</a>
-        </li>
-		 <li>
-			<a title="Ethan Bagley" class="lightbox" href="images/EthanBagleyu.jpg">
-			 <img class="thumbnail" src="images/EthanBagleyu.jpg" alt="">
-			 <h4 class="name">Ethan Bagley</h4>
-			</a>
-        </li>
-		 <li>
-			<a title="Geordie Kaytes" class="lightbox" href="images/GeordieKaytes.jpg">
-			 <img class="thumbnail" src="images/GeordieKaytes.jpg" alt="">
-			 <h4 class="name">Geordie Kaytes</h4>
-			</a>
-        </li>
-		 <li>
-			<a title="Ian Markowitz" class="lightbox" href="images/Ian Markowitzjpg">
-			 <img class="thumbnail" src="images/IanMarkowitz.jpg" alt="">
-			 <h4 class="name">Ian Markowitz</h4>
-			</a>
-        </li>
-		 <li>
-			<a title="Jeremy Carter" class="lightbox" href="images/JeremyCarter.jpg">
-			 <img class="thumbnail" src="images/JeremyCarter.jpg" alt="">
-			 <h4 class="name">Jeremy Carter</h4>
-			</a>
-        </li>
-		<li>
-			<a title="Jeremy Yudkin" class="lightbox" href="JeremyYudkin.jpg">
-			 <img class="thumbnail" src="images/JeremyYudkin.jpg" alt="">
-			 <h4 class="name">Jeremy Yudkin</h4>
-			</a>
-        </li>
-		<li>
-			<a title="Jessica Miller" class="lightbox" href="images/JessicaMiller.jpg">
-			 <img class="thumbnail" src="images/JessicaMiller.jpg" alt="">
-			 <h4 class="name">Jessica Miller</h4>
-			</a>
-        </li>
-		 <li>
-			<a title="JP Bonner" class="lightbox" href="images/JPBonner.jpg">
-			 <img class="thumbnail" src="images/JPBonner.jpg" alt="">
-			 <h4 class="name">JP Bonner</h4>
-			</a>
-        </li>
-		 <li>
-			<a title="Kailey Raymond" class="lightbox" href="images/KaileyRaymond.jpg">
-			 <img class="thumbnail" src="images/KaileyRaymond.jpg" alt="">
-			 <h4 class="name">Kailey Raymond</h4>
-			</a>
-        </li>
-		 <li>
-			<a title="Kate Beret" class="lightbox" href="images/KateBeret.jpg">
-			 <img class="thumbnail" src="images/KateBeret.jpg" alt="">
-			 <h4 class="name">Kate Beret</h4>
-			</a>
-        </li>
-		 <li>
-			<a title="Liz Cormack" class="lightbox" href="images/Lizcormack.jpg">
-			 <img class="thumbnail" src="images/Lizcormack.jpg" alt="">
-			 <h4 class="name">Liz Cormack</h4>
-			</a>
-        </li>
-		 <li>
-			<a title="Luis Duco" class="lightbox" href="images/LuisDuco.jpg">
-			 <img class="thumbnail" src="images/LuisDuco.jpg" alt="">
-			 <h4 class="name">Luis Duco</h4>
-			</a>
-        </li>
-		 <li>
-			<a title="Max Ade" class="lightbox" href="images/MaxAde.jpg">
-			 <img class="thumbnail" src="images/MaxAde.jpg" alt="">
-			 <h4 class="name">Max Ade</h4>
-			</a>
-        </li>
-		 <li>
-			<a title="Michael Spence Guerra" class="lightbox" href="images/MichaelSpenceGuerra.jpg">
-			 <img class="thumbnail" src="images/MichaelSpenceGuerra.jpg" alt="">
-			 <h4 class="name">Michael Spence Guerra</h4>
-			</a>
-        </li>
-		 <li>
-			<a title="Miguel Bejar" class="lightbox" href="images/MiguelBejar.jpg">
-			 <img class="thumbnail" src="images/MiguelBejar.jpg" alt="">
-			 <h4 class="name">Miguel Bejar</h4>
-			</a>
-        </li>
-		 <li>
-			<a title="Rhan Kim" class="lightbox" href="images/Rhan Kim.jpg">
-			 <img class="thumbnail" src="images/RhanKim.jpg" alt="">
-			 <h4 class="name">Rhan Kim</h4>
-			</a>
-        </li>
-		 <li>
-			<a title="Roger Maranan" class="lightbox" href="images/RogerMaranan.jpg">
-			 <img class="thumbnail" src="images/RogerMaranan.jpg" alt="">
-			 <h4 class="name">Roger Maranan</h4>
-			</a>
-        </li>
-		 <li>
-			<a title="Sam Flanagan" class="lightbox" href="images/SamFlanagan.jpg">
-			 <img class="thumbnail" src="images/SamFlanagan.jpg" alt="">
-			 <h4 class="name">Sam Flanagan</h4>
-			</a>
-        </li>
-		 <li>
-			<a title="Shafig Mamdani" class="lightbox" href="images/ShafiqMamdani.jpg">
-			 <img class="thumbnail" src="images/ShafiqMamdani.jpg" alt="">
-			 <h4 class="name">Shafiq Mamdani</h4>
-			</a>
-        </li>
-		 <li>
-			<a title="Shanty George" class="lightbox" href="images/ShantyGeorge.jpg">
-			 <img class="thumbnail" src="images/ShantyGeorge.jpg" alt="">
-			 <h4 class="name">Shanty George</h4>
-			</a>
-        </li>
-		 <li>
-			<a title="Sterling Cobb" class="lightbox" href="images/SterlingCobb.png">
-			 <img class="thumbnail" src="images/SterlingCobb.png" alt="">
-			 <h4 class="name">Sterling Cobb</h4>
-			</a>
-        </li>
-		 <li>
-			<a title="Todd Haylon" class="lightbox" href="images/ToddHaylon.jpg">
-			 <img class="thumbnail" src="images/ToddHaylon.jpg" alt="">
-			 <h4 class="name">Todd Haylon</h4>
-			</a>
-        </li>
-		 <li>
-			<a title="Trevor Lynn" class="lightbox" href="images/TrevorLynn.jpg">
-			 <img class="thumbnail" src="images/TrevorLynn.jpg" alt="">
-			 <h4 class="name">Trevor Lynn</h4>
-			</a>
-        </li>
-		 <li>
-			<a title="Vik Shah" class="lightbox" href="images/VikShah.jpg">
-			 <img class="thumbnail" src="images/VikShah.jpg" alt="">
-			 <h4 class="name">Vik Shah</h4>
-			</a>
-        </li>
-		 <li>
-			<a title="Zachary Davis" class="lightbox" href="images/ZacharyDavis.jpg">
-			 <img class="thumbnail" src="images/ZacharyDavis.jpg" alt="">
-			 <h4 class="name">Zachary Davis</h4>
-			</a>
-        </li>	
-      </ul>
+ <div id="profile_container">
+	<div class="student_profile">
+		<h2>Aman Kapur</h2>
+		<h3><a href="www.twitter.com/amankapur91">@amankapur91</a></h3>
+			Aman Kapur. Olin College Education: Computers, Software, Design, Users. Passions: Food, Interaction, Web stuff Other: gaming, poetry</div>
+	<div class="student_profile">
+		<img src="images/AndrewDunn.jpg">
+		<h2>Andrew Dunn</h2>
+		Aspiring entrepreneur from NY.  Creative, driven, gets things done.  Passions for travel and extreme sports.  Loving life a lot right now.</div>
+	<div class="student_profile">
+		<h2>Andrew Rosenblatt</h2>
+		I love technology and the fierce energy of startups. I also ride horses.</div>
+	<div class="student_profile">
+		<h2>Annaliese Godderz</h2>
+		<h3><a href="www.twitter.com/annaliesego">@annaliesego</a></h3>
+		BU philosociologist, snowboarder, cyclist, yogi, chronic traveler, and food lover. Appreciate positive vibes, open minds, and new ideas.</div>
+	<div class="student_profile">
+		<h2>Arian Razzaghi-Fernandez</h2>
+		<h3><a href="www.twitter.com/razzaghi2012">@razzaghi2012</a></h3>
+		From a poor city in Costa Rica with dreams of making a global impact using tech. I'm a hustler and a challenger of the status quo. Im hungry</div>
+	<div class="student_profile">
+		<h2>Assaad Lyn</h2>
+		An energetic and determined individual who can work alone and with a team. I have a keen eye for detail, as well as strong wordplay. </div>
+	<div class="student_profile">
+		<h2>Bradley Ericson</h2>
+		Nationally recognized entrepreneur & sports marketer. Golfer & Fencer. Traveled 90k+ miles since 2010. Work hard, play hard but always smile</div>
+	<div class="student_profile">
+		<h2>Brendan Sheehan</h2>
+		<h3><a href="www.twitter.com/sheehanb7">@sheehanb7</a></h3>
+		I am a leader, adaptable and interpersonal.  I have a desirable set of personable skills that are an asset to sales and business development</div>
+	<div class="student_profile">
+		<h2>Colin Santangelo</h2>
+		I am defined by the breadth and depth of my curiosity and when I find a problem that piques my interest I don't stop until I solve it.</div>
+	<div class="student_profile">
+		<h2>Dan Bourdeau</h2>
+		I am an energetic, entrepreneurial soon to be college grad with a passion for start ups and innovation.</div>
+	<div class="student_profile">
+		<h2>Dan Macleod</h2>
+		<h3><a href="www.twitter.com/dmacleod534">@DMacleod534</a></h3>
+			I'm a marketing, car, and environmental enthusiast. I spend as much time as possible laughing every day. Understanding people drives me.</div>
+	<div class="student_profile">
+		<h2>Dan Pratt</h2>
+		I'm a random fact generator, culinary wiz kid, and a 2012 college grad ditching my degree to pursue a career with early-stage tech startups.</div>
+	<div class="student_profile">
+		<h2>David George Kaytes</h2></div>
+	<div class="student_profile">
+		<h2>Dean Dieker</h2></div>
+	<div class="student_profile">
+		<h2>Dibyajyoti Ghosh</h2>
+			A student and technology enthusiast with three years of start-up ROR platform development experience.</div>
+	<div class="student_profile">
+		<h2>Erik Grueter</h2>
+			Pursuing actualization. Going deep into something I want to learn and internalizing its processes. In the past it has been chinese/history
+An engineer with an entrepreneurial streak looking to develop the skills he needs to lead a successful business.</div>
+	<div class="student_profile">
+		<h2>Ethan Bagley</h2>
+		<h3><a href="www.twitter.com/ebagsLOLZ">@ebagsLOLZ</a></h3>
+			An engineer with an entrepreneurial streak looking to develop the skills he needs to lead a successful business.</div>
+	<div class="student_profile">
+		<h2>Greg Nemes</h2>
+		<h3><a href="www.twitter.com/gregnemes">@gregnemes</a></h3>
+			Vice president RISD Grad Student Alliance and cross-disciplinary designer, exploring intersection of technology, culture, and experience.</div>
+	<div class="student_profile">
+		<h2>Ian Markowitz</h2>
+		<h3><a href="www.twitter.com/ianmarkowitz">@ianmarkowitz</a></h3>
+			A passionate entrepreneur focused on building products & services for consumers & looking to become more active in the Boston startup scene.</div>
+	<div class="student_profile">
+		<h2>Ida Apel</h2>
+		<h3><a href="www.twitter.com/idasbentos">@idasbentos</a></h3>
+			I am 23, dual citizen (GER/US), speak Japanese, passionate about innovative products, hands-on, energetic, fan of outdoors and travelling.</div>
+	<div class="student_profile">
+		<h2>Ijeoma Ekeh</h2>
+			I am a tinkerer, a physicist and a problem solver. I enjoy "the challenge" not for the win, but for the process. It makes me feel alive.</div>
+	<div class="student_profile">
+		<h2>Jeremy Carter</h2>
+			I am an artist, designer and business strategist.  I thrive in creative environments that value innovative ideas and artistic integrity. </div>
+	<div class="student_profile">
+		<h2>Jeremy Yudkin</h2>
+		<h3><a href="www.twitter.com/yudDIDit">@yudDIDit</a></h3>
+			I am motivated and hungry! I am music and entrepreneurship obsessed; I am goal oriented and love to think outside of the box.
+I am a RISD Painting senior who wants to start her own company which helps young artists find studio spaces. I am innovative and hungry.</div>
+	<div class="student_profile">
+		<h2>Jessica Miller</h2>
+			I am a RISD Painting senior who wants to start her own company which helps young artists find studio spaces. I am innovative and hungry.</div>
+	<div class="student_profile">
+		<h2>JP Bonner</h2>
+		<h3><a href="www.twitter.com/bonneroo">@bonneroo</a></h3>
+			Student of computer systems, finance, and chinese language at Boston College. Lover of difficult problems and ambitious solutions.</div>
+	<div class="student_profile">
+		<h2>Kailey Raymond</h2>
+		<h3><a href="www.twitter.com/kaileyraymond">@kaileyraymond</a></h3>
+			I am a knowledge-seeking, fast-paced living, passionate, and determined go-getter looking to make my mark on the world one stride at a time.</div>
+	<div class="student_profile">
+		<h2>Kate Beret Festa</h2>
+		<h3><a href="www.twitter.com/kateberet">@kateberet</a></h3>
+			I'm a creative soul ready to unleash my artistry on the world in the form of a good deed. I'm an idea-generating, problem-solving designer. </div>
+	<div class="student_profile">
+		<h2>Kerrie McCarthy</h2>
+		<h3><a href="www.twitter.com/McKerrie">@McKerrie</a></h3>
+			Offbeat and chatty philosopher who laughs as much as she works and is intent on making her mark. My perfect meal is scotch and kale chips.</div>
+	<div class="student_profile">
+		<h2>Liz Cormack</h2>
+		<h3><a href="www.twitter.com/elizacormack">@elizacormack</a></h3>
+			Hi, my name is Liz! I'm a communication designer, a creative problem solver & visual story teller, raised overseas and now loving Boston.</div>
+	<div class="student_profile">
+		<h2>Luis Duco</h2>
+		<h3><a href="www.twitter.com/LMDuco">@LMDuco</a></h3>
+			I'm a 25 year old entrepreneur that has his MBA. I played/coached professional tennis for the last 3 years. I'm addicted to helping people.</div>
+	<div class="student_profile">
+		<h2>Max Ade</h2>
+			I'm a senior at Boston College and founder of Maji Bottles, a stainless steel water bottle company aimed at solving the world's water crisis</div>
+	<div class="student_profile">
+		<h2>Max Veggeberg</h2>
+		<h3><a href="www.twitter.com/maxveg4">@maxveg4</a></h3>
+			Annoyingly competitive and persistant. I need a business with a tinge of altruism and it's tough for me to work hard without passion.</div>
+	<div class="student_profile">
+		<h2>Michael Spence Guerra</h2>
+			Excited to make a DIFFERENCE in the world with everything I do; innovator, team player, passionate</div>
+	<div class="student_profile">
+		<h2>Miguel Bejar</h2>
+		<h3><a href="www.twitter.com/bejar37">@bejar37</a></h3>
+			I love to code, but have an extremely wide base of interests. One day I'm going to be my own boss, and change the world while I'm at it.</div>
+	<div class="student_profile">
+		<h2>Mike Laderman</h2>
+		<h3><a href="www.twitter.com/mbltoo">@mbltoo</a></h3>
+			I’m a student of many things, an innovator, a problem solver and a collaborator. I'm a good listener who asks questions and shares thoughts.</div>
+	<div class="student_profile">
+		<h2>Nicole Haylon</h2>
+		An excessively creative person. An artist with words, graphics, and pencil on paper. A hard worker, borderline perfectionist & great friend.</div>
+	<div class="student_profile">
+		<h2>Patrick McCoy</h2>
+		<h3><a href="www.twitter.com/mccoypa">@mccoypa</a></h3>
+		I am a eagerly passionate learner. I love to start things and feel the rush when things are good and pain when things flop. In short hustler </div>
+	<div class="student_profile">
+		<h2>Rhan Kim</h2>
+		<h3><a href="www.twitter.com/rhanniekimz">@rhanniekimz</a></h3>
+			Energetic, passionate senior who is ready to challenge the expected and looking for an innovative way to change the world one step at a time
+			I am many things: engineer, musician, reliable, passionate, loyal, strong willed, and always ready for a challenge. </div>
+	<div class="student_profile">
+		<h2>Rich Rakowski</h2>
+			I am many things: engineer, musician, reliable, passionate, loyal, strong willed, and always ready for a challenge. </div>
+	<div class="student_profile">
+		<h2>Roger Maranan</h2>
+		<h3><a href="www.twitter.com/gmaranan">@gmaranan</a></h3>
+			Engineer with a desire to tackle difficult problems. Hero-in-training on a quest to change the world and live an awesome life.</div>
+	<div class="student_profile">
+		<h2>Roger Zhu</h2>
+			I am a diligent designer with critical eye and critical mind.
+I provide beautiful solutions to complex problems.</div>
+	<div class="student_profile">
+		<h2>Sam Flanagan</h2>
+		<h3><a href="www.twitter.com/samflan">@samflan</a></h3>
+			Health, well-being, innovation addict; seeking to work with start-ups and small businesses to create healthier, happier communities.
+The five words that describe me best are Maximizer, Futuristic, Responsibility, Communication and Strategic</div>
+	<div class="student_profile">
+		<h2>Shafiq Mamdani</h2>
+		<h3><a href="www.twitter.com/shafiqmamdani">@ShafiqMamdani</a></h3>
+			The five words that describe me best are Maximizer, Futuristic, Responsibility, Communication and Strategic</div>
+	<div class="student_profile">
+		<h2>Shanty George</h2>
+			My name is Shanty George. I finished my Masters in Information Systems from Boston University. I am looking forward to a new exciting job.</div>
+	<div class="student_profile">
+		<h2>Sterling Cobb</h2>
+		<h3><a href="www.twitter.com/sterlingcobb">@sterlingcobb</a></h3>
+			My name is Sterling Cobb. I'm coming to work at ThoughtBot as an apprentice and I'm passionate about web tech. I like improv and baseball.</div>
+	<div class="student_profile">
+		<h2>Todd Haylon</h2>
+		<h3><a href="www.twitter.com/THLynn">@THLynn</a></h3>
+			I am a competitor.  When I find something I am passionate about I go after to the best of my ability and do not like taking no for an answer</div>
+	<div class="student_profile">
+		<h2>Trevor Lynn</h2>
+			Midwest raised and East coast educated - I've been surrounded by startups for the last 2 years of my life AKA the best 2 years of my life</div>
+	<div class="student_profile">
+		<h2>Vik Shah</h2>
+			I'm an aspiring entrepreneur interested in leveraging my expertise in New Media Tech. and Business Mgmt. towards build web/mob. apps.
+I'm a recovering academic who's convinced that technology does not spell the end of the humanities, but a chance to renew it.</div>
+	<div class="student_profile">
+		<h2>Zachary Davis</h2>
+		<h3><a href="www.twitter.com/zacharysdavis">@zacharysdavis</a></h3>
+			I'm a recovering academic who's convinced that technology does not spell the end of the humanities, but a chance to renew it.</div>
     </div> <!-- /container -->
 
   </body>
