@@ -420,6 +420,7 @@ h1 {
   margin-bottom: 18px;
   font-size: 30px;
   line-height: 36px;
+  margin-top: 80px;
 }
 h1 small {
   font-size: 18px;
@@ -1768,8 +1769,10 @@ a.menu:after, .dropdown-toggle:after {
 }
 .hero-unit {
   background-color: #f5f5f5;
-  margin-bottom: 30px;
-  padding: 60px;
+  margin-bottom: -40px;
+  padding: 20px;
+  border-bottom: 10px solid rgba(0,0,0,0.3);
+  border-bottom-style: double;
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
   border-radius: 6px;
