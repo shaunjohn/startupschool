@@ -27,6 +27,7 @@
 	} 
 	#profile_image {
 		width: 350px;
+		box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.45);
 	} 
 	#track_icon { }
 	.icon {
@@ -34,49 +35,93 @@
 		width: 128px;
 		height: 128px;
 	}
+	.span8 h1 {
+		font-size: 40px;
+	} 
 	.bar_cover {
-		margin: 25px 0 0 -10px;
+		margin: 30px 0 0 -10px;
 		float: left;
 		overflow: hidden;
 		width: 360px;
+		border-top-right-radius: 25px;
+		box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.45);
 	}
 	.bar {
-		padding: 10px 0 0 15px;
-		height: 36px;
+		padding: 0 0 0 10px;
+		height: 30px;
 		font-size: 25px;
 		color: #ffffff;
-		background: #3ba4db;
+		background: #3BA4DB;
 		width: 692px;
 		text-shadow: 0 0 0;
+		padding-top: 10px;
 	}
 	#dev_icon {
 		background: url(images/icon_dev.png) no-repeat;
 		background-size: 100px;	
 		width: 100px;
-		height: 100px;	
+		height: 100px;
+		border: none;
+		box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.45);
 	}
+	.span16 {
+		width: 932px;
+	} 
 	.centralbar {
-		background-color: #3ba4db;
-		height: 50px; 
+		background-color: #3BA4DB;
+		height: 30px; 
+		border-radius: 25px;
+		box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.45);
 	} 
 	.row {
 		margin-bottom: 75px;
 	} 
 	#skills span {
 		overflow:hidden;
-		background:#f1f2f3;
+		background:#3BA4DB;
 		border:1px solid #a8abad;
 		border-top-color:#cbcdce;
 		border-left-color:#cbcdce;
 		border-radius:3px;
 		-webkit-border-radius:3px;
 		-moz-border-radius:3px;
-		color:#797979;
+		color:white;
+		text-decoration:none;
+		white-space:nowrap;
+		text-overflow:ellipsis;
+		padding:1px 4px;
+		font-size: 18px;
+	}
+	#fl {
+		margin-top: 10px;
+	} 
+	#interests span {
+		overflow:hidden;
+		background:#3BA4DB;
+		border:1px solid #a8abad;
+		border-top-color:#cbcdce;
+		border-left-color:#cbcdce;
+		border-radius:3px;
+		-webkit-border-radius:3px;
+		-moz-border-radius:3px;
+		color:white;
 		text-decoration:none;
 		white-space:nowrap;
 		text-overflow:ellipsis;
 		padding:2px 4px;
-	}
+		font-size: 18px;
+	} 
+	
+	.bottom_container {
+		font-size: 16px;
+	} 
+	#profile_background {
+		float: left;
+	} 
+	.social_footprint {
+		float: right;
+		margin-right: 177px;
+	} 
 	</style>
 
   <body>
@@ -86,13 +131,19 @@
 			<img id="logo" src="images/BSS_Logo_256x761 (3).PNG">
 			<h1>John Capecelatro</h1> 
 			<div id="skills"> 
-				<span>Skill 1</span>
-				<span>Skill 2</span>
-				<span>Skill 2</span>
-				<span>Skill 2</span>
+				<span>Negotiation</span>
+				<span>Leadership</span>
+				<span>Business Development</span>
+				<div id="fl"><span>Foreign Language</span></div>
 			</div>
-			<h3>Interests</h3>
-			<p>BD, Sales, Marketing</p>
+			<br>
+			<h2>Interests</h2>
+				<div id="interests"> 
+				<span>Water Skiing</span>
+				<span>Cooking</span>
+				<span>Music</span>
+				<span>Beer</span>
+			</div>
 		</div>
 		<div class="span8">
 			<div class="curric_bar">
@@ -106,33 +157,27 @@
 			<img id="profile_image" src="images/associate_john_large.jpg">
 		</div>
 	</div>
-	<div class="row">
-		<div class="span16 centralbar">
+		<div class="bottom_container">
+			<div class="row">
+				<div class="span16 centralbar"></div>
+				<div class="span8">
+					<div id="profile_background"><h2>Background</h2>
+					This is where the tl;dr of the person is going to go. Blah Blah I am cool. 
+					</div>
+				</div>
+				<div class="span8">
+					<div class="social_footprint">
+						<h2>Social Footprint</h2>
+						<a href="http://twitter.com/jcap49" target="_blank">@jcap49</a>
+						<br>
+						<a href="http://www.github.com/jcap49" target="_blank">Github Profile</a>
+						<br>
+						<a href="http://www.linkedin.com/johncapecelatro" target="_blank">Linkedin Profile</a><br>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
-      <!-- Main hero unit for a primary marketing message or call to action -->
-      <div class="hero-unit">
-	   </div>
-	
-	
-	<div class="social_footprint"><h2>Social Footprint:</h2> 
-		<a href="http://twitter.com/jcap49" target="_blank">@jcap49</a>
-		<br>
-		<br>
-		<a href="http://www.github.com/jcap49" target="_blank">Github Profile</a>
-		<br>
-		<br>
-		<a href="http://www.linkedin.com/johncapecelatro" target="_blank">Linkedin Profile</a><br></div>
-	<div class="body">
-	<div class="profile_info">
-		<strong>Skills:</strong>
-		<span class="skill">Being awesome.</span>
-		<span class="skill">Being awesome.</span>
-		<span class="skill">Being awesome.</span>
-		<span class="skill">Being awesome.</span>
-		</br>
-		<strong>Background:</strong>This is where the tl;dr of a person's background goes
-	
 	</div>
 	</div>
 		
