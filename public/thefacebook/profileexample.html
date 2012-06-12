@@ -13,80 +13,128 @@
 
     <!-- Le styles -->
     <link rel="stylesheet" href="bootstrap.css">
-    <link rel="stylesheet" href="custom.css">
+    <!--link rel="stylesheet" href="custom.css" -->
 	<style type="text/css">
-		
-	
-		.profile_image {
-			margin-bottom: 40px;
-			margin-top: 40px;
-		}
-		.profile_image img {
-			box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.45);
-			height: 300px;
-		} 
-		body {
-			background: #EEE url(images/bg.jpg);
-			font-size: 16px; 
-			margin-bottom: 60px;
-		}
-		.hero-unit img {
-			height: 120px;
-		} 
-		.profile_header h1 {
-			margin-bottom: 20px;
-			margin-top: 60px;
-			font-size: 60px;
-		} 
-		.profile_info {
-			margin-bottom: 40px;
-		}
-		.skill {
-			background-color: #663399;
-			color: white;
-			padding: 20px;
-		}		
-
+	.container {
+		margin-top: 40px;
+	} 
+	#logo {
+		height: 100px;
+	}
+	.bar {
+		background: black;
+		height: 50px;
+	} 
+	#profile_image {
+		width: 350px;
+	} 
+	#track_icon { }
+	.icon {
+		float: left;
+		width: 128px;
+		height: 128px;
+	}
+	.bar_cover {
+		margin: 25px 0 0 -10px;
+		float: left;
+		overflow: hidden;
+		width: 360px;
+	}
+	.bar {
+		padding: 10px 0 0 15px;
+		height: 36px;
+		font-size: 25px;
+		color: #ffffff;
+		background: #3ba4db;
+		width: 692px;
+		text-shadow: 0 0 0;
+	}
+	#dev_icon {
+		background: url(images/icon_dev.png) no-repeat;
+		background-size: 100px;	
+		width: 100px;
+		height: 100px;	
+	}
+	.centralbar {
+		background-color: #3ba4db;
+		height: 50px; 
+	} 
+	.row {
+		margin-bottom: 75px;
+	} 
+	#skills span {
+		overflow:hidden;
+		background:#f1f2f3;
+		border:1px solid #a8abad;
+		border-top-color:#cbcdce;
+		border-left-color:#cbcdce;
+		border-radius:3px;
+		-webkit-border-radius:3px;
+		-moz-border-radius:3px;
+		color:#797979;
+		text-decoration:none;
+		white-space:nowrap;
+		text-overflow:ellipsis;
+		padding:2px 4px;
+	}
 	</style>
 
   <body>
     <div class="container">
-
+	<div class="row">
+		<div class="span8">
+			<img id="logo" src="images/BSS_Logo_256x761 (3).PNG">
+			<h1>John Capecelatro</h1> 
+			<div id="skills"> 
+				<span>Skill 1</span>
+				<span>Skill 2</span>
+				<span>Skill 2</span>
+				<span>Skill 2</span>
+			</div>
+			<h3>Interests</h3>
+			<p>BD, Sales, Marketing</p>
+		</div>
+		<div class="span8">
+			<div class="curric_bar">
+				<a href="img/dev_cloud_large.png" target="blank" class="hoverZoomLink" style="">
+					<div class="icon" id="dev_icon" ></div>
+				</a>
+				<div class="bar_cover">
+					<div class="bar">Software Development</div>
+				</div>
+			</div>
+			<img id="profile_image" src="images/associate_john_large.jpg">
+		</div>
+	</div>
+	<div class="row">
+		<div class="span16 centralbar">
+		</div>
+	</div>
       <!-- Main hero unit for a primary marketing message or call to action -->
       <div class="hero-unit">
-		<div class="image">
-			<center><img src="images/BSS_Logo_256x761 (3).PNG"></center>
-		</div>
 	   </div>
-	<div class="profile_header">	
-		<center><h1>John Capecelatro</h1></center>
-		</div>
-		
-	<div class="profile_image">
-		<center><img src="images/associate_john_large.jpg"></center>
-		</div>
-		
 	
+	
+	<div class="social_footprint"><h2>Social Footprint:</h2> 
+		<a href="http://twitter.com/jcap49" target="_blank">@jcap49</a>
+		<br>
+		<br>
+		<a href="http://www.github.com/jcap49" target="_blank">Github Profile</a>
+		<br>
+		<br>
+		<a href="http://www.linkedin.com/johncapecelatro" target="_blank">Linkedin Profile</a><br></div>
+	<div class="body">
 	<div class="profile_info">
-		<strong><center><h2>Track: Staff</h2></strong></center><br>
 		<strong>Skills:</strong>
 		<span class="skill">Being awesome.</span>
 		<span class="skill">Being awesome.</span>
 		<span class="skill">Being awesome.</span>
 		<span class="skill">Being awesome.</span>
-		
-		
 		</br>
-		<br>
-		<strong>Social Footprint:</strong> <a href="http://twitter.com/jcap49" target="_blank">@jcap49</a>, <a href="http://www.github.com/jcap49" target="_blank">Github Profile</a>, <a href="http://www.linkedin.com/johncapecelatro" target="_blank">Linkedin Profile</a><br>
-		<br>
-		<strong>Background:</strong> John Capecelatro is currently studying business at Babson College, focusing specifically on entrepreneurship, finance, and management. From an early age, John was certain that he wanted to be involved in business.
-After arriving at Babson, John actively sought out opportunities to create a meaningful impact on the greater campus community. As a founding father of the Iota Omicron Chapter of the Delta Tau Delta Fraternity, John has helped to shape the future direction of the Greek Community on campus. In addition to his involvement in this organization, John plays with the Babson Jazz Ensemble, participates in the Babson Outdoor Club, and is an active and enthusiastic member of the sailing club. 
-His professional efforts began with a failed startup called GroupGain - a social network-oriented e-commerce startup. Initially tasked with assisting in the development and maintenance of the company's social media presence, John has worked additionally in the business development and marketing areas. In his last role, he oversaw the development of a customer philosophy and strategy for interacting with users. 
-At the conclusion of this position, John accepted a position at Babson College managing the social media presence of the Global Entrepreneurship Monitor. He managed the research organization's social media presence, helping to establish GEM as a modern-day, interactive portal for all available research on entrepreneurial activity across the globe.
-In January, John was offered an associate position with the TechStars program in Boston. Working under Katie Rae, Reed Sturtevant, and Aaron O'Hearn, he first began working with several of the portfolio companies, but switched to working full-time on the Boston Startup School. . 
-John hopes to approach future endeavors with the same vigor and determination that he has exhibited throughout his life. He aspires to pursue a unique path, start trends, lead others, and ultimately leave a positive impact on society.
-		</div>
+		<strong>Background:</strong>This is where the tl;dr of a person's background goes
+	
+	</div>
+	</div>
 		
 		
 		
