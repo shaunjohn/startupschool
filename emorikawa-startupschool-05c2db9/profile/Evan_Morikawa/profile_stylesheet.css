@@ -1,0 +1,80 @@
+body, html {
+  min-height: 100%;
+  background: url(images/background_texture.png);
+}
+
+h1 {
+  font-weight: normal;
+}
+
+h2 {
+  font-size: 16px;
+  line-height: 19px;
+}
+
+h2.inline-header {
+  display: inline-block;
+}
+
+.profile-container {
+  width: 800px;
+  background: #f3f3f3;
+
+  margin-top: 10%;
+  margin-right: auto;
+  margin-bottom: 0;
+  margin-left: auto;
+
+  -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+     -moz-box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+
+  -webkit-border-radius: 5px 5px 5px 5px;
+     -moz-border-radius: 5px 5px 5px 5px;
+          border-radius: 5px 5px 5px 5px;
+}
+
+.profile-container:before,
+.profile-container:after {
+  display: table;
+  content: "";
+}
+.profile-container:after {
+  clear: both;
+}
+
+
+.avatar-container {
+  float: left;
+  width: 33%;
+}
+.avatar {
+  width: 100%;
+  height: auto;
+}
+
+.content-container {
+  float: left;
+  width: 67%;
+}
+.content-header {
+  background: #444;
+  color: #f0f0f0;
+  padding: 5px 15px;
+  border-bottom: 2px solid #aaa;
+}
+
+.content-section {
+  margin-left: 15px;
+  margin-top: 10px;
+}
+
+.skill {
+  padding: .2em .5em;
+  background: #ddd;
+}
+
+.interest {
+  padding: .2em .5em;
+  background: #ddd;
+}
