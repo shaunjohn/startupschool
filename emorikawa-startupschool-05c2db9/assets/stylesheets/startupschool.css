@@ -1,0 +1,59 @@
+.hero-unit h1 {
+  font-size: 42px;
+}
+.hero-unit {
+  border-bottom: 10px solid rgba(0,0,0,0.3);
+  border-bottom-style: double;
+}
+body {
+  padding-top: 10px;
+  background: #EEE url(../images/bg.jpg);
+}
+.student_profile {
+  width: 215px;
+  margin: 10px;
+  float: left;
+}
+.student_profile {
+  font-size: 12px;
+}
+.track {
+  position: relative;
+}
+.h1 {
+  padding-top: 10px;
+}
+.track_product {
+  border-top: 10px solid rgba (0,0,0,0.3);
+}
+.media-grid a {
+  background-color: #;
+  margin-bottom:40px;
+  text-align:right;
+}
+
+.teamName {
+  margin-left:20px;
+}
+
+.thumbnail {
+}
+
+.name {
+  color:    #404040;
+  margin-right: 4px;
+  margin-top:4px;
+  line-height: 24px;
+}
+
+.nameWhite {
+  color:    #fff;
+  margin-right: 4px;
+  margin-top:4px;
+  line-height: 24px;
+}
+
+a:hover{
+  text-decoration:none;
+}
+a:hover .name {color:#404040;}
