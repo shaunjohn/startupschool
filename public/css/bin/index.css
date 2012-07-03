@@ -132,7 +132,7 @@ textarea {
 }
 body {
   margin: 0;
-  font-family: "Flama-Book", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: Helvetica, "Flama-Book", "Helvetica Neue", Arial, sans-serif;
   font-size: 16px;
   line-height: 1.4;
   color: #58585a;
@@ -322,7 +322,7 @@ a:hover {
 }
 p {
   margin: 0 0 0.7;
-  font-family: "Flama-Book", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: Helvetica, "Flama-Book", "Helvetica Neue", Arial, sans-serif;
   font-size: 16px;
   line-height: 1.4;
 }
@@ -606,7 +606,7 @@ input,
 button,
 select,
 textarea {
-  font-family: "Flama-Book", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: Helvetica, "Flama-Book", "Helvetica Neue", Arial, sans-serif;
 }
 label {
   display: block;
@@ -4035,7 +4035,7 @@ html {
 body {
   position: relative;
   margin: 0;
-  font-family: "Flama-Book", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: Helvetica, "Flama-Book", "Helvetica Neue", Arial, sans-serif;
   font-size: 16px;
   line-height: 1.4;
   text-shadow: 0px 1px rgba(255, 255, 255, 0.6);
@@ -4068,7 +4068,7 @@ h1 {
   padding-left: 4%;
   padding-right: 4%;
   border-top: 10px solid rgba(0, 0, 0, 0.3);
-  font-family: "Flama-Medium", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: Helvetica, "Flama-Medium", "Helvetica Neue", Arial, sans-serif;
   text-transform: uppercase;
   letter-spacing: 2px;
   text-shadow: 0 2px 0 white;
@@ -4081,7 +4081,7 @@ h3 {
   margin: 0 0 1em 0;
   color: #818285;
   font-size: 1.2em;
-  font-family: "Flama-Book", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: Helvetica, "Flama-Book", "Helvetica Neue", Arial, sans-serif;
   text-transform: uppercase;
   letter-spacing: 2px;
   line-height: 1.4;
@@ -4129,7 +4129,7 @@ ol ol {
   list-style: lower-alpha;
 }
 .bold {
-  font-family: "Flama-Medium", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: Helvetica, "Flama-Medium", "Helvetica Neue", Arial, sans-serif;
 }
 .larger {
   font-size: 1.2em;
@@ -4452,7 +4452,7 @@ form .counter {
 }
 #why .quotation_mark {
   color: #3ba4db;
-  font-family: "Flama-Medium", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: Helvetica, "Flama-Medium", "Helvetica Neue", Arial, sans-serif;
 }
 #why .video_frame {
   -webkit-box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.4);
@@ -4626,7 +4626,7 @@ form .counter {
   color: #eeeeee;
   letter-spacing: 2px;
   text-shadow: 0 0 0;
-  font-family: "Flama-Medium", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: Helvetica, "Flama-Medium", "Helvetica Neue", Arial, sans-serif;
 }
 #top_nav {
   display: none;
@@ -4646,7 +4646,7 @@ form .counter {
 #top_nav #apply_now_top_nav a {
   font-size: 18px;
   color: #3ba4db;
-  font-family: "Flama-Medium", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: Helvetica, "Flama-Medium", "Helvetica Neue", Arial, sans-serif;
   text-shadow: 0 0 0;
 }
 #top_nav #apply_now_top_nav a:hover {
