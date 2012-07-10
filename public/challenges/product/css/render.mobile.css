@@ -1,0 +1,104 @@
+@charset "utf-8";
+/* {wrapbootstrap} - Portfolio Igniter 1.1 / mobile  */
+
+h1, h2 {
+	color:#FFF;
+}
+.footer {
+	padding:20px 10px;
+	margin-bottom: 0;
+}
+body * {
+	font-family: 'Lato', sans-serif;
+}
+body {padding-top:40px;}
+
+p {
+	font-weight:300;
+	font-size:14pt;
+	line-height:20pt;
+}
+h1 {
+	font-size:48pt;
+	font-weight:100;
+	line-height:60pt;
+}
+p a {
+	color:#FFFFFF;
+	text-decoration:underline;
+}
+p a:hover {
+	color:#FFF;
+	text-decoration:none;
+}
+p a.btn {
+	text-decoration:none!important;
+}
+
+
+/* colors */
+
+h1 {color:#FFFFFF;}
+h2 {color:#FFFFFF;}
+h3 {color:#FFFFFF;}
+h4 {color:#FFFFFF;}
+h5 {color:#FFFFFF;}
+h6 {color:#FFFFFF;}
+p {color:#FFFFFF;}
+
+.navbar-fixed-top {
+position:fixed;
+margin-bottom: 18px;
+}
+
+/* footer */
+.footer {
+	background:#333333;
+}
+.footer p {font-size:11pt;}
+.footer p, .footer h1, .footer h2, .footer h3, .footer h4, .footer h5, footer h6 {
+	color:#FFFFFF;
+}
+
+/* elements */
+span.rnd {
+	font-size: 14px;
+	background-color: rgba(0,0,0,0.5);
+	color: #fff;
+	border-radius: 50px;
+	-moz-border-radius: 50px;
+	width: 44px;
+	height: 44px;
+	text-indent: 8px;
+	line-height: 44px;
+	position: absolute;
+	margin-top: 8px;
+	margin-left: 2px;
+	font-weight: normal;
+	text-transform: lowercase;
+	font-weight:800;
+	font-style: italic;
+	text-shadow: 1px 2px 0 rgba(0,0,0,0.075);
+	-webkit-box-shadow: 1px 2px 0 0 rgba(0,0,0,0.075);
+	-moz-box-shadow: 1px 2px 0 0 rgba(0,0,0,0.075);
+}
+
+.story {
+	margin: 0 auto;
+	margin-top:60px;
+}
+
+
+/* pages */
+#home { background:#8c31b7; background:url(../assets/firstBG.jpg) 50% -75px no-repeat fixed;}
+#second { background:#0099CC; background: url(../assets/secondBG.jpg) 50% 0 no-repeat fixed;}
+#third { background:#FFCC00; }
+#fourth { background:#6C9; background: url(../assets/thirdBG.jpg) 50% 0 no-repeat fixed;}
+#fifth { background:#8c31b7;}
+
+#home, #second, #third, #fourth, #fifth {min-height:500px;}
+
+#third p, #third h1, #third h2, #third h3, #third h4, #third h5, #third h6 {color:#FFFFFF;}
+#third h2 {font-weight:300;}
+.mobile {padding:0px 0px 0px 0px;}
+.content {padding:10px;}
