@@ -45,6 +45,12 @@ We switch the number of columns on a row when each breakpoint is hit.
       <div class="nav_bg"></div>
       <div class="nav_text">Who&rsquo;s Involved</div>
     </li>
+
+    <li id="nav_who" class="nav_item" data-section_id="partners" >
+      <div class="nav_bg"></div>
+      <div class="nav_text">Partners &amp; Sponsors</div>
+    </li>
+
     <li id="nav_details" class="nav_item" data-section_id="details" >
       <div class="nav_bg"></div>
       <div class="nav_text">About the Program</div>
@@ -90,6 +96,7 @@ We switch the number of columns on a row when each breakpoint is hit.
       <option value="contact">Contact</option>
       <option value="apply">Sign Up</option>
       <option value="who">Who's Involved</option>
+      <option value="who">Partners &amp; Sponsors</option>
       <option value="details">About the Program</option>
       <option value="why">Why Startup School</option>
       <option value="when_where">When &amp; Where</option>
@@ -119,6 +126,8 @@ We switch the number of columns on a row when each breakpoint is hit.
   <%# render "trust" %>
 
   <%= render "who" %>
+
+  <%= render "partners" %>
 
   <%= render "details" %>
 
